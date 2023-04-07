@@ -1,0 +1,233 @@
+<nav class="navbar navbar-expand-lg navbar-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand me-auto" routerLink="/home">Waddhly</a>
+    <a class="nav-link text-white" routerLink="/login">Login</a>
+  </div>
+</nav>
+
+<section class="vh-100">
+  <div class=" h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-12 col-xl-11">
+        <div class="text-black" >
+          <!-- <div class=" p-md-5"> -->
+            <div class="row justify-content-center">
+              <div class="col-md-12 col-lg-8 col-xl-7 order-2 order-lg-1">
+
+                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
+
+                <form [formGroup]="SignUpForm" class="mx-1 mx-md-4" (ngSubmit)="SignUp()">
+
+<!-- First Name -->
+                  <div class="d-flex flex-row mb-4 ">
+                    <div class="form-outline flex-fill mb-0 pe-3">
+                      <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                      <label class="form-label" for="firstname">First Name <small class="text-danger">*</small></label>
+                      <input type="text" id="firstname" class="form-control"
+                      formControlName="firstname"
+                      [ngClass]="{'is-invalid':(SignUpForm.get('firstname')?.touched || SignUpForm.get('firstname')?.dirty )&& SignUpForm.get('firstname')?.invalid}">
+                      <span class='invalid-feedback'>
+                        <span *ngIf="SignUpForm.get('firstname')?.errors?.['required']">
+                         First Name is required.
+                        </span>
+                        <span *ngIf="SignUpForm.get('firstname')?.errors?.['minlength']">
+                         First Name must be longer than 3 characters.
+                        </span>
+                      </span>
+                    </div>
+
+<!-- Last Name -->
+                    <div class="form-outline flex-fill mb-0">
+                      <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                      <label class="form-label" for="lastname">Last Name<small class="text-danger">*</small></label>
+                      <input type="text" id="lastname" class="form-control"
+                      formControlName="lastname"
+                      [ngClass]="{'is-invalid':(SignUpForm.get('lastname')?.touched || SignUpForm.get('lastname')?.dirty )&& SignUpForm.get('lastname')?.invalid}">
+                      <span class='invalid-feedback'>
+                        <span *ngIf="SignUpForm.get('lastname')?.errors?.['required']">
+                          Last Name required.
+                        </span>
+                        <span *ngIf="SignUpForm.get('lastname')?.errors?.['minlength']">
+                          Last Name must be longer than 3 characters.
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+
+<!-- User Name -->
+                  <div class="d-flex flex-row align-items-center mb-4 ">
+                    <div class="form-outline flex-fill mb-0">
+                      <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                      <label class="form-label" for="username">User Name <small class="text-danger">*</small><small class="text-danger mx-2">(Can't be changed later) </small></label>
+
+                      <!-- <form class="form-floating"> -->
+                      <input type="text" id="username" class="form-control"
+                      formControlName="username"
+                      [ngClass]="{'is-invalid':(SignUpForm.get('username')?.touched || SignUpForm.get('username')?.dirty )&& SignUpForm.get('username')?.invalid}"
+                      >
+                      <!-- <label class="text-danger" for="floatingInputInvalid">Can't be changed later </label> -->
+                      <!-- </form> -->
+                      <span class='invalid-feedback'>
+                        <span *ngIf="SignUpForm.get('username')?.errors?.['required']">
+                          User Name is required.
+                        </span>
+                        <span *ngIf="SignUpForm.get('username')?.errors?.['minlength']">
+                          User Name must be longer than 3 characters.
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+
+<!-- Email -->
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <div class="form-outline flex-fill mb-0">
+                      <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                      <label class="form-label" for="email">Your Email <small class="text-danger">*</small></label>
+                      <input type="email" id="email" class="form-control"
+                      formControlName="email"
+                      [ngClass]="{'is-invalid':(SignUpForm.get('email')?.touched || SignUpForm.get('email')?.dirty )&& SignUpForm.get('email')?.invalid}">
+                      <span class='invalid-feedback'>
+                        <span *ngIf="SignUpForm.get('email')?.errors?.['required']">
+                          Email is required.
+                        </span>
+                        <span *ngIf="SignUpForm.get('email')?.errors?.['email']">
+                          Please enter a valid email address.
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+
+<!-- Password -->
+                  <div class="d-flex flex-row mb-4">
+                    <div class="form-outline flex-fill mb-0 me-3">
+                      <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                      <label class="form-label" for="password">Password <small class="text-danger">* </small></label>
+                      <input type="password" id="password" class="form-control"
+                      formControlName="password"
+                      [ngClass]="{'is-invalid':(SignUpForm.get('password')?.touched || SignUpForm.get('password')?.dirty )&& SignUpForm.get('password')?.invalid}">
+                      <span class='invalid-feedback'>
+                        <span *ngIf="SignUpForm.get('password')?.errors?.['required']">
+                          Password is required.
+                        </span>
+                        <span *ngIf="SignUpForm.get('password')?.errors?.['pattern'] || SignUpForm.get('password')?.errors?.['minlength']">
+                          Password should be at least 8 characters with numbers
+                        </span>
+                      </span>
+                    </div>
+
+<!-- Confirm Password -->
+                    <div class="form-outline flex-fill mb-0">
+                      <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                      <label class="form-label" for="confirm_password">Confirm your password <small class="text-danger">*</small></label>
+                      <input type="password" id="confirm_password" class="form-control"
+                      formControlName="confirm_password"
+                      [ngClass]="{'is-invalid':(SignUpForm.get('confirm_password')?.touched || SignUpForm.get('confirm_password')?.dirty )&& SignUpForm.get('confirm_password')?.invalid}">
+                      <span class='invalid-feedback'>
+                        <span *ngIf="SignUpForm.get('confirm_password')?.errors?.['required']">
+                          Confirm Password is required.
+                        </span>
+                        <span *ngIf="SignUpForm.get('confirm_password')?.errors?.['pattern'] || SignUpForm.get('confirm_password')?.errors?.['minlength']">
+                          Password should be at least 8 characters with numbers
+                        </span>
+                        <span *ngIf="SignUpForm.get('confirm_password')?.errors?.['ConfirmValidator']">
+                          Password and Confirm Password must be match.
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+
+<!-- Country -->
+                  <div class="d-flex flex-row mb-4">
+                    <div class="form-outline flex-fill mb-0 me-3">
+                      <i class="fas fa-home fa-lg me-3 fa-fw"></i>
+                      <label class="form-label" for="country">Your Country <small class="text-danger">*</small></label>
+                      <select class="form-select form-select-m" name="country" id="country"
+                      formControlName="country"
+                      [ngClass]="{'is-invalid':(SignUpForm.get('country')?.touched || SignUpForm.get('country')?.dirty )&& SignUpForm.get('country')?.invalid}">
+                        <option disabled selected>Select your country</option>
+                        <option value="USA">USA</option>
+                        <option value="Canada">Canada</option>
+                        <option value="Mexico">Egypt</option>
+                      </select>
+                      <span class='invalid-feedback'>
+                        <span *ngIf="SignUpForm.get('country')?.errors?.['required']">
+                          Country is required.
+                        </span>
+                      </span>
+                    </div>
+
+<!-- Phone -->
+                    <div class="form-outline flex-fill mb-0">
+                      <i class="fas fa-mobile fa-lg me-3 fa-fw"></i>
+                      <label class="form-label" for="phone">Your Phone <small class="text-danger">*</small></label>
+                      <input type="tel" id="phone" class="form-control"
+                      formControlName="phone"
+                      [ngClass]="{'is-invalid':(SignUpForm.get('phone')?.touched || SignUpForm.get('phone')?.dirty )&& SignUpForm.get('phone')?.invalid}"/>
+                      <span class='invalid-feedback'>
+                        <span *ngIf="SignUpForm.get('phone')?.errors?.['required']">
+                          Phone is required.
+                        </span>
+                        <span *ngIf="SignUpForm.get('phone')?.errors?.['minlength']">
+                          Phone must be longer than 11 characters.
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+
+<!-- Account Type -->
+                  <div class="form-outline flex-fill mb-3">
+                      <label class="form-label" for="phone">Gender </label>
+                    <div class="form-check form-check-inline mx-5">
+                    <input class="form-check-input" type="radio" name="gender" id="male" value="male" formControlName="gender">
+                    <label class="form-check-label" for="male">Male</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="gender" id="female" value="female" formControlName="gender">
+                    <label class="form-check-label" for="female">Female</label>
+                    </div>
+
+
+
+
+                    <!-- <label class="form-label" for="phone">Account type </label>
+                    <div class="form-check form-check-inline mx-5">
+                    <input class="form-check-input" type="checkbox" name="std" id="std" value="student" disabled checked>
+                    <label class="form-check-label" for="std">Want Service</label>
+                    </div>
+                    <div class="form-check form-check-inline ">
+                    <input class="form-check-input" type="checkbox" name="mentor" id="mentor" value="mentor" formControlName="isMentor">
+                    <label class="form-check-label" for="mentor">Mentor</label>
+                    </div> -->
+                  </div>
+
+                  <!-- <div class="form-check d-flex justify-content-center mb-5">
+                    <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" />
+                    <label class="form-check-label" for="form2Example3">
+                      I agree all statements in <a href="#!">Terms of service</a>
+                    </label>
+                  </div> -->
+
+<!-- Sign Up -->
+                  <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                    <button type="submit" [disabled]="SignUpForm.invalid" class="btn btn-primary btn-lg w-100" style="background-color:#395B64 ;">Sign Up</button>
+                  </div>
+
+                </form>
+
+              </div>
+              <div class="col-md-8 col-lg-4 col-xl-5 d-flex align-items-center order-1 order-lg-2">
+
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                  class="img-fluid" alt="Sample image">
+
+
+              </div>
+            </div>
+          </div>
+          <button (click)="get()"></button>
+        <!-- </div> -->
+      </div>
+    </div>
+  </div>
+</section>
+
