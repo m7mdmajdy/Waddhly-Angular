@@ -24,7 +24,7 @@
                       <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                       <label class="form-label" for="firstname">First Name <small class="text-danger">*</small></label>
                       <input type="text" id="firstname" class="form-control"
-                      formControlName="firstname"
+                      formControlName="firstname" [(ngModel)]=NewUser.firstname
                       [ngClass]="{'is-invalid':(SignUpForm.get('firstname')?.touched || SignUpForm.get('firstname')?.dirty )&& SignUpForm.get('firstname')?.invalid}">
                       <span class='invalid-feedback'>
                         <span *ngIf="SignUpForm.get('firstname')?.errors?.['required']">
@@ -41,7 +41,7 @@
                       <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                       <label class="form-label" for="lastname">Last Name<small class="text-danger">*</small></label>
                       <input type="text" id="lastname" class="form-control"
-                      formControlName="lastname"
+                      formControlName="lastname" [(ngModel)]=NewUser.lastname
                       [ngClass]="{'is-invalid':(SignUpForm.get('lastname')?.touched || SignUpForm.get('lastname')?.dirty )&& SignUpForm.get('lastname')?.invalid}">
                       <span class='invalid-feedback'>
                         <span *ngIf="SignUpForm.get('lastname')?.errors?.['required']">
@@ -58,11 +58,11 @@
                   <div class="d-flex flex-row align-items-center mb-4 ">
                     <div class="form-outline flex-fill mb-0">
                       <i class="fas fa-user fa-lg me-3 fa-fw"></i>
-                      <label class="form-label" for="username">User Name <small class="text-danger">*</small><small class="text-danger mx-2">(Can't be changed later) </small></label>
+                      <label class="form-label" for="username">User Name <small class="text-danger">*</small><small class="text-secondary mx-2">(Can't be changed later) </small></label>
 
                       <!-- <form class="form-floating"> -->
                       <input type="text" id="username" class="form-control"
-                      formControlName="username"
+                      formControlName="username" [(ngModel)]=NewUser.username
                       [ngClass]="{'is-invalid':(SignUpForm.get('username')?.touched || SignUpForm.get('username')?.dirty )&& SignUpForm.get('username')?.invalid}"
                       >
                       <!-- <label class="text-danger" for="floatingInputInvalid">Can't be changed later </label> -->
@@ -84,13 +84,13 @@
                       <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                       <label class="form-label" for="email">Your Email <small class="text-danger">*</small></label>
                       <input type="email" id="email" class="form-control"
-                      formControlName="email"
+                      formControlName="email" [(ngModel)]=NewUser.email
                       [ngClass]="{'is-invalid':(SignUpForm.get('email')?.touched || SignUpForm.get('email')?.dirty )&& SignUpForm.get('email')?.invalid}">
                       <span class='invalid-feedback'>
                         <span *ngIf="SignUpForm.get('email')?.errors?.['required']">
                           Email is required.
                         </span>
-                        <span *ngIf="SignUpForm.get('email')?.errors?.['email']">
+                        <span *ngIf="SignUpForm.get('email')?.errors?.['email'] || SignUpForm.get('email')?.errors?.['pattern']">
                           Please enter a valid email address.
                         </span>
                       </span>
@@ -103,14 +103,15 @@
                       <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                       <label class="form-label" for="password">Password <small class="text-danger">* </small></label>
                       <input type="password" id="password" class="form-control"
-                      formControlName="password"
+                      formControlName="password" [(ngModel)]=NewUser.password
                       [ngClass]="{'is-invalid':(SignUpForm.get('password')?.touched || SignUpForm.get('password')?.dirty )&& SignUpForm.get('password')?.invalid}">
                       <span class='invalid-feedback'>
                         <span *ngIf="SignUpForm.get('password')?.errors?.['required']">
                           Password is required.
                         </span>
-                        <span *ngIf="SignUpForm.get('password')?.errors?.['pattern'] || SignUpForm.get('password')?.errors?.['minlength']">
-                          Password should be at least 8 characters with numbers
+                        <span *ngIf="SignUpForm.get('password')?.errors?.['pattern']">
+                          Password must be at least 8 characters and
+                          contain one or more uppercase characters,lowercase characters,numeric values,special characters.
                         </span>
                       </span>
                     </div>
@@ -126,10 +127,11 @@
                         <span *ngIf="SignUpForm.get('confirm_password')?.errors?.['required']">
                           Confirm Password is required.
                         </span>
-                        <span *ngIf="SignUpForm.get('confirm_password')?.errors?.['pattern'] || SignUpForm.get('confirm_password')?.errors?.['minlength']">
-                          Password should be at least 8 characters with numbers
+                        <span *ngIf="SignUpForm.get('confirm_password')?.errors?.['pattern']">
+                          Password must be at least 8 characters and
+                          contain one or more uppercase characters,lowercase characters,numeric values,special characters.
                         </span>
-                        <span *ngIf="SignUpForm.get('confirm_password')?.errors?.['ConfirmValidator']">
+                        <span *ngIf="SignUpForm.get('confirm_password')?.errors?.['passwordMismatch']">
                           Password and Confirm Password must be match.
                         </span>
                       </span>
@@ -142,12 +144,12 @@
                       <i class="fas fa-home fa-lg me-3 fa-fw"></i>
                       <label class="form-label" for="country">Your Country <small class="text-danger">*</small></label>
                       <select class="form-select form-select-m" name="country" id="country"
-                      formControlName="country"
+                      formControlName="country" [(ngModel)]=NewUser.country
                       [ngClass]="{'is-invalid':(SignUpForm.get('country')?.touched || SignUpForm.get('country')?.dirty )&& SignUpForm.get('country')?.invalid}">
                         <option disabled selected>Select your country</option>
                         <option value="USA">USA</option>
                         <option value="Canada">Canada</option>
-                        <option value="Mexico">Egypt</option>
+                        <option value="Egypt">Egypt</option>
                       </select>
                       <span class='invalid-feedback'>
                         <span *ngIf="SignUpForm.get('country')?.errors?.['required']">
@@ -156,19 +158,19 @@
                       </span>
                     </div>
 
-<!-- Phone -->
+<!-- phoneNumber -->
                     <div class="form-outline flex-fill mb-0">
                       <i class="fas fa-mobile fa-lg me-3 fa-fw"></i>
-                      <label class="form-label" for="phone">Your Phone <small class="text-danger">*</small></label>
-                      <input type="tel" id="phone" class="form-control"
-                      formControlName="phone"
-                      [ngClass]="{'is-invalid':(SignUpForm.get('phone')?.touched || SignUpForm.get('phone')?.dirty )&& SignUpForm.get('phone')?.invalid}"/>
+                      <label class="form-label" for="phoneNumber">Your Phone Number <small class="text-danger">*</small></label>
+                      <input type="tel" id="phoneNumber" class="form-control"
+                      formControlName="phoneNumber" [(ngModel)]=NewUser.phoneNumber
+                      [ngClass]="{'is-invalid':(SignUpForm.get('phoneNumber')?.touched || SignUpForm.get('phoneNumber')?.dirty )&& SignUpForm.get('phoneNumber')?.invalid}"/>
                       <span class='invalid-feedback'>
-                        <span *ngIf="SignUpForm.get('phone')?.errors?.['required']">
-                          Phone is required.
+                        <span *ngIf="SignUpForm.get('phoneNumber')?.errors?.['required']">
+                          phoneNumber is required.
                         </span>
-                        <span *ngIf="SignUpForm.get('phone')?.errors?.['minlength']">
-                          Phone must be longer than 11 characters.
+                        <span *ngIf="SignUpForm.get('phoneNumber')?.errors?.['minlength']">
+                          phoneNumber must be 11 characters.
                         </span>
                       </span>
                     </div>
@@ -176,20 +178,20 @@
 
 <!-- Account Type -->
                   <div class="form-outline flex-fill mb-3">
-                      <label class="form-label" for="phone">Gender </label>
+                      <label class="form-label" for="gender">Gender <small class="text-danger">*</small></label>
                     <div class="form-check form-check-inline mx-5">
-                    <input class="form-check-input" type="radio" name="gender" id="male" value="male" formControlName="gender">
+                    <input class="form-check-input" type="radio" name="gender" id="male" value="male" formControlName="gender" [(ngModel)]=NewUser.gender>
                     <label class="form-check-label" for="male">Male</label>
                     </div>
                     <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="gender" id="female" value="female" formControlName="gender">
+                    <input class="form-check-input" type="radio" name="gender" id="female" value="female" formControlName="gender" [(ngModel)]=NewUser.gender>
                     <label class="form-check-label" for="female">Female</label>
                     </div>
 
 
 
 
-                    <!-- <label class="form-label" for="phone">Account type </label>
+                    <!-- <label class="form-label" for="gender">Account type </label>
                     <div class="form-check form-check-inline mx-5">
                     <input class="form-check-input" type="checkbox" name="std" id="std" value="student" disabled checked>
                     <label class="form-check-label" for="std">Want Service</label>

@@ -2,7 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgToastService } from 'ng-angular-popup';
 import { User } from 'src/app/Modals/user';
+import { UserstoreService } from 'src/app/Services/auth/UserStore/userstore.service';
 import { AuthService } from 'src/app/Services/auth/auth.service';
 
 @Component({
@@ -13,7 +15,13 @@ import { AuthService } from 'src/app/Services/auth/auth.service';
 export class LoginComponent {
   //NewUser= new User();
   LoginForm :FormGroup;
-  constructor(private fb:FormBuilder,private http:HttpClient,private router:Router,private authService:AuthService)
+  constructor(
+    private fb:FormBuilder,
+    private http:HttpClient,
+    private router:Router,
+    private authService:AuthService,
+    private toast:NgToastService,
+    private userStore:UserstoreService)
   {
     this.LoginForm=this.fb.group({
       email:['',[Validators.required,Validators.email]],
@@ -22,25 +30,19 @@ export class LoginComponent {
   }
 
   Login(){
-    console.log(this.LoginForm.value)
-    this.authService.Login(this.LoginForm.value).subscribe({
+      this.authService.Login(this.LoginForm.value).subscribe({
       next:(res)=>{
-        console.log(res.message);
         this.LoginForm.reset();
+        this.toast.success({detail:"Success",summary:"Login confirmed",duration:5000});
         this.authService.storeToken(res.token)
+        let TokenPayload=this.authService.decodedToken();
+        this.userStore.setFullNameforStore(TokenPayload.name);
+        this.userStore.setRoleforStore(TokenPayload.role);
         this.router.navigate(['/home'])
       }, error:(err)=>{
-        alert(err?.error.message);
+        this.toast.error({detail:"Error",summary:err.message,duration:5000});
       }
     })
-  //   this.http.post('http://localhost:8080/api/login',this.LoginForm.value)
-  //   .subscribe(res=>{
-  //     console.log(res);
-  //       this.router.navigate(['/home']);
-  //     },err=>{
-  //       console.log(err);
-  //     });
-
   }
 
 
