@@ -1,0 +1,40 @@
+<app-header></app-header>
+<label class="form-label" for="serCat">Select a Category</label>
+<select
+  name="cat"
+  id="prdCat"
+  class="form-control w-50"
+  [(ngModel)]="selectedCategoryId"
+  (change)="filterCategory()"
+>
+  <option value="0" selected>All</option>
+  <option *ngFor="let item of Categories" [value]="item.id">
+    {{ item.name }}
+  </option>
+</select>
+
+<div *ngFor="let item of ServicesByCatId">
+  <br />
+  {{ item.title }}
+  <br />
+  {{ item.description }}
+  <br />
+  {{ item.date }}
+  <br />
+  {{ item.hours }}
+  <br />
+  {{ item.status }}
+  <br />
+  {{ item.service_category_id }}
+  <br />
+  {{ item.service_category_name }}
+  <br />
+  {{ item.user_firstname }}
+  <br />
+  {{ item.user_lastname }}
+  <br />
+  {{ item.user_title }}
+  <hr />
+</div>
+<!-- <div>{{ ServicesByCatId | json }}</div> -->
+<app-footer></app-footer>
