@@ -18,10 +18,10 @@ export class SignUpComponent {
     constructor(private fb:FormBuilder,private http:HttpClient,private router:Router,private authService:AuthService,private toast:NgToastService)
     {
         this.SignUpForm=this.fb.group({
-          firstname:['',[Validators.required,Validators.minLength(3)]],
-          lastname:['',[Validators.required,Validators.minLength(3)]],
-          username:['',[Validators.required,Validators.minLength(3)]],
-          email:['',[Validators.required,Validators.email,Validators.pattern("[a-z0-9]+@[a-z]+\.[a-z]{2,3}")]],
+          firstname:['',[Validators.required,Validators.pattern("^[A-Za-z]+([A-Za-z]){2,}$")]],
+          lastname:['',[Validators.required,Validators.pattern("^[A-Za-z]+([A-Za-z]){2,}$")]],
+          username:['',[Validators.required,Validators.pattern("^[A-Za-z][A-Za-z0-9_]{2,16}$")]],
+          email:['',[Validators.required,Validators.email,Validators.pattern("[a-zA-Z0-9.]*[@]{1}[a-zA-Z0-9]*[.]{1}[a-zA-Z0-9]{2,}")]],
           //password:['',[Validators.required]],
           password:['',[Validators.required,
                         Validators.pattern("(?=.*)(?=.*[a-z])(?=.*[A-Z])(?=.*[~`!@#$%^&*()--+={}[]|\:;\"'<>,.?/_₹]).{8,}")]],
@@ -54,23 +54,16 @@ export class SignUpComponent {
     {
       this.authService.SignUp(this.NewUser).subscribe({
         next:(res)=>{
-          console.log(this.NewUser)
-          console.log(res)
+          // console.log(this.NewUser)
+          // console.log(res)
           this.toast.success({detail:"Success",summary:"Successfully Registered",duration:5000})
           this.SignUpForm.reset();
           this.router.navigate(['/login'])
         }, error:(err)=>{
-          console.log(err)
-          console.log(err.message)
-          this.toast.error({detail:"Failed",summary:err.message,duration:5000})
+          // console.log(err)
+          this.toast.error({detail:"Failed",summary:err.error,duration:5000})
         }
       })
-    }
-
-myvar:any ;
-    get(){
-      this.authService.get().subscribe(x=>{this.NewUser=x})
-      console.log(this.myvar)
     }
 
     passwordMatchValidator(formGroup: FormGroup) {

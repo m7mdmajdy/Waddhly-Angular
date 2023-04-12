@@ -32,15 +32,17 @@ export class LoginComponent {
   Login(){
       this.authService.Login(this.LoginForm.value).subscribe({
       next:(res)=>{
+        debugger;
         this.LoginForm.reset();
         this.toast.success({detail:"Success",summary:"Login confirmed",duration:5000});
         this.authService.storeToken(res.token)
         let TokenPayload=this.authService.decodedToken();
-        this.userStore.setFullNameforStore(TokenPayload.name);
+        this.userStore.setIDforStore(TokenPayload.id);
+        this.userStore.setEmailforStore(TokenPayload.email);
         this.userStore.setRoleforStore(TokenPayload.role);
         this.router.navigate(['/home'])
       }, error:(err)=>{
-        this.toast.error({detail:"Error",summary:err.message,duration:5000});
+        this.toast.error({detail:"Error",summary:err.error,duration:5000});
       }
     })
   }

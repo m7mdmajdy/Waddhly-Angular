@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { BehaviorSubject } from 'rxjs';
 
@@ -8,9 +9,9 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class AuthService {
   //private IsUserLogged:BehaviorSubject<boolean>;
-  private baseUrl: string="https://localhost:7033/api/Auth/";
-  private userPayload:any;
-  constructor(private http:HttpClient) {
+  private baseUrl: string="https://localhost:44310/api/Auth/";
+  public userPayload:any;
+  constructor(private http:HttpClient,private router:Router) {
    // this.IsUserLogged = new BehaviorSubject<boolean>((this.UserState))
     this.userPayload=this.decodedToken();
   }
@@ -48,19 +49,21 @@ export class AuthService {
   {
    localStorage.clear();
    localStorage.removeItem('token');
+   this.router.navigate(['/home']);
    //this.IsUserLogged.next(false);
   }
 
-  get(){
-    this.logout();
-    return this.http.get<any>("https://localhost:7033/api/Category");
-  }
-
-  getFullNamefromToken(){
+  getIDfromToken(){
     if (this.userPayload) {
-      return this.userPayload.name;
+      return this.userPayload.uid;
     }
   }
+  getEmailfromToken(){
+    if (this.userPayload) {
+      return this.userPayload.email;
+    }
+  }
+
   getRoleFromToken(){
     if (this.userPayload) {
       return this.userPayload.role;

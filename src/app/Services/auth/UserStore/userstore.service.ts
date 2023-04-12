@@ -5,18 +5,26 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class UserstoreService {
-  private FullName$= new BehaviorSubject<string>("");
+  private email$= new BehaviorSubject<string>("");
   private role$ = new BehaviorSubject<string>("");
+  private ID$ = new BehaviorSubject<string>("");
   constructor() { }
 
-  public getFullNamefromStore() {
-    return this.FullName$.asObservable();
+  public getIDfromStore() {
+    return this.ID$.asObservable();
+  }
+  public getEmailfromStore() {
+    return this.email$.asObservable();
   }
   public getRolefromStore() {
     return this.role$.asObservable();
   }
-  public setFullNameforStore(fullName:string) {
-    this.FullName$.next(fullName);
+
+  public setIDforStore(ID:string) {
+    this.ID$.next(ID);
+  }
+  public setEmailforStore(email:string) {
+    this.email$.next(email);
   }
   public setRoleforStore(role:string) {
     this.role$.next(role);

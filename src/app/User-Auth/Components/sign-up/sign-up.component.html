@@ -20,7 +20,7 @@
 
 <!-- First Name -->
                   <div class="d-flex flex-row mb-4 ">
-                    <div class="form-outline flex-fill mb-0 pe-3">
+                    <div class="form-outline w-100 mb-0 pe-3">
                       <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                       <label class="form-label" for="firstname">First Name <small class="text-danger">*</small></label>
                       <input type="text" id="firstname" class="form-control"
@@ -30,14 +30,14 @@
                         <span *ngIf="SignUpForm.get('firstname')?.errors?.['required']">
                          First Name is required.
                         </span>
-                        <span *ngIf="SignUpForm.get('firstname')?.errors?.['minlength']">
-                         First Name must be longer than 3 characters.
+                        <span *ngIf="SignUpForm.get('firstname')?.errors?.['pattern']">
+                         First Name must be at least 3 characters and only alphabetic and can't contain voids.
                         </span>
                       </span>
                     </div>
 
 <!-- Last Name -->
-                    <div class="form-outline flex-fill mb-0">
+                    <div class="form-outline w-100 mb-0">
                       <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                       <label class="form-label" for="lastname">Last Name<small class="text-danger">*</small></label>
                       <input type="text" id="lastname" class="form-control"
@@ -47,8 +47,8 @@
                         <span *ngIf="SignUpForm.get('lastname')?.errors?.['required']">
                           Last Name required.
                         </span>
-                        <span *ngIf="SignUpForm.get('lastname')?.errors?.['minlength']">
-                          Last Name must be longer than 3 characters.
+                        <span *ngIf="SignUpForm.get('lastname')?.errors?.['pattern']">
+                          Last Name must be at least 3 characters and only alphabetic and can't contain voids.
                         </span>
                       </span>
                     </div>
@@ -56,7 +56,7 @@
 
 <!-- User Name -->
                   <div class="d-flex flex-row align-items-center mb-4 ">
-                    <div class="form-outline flex-fill mb-0">
+                    <div class="form-outline w-100 mb-0">
                       <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                       <label class="form-label" for="username">User Name <small class="text-danger">*</small><small class="text-secondary mx-2">(Can't be changed later) </small></label>
 
@@ -71,8 +71,9 @@
                         <span *ngIf="SignUpForm.get('username')?.errors?.['required']">
                           User Name is required.
                         </span>
-                        <span *ngIf="SignUpForm.get('username')?.errors?.['minlength']">
-                          User Name must be longer than 3 characters.
+                        <span *ngIf="SignUpForm.get('username')?.errors?.['pattern']">
+                          The number of characters must be between 3 and 16 and the first character should be alphabetic.
+                          <br>Can contain numbers or underscores(_) only.
                         </span>
                       </span>
                     </div>
@@ -80,7 +81,7 @@
 
 <!-- Email -->
                   <div class="d-flex flex-row align-items-center mb-4">
-                    <div class="form-outline flex-fill mb-0">
+                    <div class="form-outline w-100 mb-0">
                       <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                       <label class="form-label" for="email">Your Email <small class="text-danger">*</small></label>
                       <input type="email" id="email" class="form-control"
@@ -99,7 +100,7 @@
 
 <!-- Password -->
                   <div class="d-flex flex-row mb-4">
-                    <div class="form-outline flex-fill mb-0 me-3">
+                    <div class="form-outline w-100 mb-0 me-3">
                       <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                       <label class="form-label" for="password">Password <small class="text-danger">* </small></label>
                       <input type="password" id="password" class="form-control"
@@ -117,7 +118,7 @@
                     </div>
 
 <!-- Confirm Password -->
-                    <div class="form-outline flex-fill mb-0">
+                    <div class="form-outline w-100 mb-0">
                       <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                       <label class="form-label" for="confirm_password">Confirm your password <small class="text-danger">*</small></label>
                       <input type="password" id="confirm_password" class="form-control"
@@ -140,7 +141,7 @@
 
 <!-- Country -->
                   <div class="d-flex flex-row mb-4">
-                    <div class="form-outline flex-fill mb-0 me-3">
+                    <div class="form-outline w-100 mb-0 me-3">
                       <i class="fas fa-home fa-lg me-3 fa-fw"></i>
                       <label class="form-label" for="country">Your Country <small class="text-danger">*</small></label>
                       <select class="form-select form-select-m" name="country" id="country"
@@ -159,7 +160,7 @@
                     </div>
 
 <!-- phoneNumber -->
-                    <div class="form-outline flex-fill mb-0">
+                    <div class="form-outline w-100 mb-0">
                       <i class="fas fa-mobile fa-lg me-3 fa-fw"></i>
                       <label class="form-label" for="phoneNumber">Your Phone Number <small class="text-danger">*</small></label>
                       <input type="tel" id="phoneNumber" class="form-control"
@@ -177,7 +178,7 @@
                   </div>
 
 <!-- Account Type -->
-                  <div class="form-outline flex-fill mb-3">
+                  <div class="form-outline w-100 mb-3">
                       <label class="form-label" for="gender">Gender <small class="text-danger">*</small></label>
                     <div class="form-check form-check-inline mx-5">
                     <input class="form-check-input" type="radio" name="gender" id="male" value="male" formControlName="gender" [(ngModel)]=NewUser.gender>
@@ -226,7 +227,6 @@
               </div>
             </div>
           </div>
-          <button (click)="get()"></button>
         <!-- </div> -->
       </div>
     </div>

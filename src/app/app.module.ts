@@ -39,10 +39,10 @@ import { EditprofileComponent } from './Components/UserProfile/editprofile/editp
     NgToastModule
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS,
-     useClass:TokenInterceptor,
-     multi:true
-    }
+    // {provide: HTTP_INTERCEPTORS,
+    //  useClass:TokenInterceptor,
+    //  multi:true
+    // }
 ],
   bootstrap: [AppComponent],
 })
