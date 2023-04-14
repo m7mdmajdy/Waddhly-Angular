@@ -1,6 +1,11 @@
 .welcome {
   min-height: calc(100vh - 56px);
 }
+.welcome div h1,
+.welcome div {
+  font-size: 50px;
+  color: var(--text-color, #2c3333);
+}
 div h1,
 div {
   font-size: 50px;
@@ -16,27 +21,72 @@ h1 {
 span.main-color {
   color: var(--main-color);
 }
+@media (min-width: 991px) and (max-width: 1040px) {
+  .welcome div h1,
+  .welcome div {
+    font-size: 42px;
+  }
+}
 @media (min-width: 768px) and (max-width: 991px) {
-  div h1,
-  div {
+  .welcome div h1,
+  .welcome div {
     font-size: 45px;
   }
   svg {
-    width: 40%;
+    width: 50%;
   }
 }
 @media (max-width: 767px) {
-  div h1,
-  div {
-    font-size: 45px;
+  .welcome {
+    flex-wrap: wrap;
   }
   svg {
-    display: none;
+    width: 70%;
+    margin-left: auto;
   }
 }
 @media (max-width: 570px) {
-  div h1,
-  div {
+  .welcome {
+    padding-top: 30px;
+  }
+
+  .welcome div h1,
+  .welcome div {
     font-size: 32px;
   }
+}
+@media (max-width: 370px) {
+  .welcome div h1,
+  .welcome div {
+    font-size: 26px;
+  }
+}
+.categories-section {
+  background-color: #f6f6f6;
+  padding: 100px 0;
+}
+.categories-section .categories .category {
+  display: block;
+  text-decoration: none;
+  width: 30%;
+  cursor: pointer;
+  gap: 20px;
+  box-shadow: 0 2px 15px rgba(0 0 0 / 10%);
+  position: relative;
+}
+.categories-section .categories .category::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 1px;
+  background-color: var(--main-color);
+  transition: 0.3s;
+}
+.categories-section .categories .category:hover::before {
+  width: 100%;
+}
+.categories-section .categories .category i {
+  font-size: 80px;
 }

@@ -6,6 +6,7 @@ import { SignUpComponent } from './User-Auth/Components/sign-up/sign-up.componen
 import { NotFoundComponent } from './Components/not-found/not-found.component';
 import { UserprofileComponent } from './Components/UserProfile/userprofile/userprofile.component';
 import { EditprofileComponent } from './Components/UserProfile/editprofile/editprofile.component';
+import { ServicesComponent } from './Components/services/services.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -14,6 +15,8 @@ const routes: Routes = [
   { path: 'editprofile', component: EditprofileComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignUpComponent },
+  { path: 'services', component: ServicesComponent },
+  { path: 'services/:id', component: ServicesComponent },
   { path: '**', component: NotFoundComponent },
 ];
 
