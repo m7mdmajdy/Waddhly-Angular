@@ -9,31 +9,20 @@
   <div class="container py-5 h-100">
     <div class="row d-flex align-items-center justify-content-center h-100">
       <div class="col-md-7 col-lg-6 col-xl-5 mb-5">
-        <img
-          src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
-          class="img-fluid"
-          alt="Phone image"
-        />
+        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+          class="img-fluid" alt="Phone image">
       </div>
       <div class="col-md-8 col-lg-6 col-xl-6 offset-xl-1">
         <form [formGroup]="LoginForm" (ngSubmit)="Login()">
-          <!-- Email input -->
+
+<!-- Email input -->
           <div class="form-outline mb-4">
             <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
             <label class="form-label" for="email">Email address</label>
-            <input
-              type="email"
-              id="email"
-              class="form-control form-control-lg"
-              formControlName="email"
-              [ngClass]="{
-                'is-invalid':
-                  (LoginForm.get('email')?.touched ||
-                    LoginForm.get('email')?.dirty) &&
-                  LoginForm.get('email')?.invalid
-              }"
-            />
-            <span class="invalid-feedback">
+            <input type="email" id="email" class="form-control form-control-lg"
+            formControlName="email"
+            [ngClass]="{'is-invalid':(LoginForm.get('email')?.touched || LoginForm.get('email')?.dirty )&& LoginForm.get('email')?.invalid}">
+            <span class='invalid-feedback'>
               <span *ngIf="LoginForm.get('email')?.errors?.['required']">
                 Email is required.
               </span>
@@ -43,23 +32,14 @@
             </span>
           </div>
 
-          <!-- Password input -->
+<!-- Password input -->
           <div class="form-outline mb-4">
             <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
             <label class="form-label" for="pass">Password</label>
-            <input
-              type="password"
-              id="pass"
-              class="form-control form-control-lg"
-              formControlName="password"
-              [ngClass]="{
-                'is-invalid':
-                  (LoginForm.get('password')?.touched ||
-                    LoginForm.get('password')?.dirty) &&
-                  LoginForm.get('password')?.invalid
-              }"
-            />
-            <span class="invalid-feedback">
+            <input type="password" id="pass" class="form-control form-control-lg"
+            formControlName="password"
+            [ngClass]="{'is-invalid':(LoginForm.get('password')?.touched || LoginForm.get('password')?.dirty )&& LoginForm.get('password')?.invalid}">
+            <span class='invalid-feedback'>
               <span *ngIf="LoginForm.get('password')?.errors?.['required']">
                 Password is required.
               </span>
@@ -76,13 +56,7 @@
           </div> -->
 
           <!-- Submit button -->
-          <button
-            type="submit"
-            class="btn btn-success btn-lg btn-block w-100"
-            style="background-color: #395b64"
-          >
-            Login
-          </button>
+          <button type="submit" [disabled]="LoginForm.invalid" class="btn btn-primary btn-lg btn-block w-100" style="background-color:#395B64 ;">Login</button>
 
           <!-- <div class="divider d-flex align-items-center my-4">
             <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
@@ -96,8 +70,10 @@
             role="button">
             <i class="fab fa-twitter me-2"></i>Continue with Twitter
           </a> -->
+
         </form>
       </div>
     </div>
   </div>
 </section>
+

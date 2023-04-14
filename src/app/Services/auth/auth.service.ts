@@ -1,15 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private IsUserLogged:BehaviorSubject<boolean>;
-  private baseUrl: string="https://localhost:7033/api/Auth/register";
-  constructor(private http:HttpClient) {
-    this.IsUserLogged = new BehaviorSubject<boolean>((this.UserState))
+  //private IsUserLogged:BehaviorSubject<boolean>;
+  private baseUrl: string="https://localhost:44310/api/Auth/";
+  public userPayload:any;
+  constructor(private http:HttpClient,private router:Router) {
+   // this.IsUserLogged = new BehaviorSubject<boolean>((this.UserState))
+    this.userPayload=this.decodedToken();
   }
 
   storeToken(token:string){
@@ -19,37 +23,50 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
+  decodedToken(){
+    const jwtHelper = new JwtHelperService();
+    const token = this.getToken()!;
+    console.log(jwtHelper.decodeToken(token));
+    return jwtHelper.decodeToken(token);
+  }
+
   get UserState():boolean
   {
-   return (localStorage.getItem('Login'))?true:false;
+   return (localStorage.getItem('token'))?true:false;
   }
 
   SignUp(SignUpRequest: any)
   {
-    return this.http.post<any>(`${this.baseUrl}`,SignUpRequest);
-    // .subscribe(res=>
-    //   {alert("SignUp successful")
-    //   this.SignUpRequest.reset();
-    //   this.router.navigate(['/Home']);
-    // },err=>{alert("")})
+    return this.http.post<any>(`${this.baseUrl}register`,SignUpRequest);
   }
-
-
 
   Login(LoginRequest: any)
   {
-    localStorage.setItem('Login',LoginRequest.value);
-    this.IsUserLogged.next(true);
-    return this.http.post<any>(`${this.baseUrl}`,LoginRequest);
+    //this.IsUserLogged.next(true);
+    return this.http.post<any>(`${this.baseUrl}login`,LoginRequest);
   }
   logout()
   {
    localStorage.clear();
-   localStorage.removeItem('Login');
-   this.IsUserLogged.next(false);
+   localStorage.removeItem('token');
+   this.router.navigate(['/home']);
+   //this.IsUserLogged.next(false);
   }
 
-  get(){
-    return this.http.get<any>("https://localhost:7033/api/Category");
+  getIDfromToken(){
+    if (this.userPayload) {
+      return this.userPayload.uid;
+    }
+  }
+  getEmailfromToken(){
+    if (this.userPayload) {
+      return this.userPayload.email;
+    }
+  }
+
+  getRoleFromToken(){
+    if (this.userPayload) {
+      return this.userPayload.role;
+    }
   }
 }
