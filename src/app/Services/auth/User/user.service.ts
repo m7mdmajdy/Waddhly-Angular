@@ -8,6 +8,7 @@ import { User } from 'src/app/Modals/user';
 export class UserService {
 
   private UserUrl='https://localhost:44310/api/user';
+  private UserUrl2='https://localhost:44310/api';
   constructor(private http:HttpClient) { }
   getUserData() {
     return this.http.get(this.UserUrl);
@@ -28,5 +29,14 @@ export class UserService {
   }
   deleteCertificate(id:string){
     return this.http.delete(`${this.UserUrl}/deletcertificate?id=${id}`);
+  }
+  addPorfolio(id:string,userProfile:any){
+    return this.http.post(`${this.UserUrl2}/Portfolios?id=${id}`, userProfile);
+  }
+  getPorfolio(id:string){
+    return this.http.get(`${this.UserUrl2}/Portfolios/${id}`);
+  }
+  deletePorfolio(id:string,pid:string){
+    return this.http.delete(`${this.UserUrl2}/Portfolios?uid=${id}&pid=${pid}`);
   }
 }

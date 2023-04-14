@@ -12,6 +12,7 @@ import { AuthService } from 'src/app/Services/auth/auth.service';
 export class UserprofileComponent implements OnInit {
   public UserID: string="";
   public UserData:any;
+  public UserPortofolio:any;
   public CertificateIMG: any;
 
   constructor(private userservice:UserService,private auth:AuthService,private userStore:UserstoreService) { }
@@ -26,5 +27,9 @@ export class UserprofileComponent implements OnInit {
         console.log(this.UserData);
     })
   // this.CertificateIMG=this.userservice.convertBYTEtoIMG(this.UserData.certfcimage)
+  this.userservice.getPorfolio(this.UserID).subscribe( val => {
+    this.UserPortofolio=val;
+    console.log(this.UserPortofolio);
+  })
   }
 }
