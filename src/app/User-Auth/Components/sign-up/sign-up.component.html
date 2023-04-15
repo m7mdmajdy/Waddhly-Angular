@@ -19,12 +19,12 @@
 
               <form
                 [formGroup]="SignUpForm"
-                class="mx-2 mx-md-4"
+                class="mx-1 mx-md-4"
                 (ngSubmit)="SignUp()"
               >
                 <!-- First Name -->
-                <div class="d-flex mb-4 flex-column flex-sm-row">
-                  <div class="form-outline w-100 mb-0 me-3 mb-sm-0 mb-4">
+                <div class="d-flex flex-row mb-4">
+                  <div class="form-outline w-100 mb-0 pe-3">
                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                     <label class="form-label" for="firstname"
                       >First Name <small class="text-danger">*</small></label
@@ -34,6 +34,7 @@
                       id="firstname"
                       class="form-control"
                       formControlName="firstname"
+                      [(ngModel)]="NewUser.firstname"
                       [ngClass]="{
                         'is-invalid':
                           (SignUpForm.get('firstname')?.touched ||
@@ -48,15 +49,16 @@
                         First Name is required.
                       </span>
                       <span
-                        *ngIf="SignUpForm.get('firstname')?.errors?.['minlength']"
+                        *ngIf="SignUpForm.get('firstname')?.errors?.['pattern']"
                       >
-                        First Name must be longer than 3 characters.
+                        First Name must be at least 3 characters and only
+                        alphabetic and can't contain voids.
                       </span>
                     </span>
                   </div>
 
                   <!-- Last Name -->
-                  <div class="form-outline w-100">
+                  <div class="form-outline w-100 mb-0">
                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                     <label class="form-label" for="lastname"
                       >Last Name<small class="text-danger">*</small></label
@@ -66,6 +68,7 @@
                       id="lastname"
                       class="form-control"
                       formControlName="lastname"
+                      [(ngModel)]="NewUser.lastname"
                       [ngClass]="{
                         'is-invalid':
                           (SignUpForm.get('lastname')?.touched ||
@@ -80,21 +83,22 @@
                         Last Name required.
                       </span>
                       <span
-                        *ngIf="SignUpForm.get('lastname')?.errors?.['minlength']"
+                        *ngIf="SignUpForm.get('lastname')?.errors?.['pattern']"
                       >
-                        Last Name must be longer than 3 characters.
+                        Last Name must be at least 3 characters and only
+                        alphabetic and can't contain voids.
                       </span>
                     </span>
                   </div>
                 </div>
 
                 <!-- User Name -->
-                <div class="d-flex align-items-center mb-4">
+                <div class="d-flex flex-row align-items-center mb-4">
                   <div class="form-outline w-100 mb-0">
                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                     <label class="form-label" for="username"
                       >User Name <small class="text-danger">*</small
-                      ><small class="text-danger mx-2"
+                      ><small class="text-secondary mx-2"
                         >(Can't be changed later)
                       </small></label
                     >
@@ -105,6 +109,7 @@
                       id="username"
                       class="form-control"
                       formControlName="username"
+                      [(ngModel)]="NewUser.username"
                       [ngClass]="{
                         'is-invalid':
                           (SignUpForm.get('username')?.touched ||
@@ -121,16 +126,18 @@
                         User Name is required.
                       </span>
                       <span
-                        *ngIf="SignUpForm.get('username')?.errors?.['minlength']"
+                        *ngIf="SignUpForm.get('username')?.errors?.['pattern']"
                       >
-                        User Name must be longer than 3 characters.
+                        The number of characters must be between 3 and 16 and
+                        the first character should be alphabetic.
+                        <br />Can contain numbers or underscores(_) only.
                       </span>
                     </span>
                   </div>
                 </div>
 
                 <!-- Email -->
-                <div class="d-flex align-items-center mb-4">
+                <div class="d-flex flex-row align-items-center mb-4">
                   <div class="form-outline w-100 mb-0">
                     <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                     <label class="form-label" for="email"
@@ -141,6 +148,7 @@
                       id="email"
                       class="form-control"
                       formControlName="email"
+                      [(ngModel)]="NewUser.email"
                       [ngClass]="{
                         'is-invalid':
                           (SignUpForm.get('email')?.touched ||
@@ -154,7 +162,9 @@
                       >
                         Email is required.
                       </span>
-                      <span *ngIf="SignUpForm.get('email')?.errors?.['email']">
+                      <span
+                        *ngIf="SignUpForm.get('email')?.errors?.['email'] || SignUpForm.get('email')?.errors?.['pattern']"
+                      >
                         Please enter a valid email address.
                       </span>
                     </span>
@@ -162,8 +172,8 @@
                 </div>
 
                 <!-- Password -->
-                <div class="d-flex mb-4 flex-column flex-sm-row">
-                  <div class="form-outline w-100 mb-sm-0 mb-4 me-3">
+                <div class="d-flex flex-row mb-4">
+                  <div class="form-outline w-100 mb-0 me-3">
                     <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                     <label class="form-label" for="password"
                       >Password <small class="text-danger">* </small></label
@@ -173,6 +183,7 @@
                       id="password"
                       class="form-control"
                       formControlName="password"
+                      [(ngModel)]="NewUser.password"
                       [ngClass]="{
                         'is-invalid':
                           (SignUpForm.get('password')?.touched ||
@@ -187,9 +198,11 @@
                         Password is required.
                       </span>
                       <span
-                        *ngIf="SignUpForm.get('password')?.errors?.['pattern'] || SignUpForm.get('password')?.errors?.['minlength']"
+                        *ngIf="SignUpForm.get('password')?.errors?.['pattern']"
                       >
-                        Password should be at least 8 characters with numbers
+                        Password must be at least 8 characters and contain one
+                        or more uppercase characters,lowercase
+                        characters,numeric values,special characters.
                       </span>
                     </span>
                   </div>
@@ -220,12 +233,14 @@
                         Confirm Password is required.
                       </span>
                       <span
-                        *ngIf="SignUpForm.get('confirm_password')?.errors?.['pattern'] || SignUpForm.get('confirm_password')?.errors?.['minlength']"
+                        *ngIf="SignUpForm.get('confirm_password')?.errors?.['pattern']"
                       >
-                        Password should be at least 8 characters with numbers
+                        Password must be at least 8 characters and contain one
+                        or more uppercase characters,lowercase
+                        characters,numeric values,special characters.
                       </span>
                       <span
-                        *ngIf="SignUpForm.get('confirm_password')?.errors?.['ConfirmValidator']"
+                        *ngIf="SignUpForm.get('confirm_password')?.errors?.['passwordMismatch']"
                       >
                         Password and Confirm Password must be match.
                       </span>
@@ -234,8 +249,8 @@
                 </div>
 
                 <!-- Country -->
-                <div class="d-flex mb-4 flex-column flex-sm-row">
-                  <div class="form-outline w-100 mb-sm-0 mb-4 me-3">
+                <div class="d-flex flex-row mb-4">
+                  <div class="form-outline w-100 mb-0 me-3">
                     <i class="fas fa-home fa-lg me-3 fa-fw"></i>
                     <label class="form-label" for="country"
                       >Your Country <small class="text-danger">*</small></label
@@ -245,6 +260,7 @@
                       name="country"
                       id="country"
                       formControlName="country"
+                      [(ngModel)]="NewUser.country"
                       [ngClass]="{
                         'is-invalid':
                           (SignUpForm.get('country')?.touched ||
@@ -255,7 +271,7 @@
                       <option disabled selected>Select your country</option>
                       <option value="USA">USA</option>
                       <option value="Canada">Canada</option>
-                      <option value="Mexico">Egypt</option>
+                      <option value="Egypt">Egypt</option>
                     </select>
                     <span class="invalid-feedback">
                       <span
@@ -266,34 +282,36 @@
                     </span>
                   </div>
 
-                  <!-- Phone -->
+                  <!-- phoneNumber -->
                   <div class="form-outline w-100 mb-0">
                     <i class="fas fa-mobile fa-lg me-3 fa-fw"></i>
-                    <label class="form-label" for="phone"
-                      >Your Phone <small class="text-danger">*</small></label
+                    <label class="form-label" for="phoneNumber"
+                      >Your Phone Number
+                      <small class="text-danger">*</small></label
                     >
                     <input
                       type="tel"
-                      id="phone"
+                      id="phoneNumber"
                       class="form-control"
-                      formControlName="phone"
+                      formControlName="phoneNumber"
+                      [(ngModel)]="NewUser.phoneNumber"
                       [ngClass]="{
                         'is-invalid':
-                          (SignUpForm.get('phone')?.touched ||
-                            SignUpForm.get('phone')?.dirty) &&
-                          SignUpForm.get('phone')?.invalid
+                          (SignUpForm.get('phoneNumber')?.touched ||
+                            SignUpForm.get('phoneNumber')?.dirty) &&
+                          SignUpForm.get('phoneNumber')?.invalid
                       }"
                     />
                     <span class="invalid-feedback">
                       <span
-                        *ngIf="SignUpForm.get('phone')?.errors?.['required']"
+                        *ngIf="SignUpForm.get('phoneNumber')?.errors?.['required']"
                       >
-                        Phone is required.
+                        phoneNumber is required.
                       </span>
                       <span
-                        *ngIf="SignUpForm.get('phone')?.errors?.['minlength']"
+                        *ngIf="SignUpForm.get('phoneNumber')?.errors?.['minlength']"
                       >
-                        Phone must be longer than 11 characters.
+                        phoneNumber must be 11 characters.
                       </span>
                     </span>
                   </div>
@@ -301,7 +319,9 @@
 
                 <!-- Account Type -->
                 <div class="form-outline w-100 mb-3">
-                  <label class="form-label" for="phone">Gender </label>
+                  <label class="form-label" for="gender"
+                    >Gender <small class="text-danger">*</small></label
+                  >
                   <div class="form-check form-check-inline mx-5">
                     <input
                       class="form-check-input"
@@ -310,6 +330,7 @@
                       id="male"
                       value="male"
                       formControlName="gender"
+                      [(ngModel)]="NewUser.gender"
                     />
                     <label class="form-check-label" for="male">Male</label>
                   </div>
@@ -321,11 +342,12 @@
                       id="female"
                       value="female"
                       formControlName="gender"
+                      [(ngModel)]="NewUser.gender"
                     />
                     <label class="form-check-label" for="female">Female</label>
                   </div>
 
-                  <!-- <label class="form-label" for="phone">Account type </label>
+                  <!-- <label class="form-label" for="gender">Account type </label>
                     <div class="form-check form-check-inline mx-5">
                     <input class="form-check-input" type="checkbox" name="std" id="std" value="student" disabled checked>
                     <label class="form-check-label" for="std">Want Service</label>
@@ -348,7 +370,7 @@
                   <button
                     type="submit"
                     [disabled]="SignUpForm.invalid"
-                    class="btn btn-success btn-lg w-100"
+                    class="btn btn-primary btn-lg w-100"
                     style="background-color: #395b64"
                   >
                     Sign Up
@@ -367,7 +389,6 @@
             </div>
           </div>
         </div>
-        <button (click)="get()"></button>
         <!-- </div> -->
       </div>
     </div>

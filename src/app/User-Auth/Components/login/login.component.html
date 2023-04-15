@@ -78,7 +78,8 @@
           <!-- Submit button -->
           <button
             type="submit"
-            class="btn btn-success btn-lg btn-block w-100"
+            [disabled]="LoginForm.invalid"
+            class="btn btn-primary btn-lg btn-block w-100"
             style="background-color: #395b64"
           >
             Login
