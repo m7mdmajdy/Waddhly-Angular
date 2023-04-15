@@ -2,46 +2,57 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgToastService } from 'ng-angular-popup';
 import { User } from 'src/app/Modals/user';
+import { UserstoreService } from 'src/app/Services/auth/UserStore/userstore.service';
 import { AuthService } from 'src/app/Services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
   //NewUser= new User();
-  LoginForm :FormGroup;
-  constructor(private fb:FormBuilder,private http:HttpClient,private router:Router,private authService:AuthService)
-  {
-    this.LoginForm=this.fb.group({
-      email:['',[Validators.required,Validators.email]],
-      password:['',[Validators.required]]
+  LoginForm: FormGroup;
+  constructor(
+    private fb: FormBuilder,
+    private http: HttpClient,
+    private router: Router,
+    private authService: AuthService,
+    private toast: NgToastService,
+    private userStore: UserstoreService
+  ) {
+    this.LoginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]],
     });
   }
 
-  Login(){
-    console.log(this.LoginForm.value)
+  Login() {
     this.authService.Login(this.LoginForm.value).subscribe({
-      next:(res)=>{
-        console.log(res.message);
+      next: (res) => {
+        debugger;
         this.LoginForm.reset();
-        this.authService.storeToken(res.token)
-        this.router.navigate(['/home'])
-      }, error:(err)=>{
-        alert(err?.error.message);
-      }
-    })
-  //   this.http.post('http://localhost:8080/api/login',this.LoginForm.value)
-  //   .subscribe(res=>{
-  //     console.log(res);
-  //       this.router.navigate(['/home']);
-  //     },err=>{
-  //       console.log(err);
-  //     });
-
+        this.toast.success({
+          detail: 'Success',
+          summary: 'Login confirmed',
+          duration: 5000,
+        });
+        this.authService.storeToken(res.token);
+        let TokenPayload = this.authService.decodedToken();
+        this.userStore.setIDforStore(TokenPayload.id);
+        this.userStore.setEmailforStore(TokenPayload.email);
+        this.userStore.setRoleforStore(TokenPayload.role);
+        this.router.navigate(['/home']);
+      },
+      error: (err) => {
+        this.toast.error({
+          detail: 'Error',
+          summary: err.error,
+          duration: 5000,
+        });
+      },
+    });
   }
-
-
 }
