@@ -1,6 +1,9 @@
 :root {
   --main-color: #395b64;
+<<<<<<< HEAD
+=======
   --second-color: #2c3333;
+>>>>>>> a6d34c43838483e0b501f9202f09cf30f6c3fb5a
   --alter-color: #6ca6a8;
   --text-color: #2c3333;
   --light-color: #e7f6f2;
@@ -29,3 +32,9 @@
 .bg-light-color {
   background-color: var(--light-color, #e7f6f2);
 }
+<<<<<<< HEAD
+.min-height {
+  min-height: calc(100vh - 96px);
+}
+=======
+>>>>>>> a6d34c43838483e0b501f9202f09cf30f6c3fb5a

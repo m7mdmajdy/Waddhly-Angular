@@ -12,11 +12,14 @@ import { HomeComponent } from './Components/home/home.component';
 import { LoginComponent } from './User-Auth/Components/login/login.component';
 import { SignUpComponent } from './User-Auth/Components/sign-up/sign-up.component';
 import { NotFoundComponent } from './Components/not-found/not-found.component';
+import { ServicesComponent } from './Components/services/services.component';
+import { PostsComponent } from './Components/posts/posts.component';
+import { PostComponent } from './Components/post/post.component';
+import { ServiceComponent } from './Components/service/service.component';
 import { NgToastModule } from 'ng-angular-popup';
 import { TokenInterceptor } from './Interceptors/token.interceptor';
 import { UserprofileComponent } from './Components/UserProfile/userprofile/userprofile.component';
 import { EditprofileComponent } from './Components/UserProfile/editprofile/editprofile.component';
-import { ServicesComponent } from './Components/services/services.component';
 
 @NgModule({
   declarations: [
@@ -29,8 +32,9 @@ import { ServicesComponent } from './Components/services/services.component';
     SignUpComponent,
     NotFoundComponent,
     ServicesComponent,
-    UserprofileComponent,
-    EditprofileComponent,
+    PostsComponent,
+    PostComponent,
+    ServiceComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,14 +42,8 @@ import { ServicesComponent } from './Components/services/services.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgToastModule
   ],
-  providers: [
-    // {provide: HTTP_INTERCEPTORS,
-    //  useClass:TokenInterceptor,
-    //  multi:true
-    // }
-],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
