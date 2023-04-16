@@ -29,3 +29,6 @@
 .bg-light-color {
   background-color: var(--light-color, #e7f6f2);
 }
+.min-height {
+  min-height: calc(100vh - 96px);
+}
