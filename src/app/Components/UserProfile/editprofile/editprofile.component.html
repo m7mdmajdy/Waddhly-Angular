@@ -143,7 +143,7 @@
                   <h6 class="mb-0">Money in my account</h6>
                 </div>
                 <div class="col-sm-9 text-secondary">
-                  <input type="text" class="form-control" #money="ngModel" [(ngModel)]="UserData.moneyAccount">
+                  <input type="text" class="form-control" name="money" #money="ngModel" [(ngModel)]="UserData.moneyAccount">
                   <!-- <input type="text" class="form-control"
                   required
                   #money="ngModel" [(ngModel)]="UserData.moneyAccount"
@@ -160,7 +160,7 @@
                   <h6 class="mb-0">Title</h6>
                 </div>
                 <div class="col-sm-9 text-secondary">
-                  <input type="text" class="form-control" [(ngModel)]="UserData.title">
+                  <input type="text" class="form-control" name="title" #title="ngModel" [(ngModel)]="UserData.title">
                 </div>
               </div>
               <div class="row mb-3" *ngIf="UserData.categoryName">
@@ -168,7 +168,7 @@
                   <h6 class="mb-0" >Category</h6>
                 </div>
                 <div class="col-sm-9 text-secondary">
-                  <input type="text" class="form-control" [(ngModel)]="UserData.categoryID">
+                  <input type="text" class="form-control" name="cat" #cat="ngModel" [(ngModel)]="UserData.categoryID">
                 </div>
               </div>
               <div class="row mb-3" *ngIf="UserData.categoryName">
@@ -176,7 +176,7 @@
                   <h6 class="mb-0">Hour Rate</h6>
                 </div>
                 <div class="col-sm-9 text-secondary">
-                  <input type="text" class="form-control" [(ngModel)]="UserData.hourRate">
+                  <input type="text" class="form-control" name="hour" #hour="ngModel" [(ngModel)]="UserData.hourRate">
                 </div>
               </div>
               <div class="row">

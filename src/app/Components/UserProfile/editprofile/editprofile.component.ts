@@ -132,11 +132,13 @@ editinfo(){
       this.formData.append('lname',this.UserData.lname)
       this.formData.append('email',this.UserData.email)
       this.formData.append('PhoneNumber',this.UserData.phoneNumber)
-      // this.formData.append('MoneyAccount',this.UserData.moneyAccount)
+      this.formData.append('MoneyAccount',this.UserData.moneyAccount)
       // this.formData.append('hourRate',this.UserData.hourRate)
       // this.formData.append('categoryID',this.UserData.categoryID)
+      this.formData.append('title',this.UserData.title)
+      debugger
       this.formData.append('country',this.UserData.country)
-      this.formData.append('File',this.UserData.userimage)
+      // this.formData.append('File',this.UserData.userimage)
 
 
       this.userservice.editUserDataByID(this.UserID,this.formData).subscribe({next:val=>{
