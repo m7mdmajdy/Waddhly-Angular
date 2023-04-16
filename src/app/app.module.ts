@@ -35,6 +35,8 @@ import { EditprofileComponent } from './Components/UserProfile/editprofile/editp
     PostsComponent,
     PostComponent,
     ServiceComponent,
+    EditprofileComponent,
+    UserprofileComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,8 +44,14 @@ import { EditprofileComponent } from './Components/UserProfile/editprofile/editp
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NgToastModule
   ],
-  providers: [],
+  providers: [
+    // {provide: HTTP_INTERCEPTORS,
+    //  useClass:TokenInterceptor,
+    //  multi:true
+    // }
+],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
