@@ -8,15 +8,15 @@ import { AuthService } from 'src/app/Services/auth/auth.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   public username:string ="";
   public email:string ="";
   public mytoken:any;
   public UserID:string="";
   public UserData:any
 
-  constructor (private userStore: UserstoreService, private auth:AuthService,private userservice:UserService){
-
+  constructor (private userStore: UserstoreService, private auth:AuthService,private userservice:UserService){}
+  ngOnInit(): void {
     this.mytoken = this.auth.getToken();
     this.userStore.getIDfromStore().subscribe(val=>{
       this.UserID = val || this.auth.getIDfromToken()
@@ -26,7 +26,6 @@ export class HeaderComponent {
       console.log(this.UserData);
     })
   }
-
 logout(){
   this.auth.logout();
 }
