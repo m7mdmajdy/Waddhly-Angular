@@ -142,8 +142,8 @@
                 <div class="card h-100">
                   <div class="card-body">
                     <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">Portfolio section</i></h6>
-                    <p class="text-secondary m-2" *ngIf="!UserPortofolio">There is no Jobs </p>
-                    <div class="card mb-3" *ngIf="UserPortofolio">
+                    <p class="text-secondary m-2" *ngIf="UserPortofolio.length ==0">There is no Jobs </p>
+                    <div class="card mb-3" *ngIf="UserPortofolio.length!==0">
                       <div class="row no-gutters" *ngFor="let item of UserPortofolio">
                         <div class="col-md-4">
                           <img src="data:image/png;base64,{{item.portimage}}" class="card-img">

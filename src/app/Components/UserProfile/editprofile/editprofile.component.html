@@ -221,7 +221,7 @@
                       <h6 class="mb-0">Title</h6>
                     </div>
                     <div class="col-sm-8 text-secondary">
-                      <input type="text" class="form-control" #title='ngModel' name="title"  [(ngModel)]=CertificateTitle >
+                      <input type="text" class="form-control" #title='ngModel' name="title"  [(ngModel)]=PortfolioTitle >
                     </div>
                   </div>
                   <div class="row mb-3">
@@ -229,7 +229,7 @@
                       <h6 class="mb-0">Job URL</h6>
                     </div>
                     <div class="col-sm-8 text-secondary">
-                      <input type="text" class="form-control" #cert='ngModel' name="certificate"  [(ngModel)]=CertificateURL required>
+                      <input type="text" class="form-control" #port='ngModel' name="Portfolio"  [(ngModel)]=PortfolioURL required>
                     </div>
                   </div>
                   <div class="row mb-3">
@@ -237,12 +237,12 @@
                       <h6 class="mb-0">Job Date</h6>
                     </div>
                     <div class="col-sm-8 text-secondary">
-                      <input type="date" class="form-control" #cert='ngModel' name="certificateDate"  [(ngModel)]=CertificateDate required>
+                      <input type="date" class="form-control" #port='ngModel' name="PortfolioDate"  [(ngModel)]=PortfolioDate required>
                     </div>
                   </div>
                   <div class="mb-3">
                     <h6 class="mb-0">Select image for your Job</h6>
-                    <input class="form-control " #myInput="ngModel" name="img" type="file" [(ngModel)]=CertificateIMG
+                    <input class="form-control " #myInput="ngModel" name="img" type="file" [(ngModel)]=PortfolioIMG
                     (change)="fileInput($event.target)" id="formFile" required>
                   </div>
                   <button class="btn btn-primary" type="submit" [disabled]="addportofolio.invalid" (click)="addNewPortofolio()"> Add New Jop </button>
@@ -259,7 +259,7 @@
             <div class="card">
               <div class="card-body">
                 <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">Certificate</i></h6>
-                <!-- <div class="card mb-3" *ngFor="let item of UserData.certfcimage">
+                <div class="card mb-3" *ngFor="let item of UserData.certfcimage">
                   <div class="row no-gutters">
                     <div class="col-md-4 d-flex">
                       <button type="button" class="btn btn-danger" (click)="deleteCertificate(item.item3)">x</button>
@@ -272,7 +272,7 @@
                       </div>
                     </div>
                   </div>
-                </div> -->
+                </div>
 
       <!-- edit certificate -->
                     <form class="g-3" #addcertificate='ngForm' >

@@ -67,7 +67,7 @@
                 <i class="material-icons md-light ml-2">{{UserData.name}}</i>
             </a>
             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="navbarDropdownMenuLink">
-              <li><a class="dropdown-item" routerLink="/profile">MY Profile</a></li>
+              <li><a class="dropdown-item" routerLink="/profile/{{UserID}}">MY Profile</a></li>
               <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
             </ul>
           </li>

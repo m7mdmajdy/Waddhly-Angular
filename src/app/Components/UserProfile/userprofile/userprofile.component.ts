@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/Modals/user';
 import { UserService } from 'src/app/Services/auth/User/user.service';
 import { UserstoreService } from 'src/app/Services/auth/UserStore/userstore.service';
@@ -11,13 +12,16 @@ import { AuthService } from 'src/app/Services/auth/auth.service';
 })
 export class UserprofileComponent implements OnInit {
   public UserID: string="";
+  public UserRouteID: any;
   public UserData:any;
   public UserPortofolio:any;
   public CertificateIMG: any;
 
-  constructor(private userservice:UserService,private auth:AuthService,private userStore:UserstoreService) { }
+  constructor(private route:ActivatedRoute ,private userservice:UserService,private auth:AuthService,private userStore:UserstoreService) { }
 
   ngOnInit(): void {
+    this.UserRouteID=(this.route.snapshot.paramMap.get('id'));
+    console.log(this.UserRouteID);
     this.userStore.getIDfromStore().subscribe( id => {
         this.UserID = id || this.auth.getIDfromToken()
         console.log(this.UserID);

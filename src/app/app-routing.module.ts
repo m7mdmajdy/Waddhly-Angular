@@ -14,7 +14,7 @@ import { EditprofileComponent } from './Components/UserProfile/editprofile/editp
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
-  { path: 'profile', component: UserprofileComponent },
+  { path: 'profile/:id', component: UserprofileComponent },
   { path: 'editprofile', component: EditprofileComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignUpComponent },

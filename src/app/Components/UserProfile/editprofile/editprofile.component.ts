@@ -24,9 +24,13 @@ export class EditprofileComponent implements OnInit{
   public UserID: string="";
   public UserPortofolio:any;
   public CertificateTitle:string="";
+  public PortfolioTitle:string="";
   public CertificateURL:string="";
+  public PortfolioURL:string="";
   public CertificateIMG: any;
+  public PortfolioIMG: any;
   public CertificateDate: any;
+  public PortfolioDate: any;
   formData=new FormData();
   constructor(private userservice:UserService,private auth:AuthService,private toast:NgToastService,private userStore:UserstoreService){
     this.userStore.getIDfromStore().subscribe( id => {
@@ -78,20 +82,20 @@ export class EditprofileComponent implements OnInit{
 
   addNewPortofolio(){
 
-      this.formData.append('Title',this.CertificateTitle)
-      this.formData.append('ProjectUrl',this.CertificateURL)
-      this.formData.append('Date',this.CertificateDate)
+      this.formData.append('Title',this.PortfolioTitle)
+      this.formData.append('ProjectUrl',this.PortfolioURL)
+      this.formData.append('Date',this.PortfolioDate)
       this.formData.append('userid',this.UserID)
-      this.formData.append('File',this.CertificateIMG)
+      this.formData.append('File',this.PortfolioIMG)
       console.log(this.usercertificate)
       this.userservice.addPorfolio(this.UserID,this.formData).subscribe({next:val=>{
-        this.toast.success({detail:"Success",summary:"You add a certificate successfully",duration:3000}),
-        this.userservice.getUserDataByID(this.UserID).subscribe( val => {
-          this.UserData = val;
-          console.log(this.UserData);
+        this.toast.success({detail:"Success",summary:"You add a Job successfully",duration:3000}),
+        this.userservice.getPorfolio(this.UserID).subscribe( val => {
+          this.UserPortofolio=val;
+          console.log(this.UserPortofolio);
         })},
         error:err=>
-        this.toast.error({detail:"Error",summary:"Add certificate Failed",duration:3000}),
+        this.toast.error({detail:"Error",summary:"Add Job Failed",duration:3000}),
 
       })
     }
@@ -107,8 +111,9 @@ export class EditprofileComponent implements OnInit{
   deletePorfolio(id:string){
     this.userservice.deletePorfolio(this.UserID,id).subscribe({next:val=>{
       this.toast.success({detail:"Success",summary:"You delete your Job successfully",duration:3000}),
-      this.userservice.getUserDataByID(this.UserID).subscribe( val => {
-        this.UserData = val;
+      this.userservice.getPorfolio(this.UserID).subscribe( val => {
+        this.UserPortofolio=val;
+        console.log(this.UserPortofolio);
       })},
       error:err=>
       this.toast.error({detail:"Error",summary:"Delete Job Failed",duration:3000}),
