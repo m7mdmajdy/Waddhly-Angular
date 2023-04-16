@@ -141,18 +141,19 @@
               <div class="col-sm-12 mb-3">
                 <div class="card h-100">
                   <div class="card-body">
-                    <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">My Porfolio</i></h6>
-                    <div class="card mb-3" >
-                      <div class="row no-gutters">
+                    <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">Portfolio section</i></h6>
+                    <p class="text-secondary m-2" *ngIf="!UserPortofolio">There is no Jobs </p>
+                    <div class="card mb-3" *ngIf="UserPortofolio">
+                      <div class="row no-gutters" *ngFor="let item of UserPortofolio">
                         <div class="col-md-4">
-                          <img src="data:image/png;base64,{{UserPortofolio.portimage}}" class="card-img">
+                          <img src="data:image/png;base64,{{item.portimage}}" class="card-img">
                         </div>
                         <div class="col-md-8">
                           <div class="card-body">
-                            <h5 class="card-title">{{UserPortofolio.title}}</h5>
-                            <p class="card-text">{{UserPortofolio.description}}</p>
-                            <p class="card-text"><small class="text-muted">{{UserPortofolio.date}}</small></p>
-                            <a href="{{UserPortofolio.projectUrl}}" target="_blank" class="stretched-link">Details</a>
+                            <h5 class="card-title">{{item.title}}</h5>
+                            <p class="card-text">{{item.description}}</p>
+                            <p class="card-text"><small class="text-muted">{{item.date}}</small></p>
+                            <a href="{{item.projectUrl}}" target="_blank" >Details</a>
                           </div>
                         </div>
                       </div>
@@ -168,16 +169,17 @@
               <div class="col-sm-12 mb-3">
                 <div class="card h-100">
                   <div class="card-body">
-                    <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">My Certificate</i></h6>
-                    <div class="card mb-3" *ngFor="let item of UserData.certfcimage">
-                      <div class="row no-gutters">
+                    <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">Certification section</i></h6>
+                    <p class="text-secondary m-2" *ngIf="UserData.certfcimage.length==0">There is no Certifications </p>
+                    <div class="card mb-3"  *ngIf="UserData.certfcimage.length!==0">
+                      <div class="row no-gutters" *ngFor="let item of UserData.certfcimage">
                         <div class="col-md-4">
                           <img src="data:image/png;base64,{{item.item4}}" class="card-img">
                         </div>
                         <div class="col-md-8">
                           <div class="card-body">
                             <h5 class="card-title">{{item.item1}}</h5>
-                            <a href="{{item.item2}}" target="_blank" class="stretched-link">Details</a>
+                            <a href="{{item.item2}}" target="_blank">Details</a>
                           </div>
                         </div>
                       </div>
