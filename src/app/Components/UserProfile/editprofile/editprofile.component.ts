@@ -17,9 +17,10 @@ export class EditprofileComponent implements OnInit{
   public userfname:string="";
   public userlname:string="";
   public useremail:string="";
-  public userphone:string=this.UserData.phoneNumber;
+  public userphone:string="";
   public usercountry:string="";
   public usermoney:string="";
+  public userIMG: any;
 
   public UserID: string="";
   public UserPortofolio:any;
@@ -49,18 +50,19 @@ export class EditprofileComponent implements OnInit{
       })
     }
 
-    editUserData(){
-      this.userservice.editUserDataByID(this.UserID,this.formData)
-    }
     addNewCertificate(){
       this.formData.append('Title',this.CertificateTitle)
       this.formData.append('CertificateUrl',this.CertificateURL)
       this.formData.append('userid',this.UserID)
-      this.formData.append('File',this.CertificateIMG)
       this.userservice.addCertificate(this.formData).subscribe({next:val=>{
         this.toast.success({detail:"Success",summary:"You add a certificate successfully",duration:3000}),
         this.userservice.getUserDataByID(this.UserID).subscribe( val => {
           this.UserData = val;
+          this.CertificateTitle=""
+          this.CertificateURL=""
+          this.CertificateIMG=""
+          this.formData=new FormData();
+
         })},
         error:err=>
         this.toast.error({detail:"Error",summary:"Add certificate Failed",duration:3000}),
@@ -81,18 +83,22 @@ export class EditprofileComponent implements OnInit{
   }
 
   addNewPortofolio(){
-
       this.formData.append('Title',this.PortfolioTitle)
       this.formData.append('ProjectUrl',this.PortfolioURL)
       this.formData.append('Date',this.PortfolioDate)
       this.formData.append('userid',this.UserID)
-      this.formData.append('File',this.PortfolioIMG)
-      console.log(this.usercertificate)
+
       this.userservice.addPorfolio(this.UserID,this.formData).subscribe({next:val=>{
         this.toast.success({detail:"Success",summary:"You add a Job successfully",duration:3000}),
         this.userservice.getPorfolio(this.UserID).subscribe( val => {
           this.UserPortofolio=val;
           console.log(this.UserPortofolio);
+          this.PortfolioTitle=""
+          this.PortfolioURL=""
+          this.PortfolioDate=""
+          this.PortfolioIMG=""
+          this.formData=new FormData();
+
         })},
         error:err=>
         this.toast.error({detail:"Error",summary:"Add Job Failed",duration:3000}),
@@ -121,7 +127,29 @@ export class EditprofileComponent implements OnInit{
   }
 
 editinfo(){
+      this.formData.append('summary',this.UserData.summary)
+      this.formData.append('fname',this.UserData.fname)
+      this.formData.append('lname',this.UserData.lname)
+      this.formData.append('email',this.UserData.email)
+      this.formData.append('PhoneNumber',this.UserData.phoneNumber)
+      // this.formData.append('MoneyAccount',this.UserData.moneyAccount)
+      // this.formData.append('hourRate',this.UserData.hourRate)
+      // this.formData.append('categoryID',this.UserData.categoryID)
+      this.formData.append('country',this.UserData.country)
+      this.formData.append('File',this.UserData.userimage)
 
+
+      this.userservice.editUserDataByID(this.UserID,this.formData).subscribe({next:val=>{
+        this.toast.success({detail:"Success",summary:"You add a Job successfully",duration:3000}),
+        this.userservice.getUserDataByID(this.UserID).subscribe( val => {
+          this.UserData = val;
+          console.log(this.UserData);
+          this.formData=new FormData();
+        })},
+        error:err=>
+        this.toast.error({detail:"Error",summary:"Edit your information Failed",duration:3000}),
+
+      })
 }
 
   // passwordMatchValidator(formGroup: FormGroup) {

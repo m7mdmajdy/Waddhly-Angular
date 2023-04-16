@@ -26,12 +26,12 @@ export class UserprofileComponent implements OnInit {
         this.UserID = id || this.auth.getIDfromToken()
         console.log(this.UserID);
     })
-    this.userservice.getUserDataByID(this.UserID).subscribe( val => {
+    this.userservice.getUserDataByID(this.UserRouteID).subscribe( val => {
         this.UserData = val;
         console.log(this.UserData);
     })
   // this.CertificateIMG=this.userservice.convertBYTEtoIMG(this.UserData.certfcimage)
-  this.userservice.getPorfolio(this.UserID).subscribe( val => {
+  this.userservice.getPorfolio(this.UserRouteID).subscribe( val => {
     this.UserPortofolio=val;
     console.log(this.UserPortofolio);
   })

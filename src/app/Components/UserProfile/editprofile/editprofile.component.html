@@ -10,9 +10,10 @@
                     <div class="profile-pic-wrapper">
                       <div class="pic-holder">
                         <!-- uploaded pic shown here -->
-                        <img id="profilePic" class="pic" src="">
-
-                        <Input class="uploadProfileInput" type="file" name="profile_pic" id="newProfilePhoto" accept="image/*" style="opacity: 0;" />
+                        <img id="profilePic" class="pic" src="data:image/png;base64,{{UserData.userimage}}">
+                        <input class="uploadProfileInput form-control" name="profile_pic" type="file" style="opacity: 0;"
+                        (change)="fileInput($event.target)" id="newProfilePhoto">
+                        <!-- <Input class="uploadProfileInput" type="file" name="profile_pic" id="newProfilePhoto" accept="image/*" style="opacity: 0;" /> -->
                         <label for="newProfilePhoto" class="upload-file-block">
                           <div class="text-center">
                             <div class="mb-2">
@@ -40,7 +41,7 @@
                 <div class="mt-3 p-3">
                   <h4>Description</h4>
                   <div class="col-sm-12 text-secondary">
-                    <textarea class="form-control" name="description" id="description" rows="3">{{UserData.summary}}</textarea>
+                    <textarea class="form-control" name="description" id="description"  #summary="ngModel" [(ngModel)]="UserData.summary" rows="3">{{UserData.summary}}</textarea>
                   </div>
                 </div>
             </div>
@@ -142,7 +143,7 @@
                   <h6 class="mb-0">Money in my account</h6>
                 </div>
                 <div class="col-sm-9 text-secondary">
-                  <input type="text" class="form-control" [(ngModel)]="UserData.moneyAccount">
+                  <input type="text" class="form-control" #money="ngModel" [(ngModel)]="UserData.moneyAccount">
                   <!-- <input type="text" class="form-control"
                   required
                   #money="ngModel" [(ngModel)]="UserData.moneyAccount"
@@ -167,7 +168,7 @@
                   <h6 class="mb-0" >Category</h6>
                 </div>
                 <div class="col-sm-9 text-secondary">
-                  <input type="text" class="form-control" [(ngModel)]="UserData.categoryName">
+                  <input type="text" class="form-control" [(ngModel)]="UserData.categoryID">
                 </div>
               </div>
               <div class="row mb-3" *ngIf="UserData.categoryName">
@@ -181,7 +182,7 @@
               <div class="row">
                 <div class="col-sm-3"></div>
                 <div class="col-sm-9 text-secondary">
-                  <input type="button" class="btn btn-primary px-4" value="Save Changes">
+                  <input type="submit" [disabled]="InformationForm.invalid" class="btn btn-primary px-4" value="Save Changes">
                 </div>
               </div>
             </div>
