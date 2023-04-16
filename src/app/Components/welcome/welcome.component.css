@@ -90,19 +90,3 @@ span.main-color {
 .categories-section .categories .category i {
   font-size: 80px;
 }
-
-@media (min-width: 768px) and (max-width: 991px) {
-}
-@media (max-width: 767px) {
-  .categories-section .categories .category {
-    width: 45%;
-  }
-}
-@media (max-width: 570px) {
-  .categories-section .categories {
-    justify-content: center !important;
-  }
-  .categories-section .categories .category {
-    width: 90%;
-  }
-}
