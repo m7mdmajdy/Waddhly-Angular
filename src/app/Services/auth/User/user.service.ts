@@ -16,7 +16,7 @@ export class UserService {
   getUserDataByID(id:string) {
     return this.http.get(`${this.UserUrl}/${id}`);
   }
-  editUserDataByID(id:string,user:User) {
+  editUserDataByID(id:string,user:any) {
     return this.http.put(`${this.UserUrl}/${id}`, user);
   }
   // convertBYTEtoIMG(imageBytes:any){
