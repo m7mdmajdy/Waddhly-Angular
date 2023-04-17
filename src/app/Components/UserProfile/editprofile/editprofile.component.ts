@@ -21,6 +21,7 @@ export class EditprofileComponent implements OnInit{
   public usercountry:string="";
   public usermoney:string="";
   public userIMG: any;
+  public Categories:any;
 
   public UserID: string="";
   public UserPortofolio:any;
@@ -48,6 +49,10 @@ export class EditprofileComponent implements OnInit{
         this.UserPortofolio=val;
         console.log(this.UserPortofolio);
       })
+      this.userservice.getallcategory().subscribe( category => {
+        this.Categories=category
+        console.log(this.Categories);
+    })
     }
 
     addNewCertificate(){
@@ -133,10 +138,10 @@ editinfo(){
       this.formData.append('email',this.UserData.email)
       this.formData.append('PhoneNumber',this.UserData.phoneNumber)
       this.formData.append('MoneyAccount',this.UserData.moneyAccount)
-      // this.formData.append('hourRate',this.UserData.hourRate)
-      // this.formData.append('categoryID',this.UserData.categoryID)
+      this.formData.append('hourRate',this.UserData.hourRate)
+      this.formData.append('categoryID',this.UserData.categoryID)
       this.formData.append('title',this.UserData.title)
-      debugger
+      debugger;
       this.formData.append('country',this.UserData.country)
       // this.formData.append('File',this.UserData.userimage)
 

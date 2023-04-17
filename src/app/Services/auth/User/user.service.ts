@@ -20,6 +20,9 @@ export class UserService {
   editUserDataByID(id:string,user:any) {
     return this.http.put(`${this.UserUrl}/${id}`, user);
   }
+  getallcategory() {
+    return this.http.get(`${this.UserUrl2}/Category`);
+  }
   // convertBYTEtoIMG(imageBytes:any){
   //   const blob = new Blob([imageBytes], { type: 'image/jpeg' });
   //   const imageUrl = URL.createObjectURL(blob);
