@@ -20,6 +20,8 @@ import { NgToastModule } from 'ng-angular-popup';
 import { TokenInterceptor } from './Interceptors/token.interceptor';
 import { UserprofileComponent } from './Components/UserProfile/userprofile/userprofile.component';
 import { EditprofileComponent } from './Components/UserProfile/editprofile/editprofile.component';
+import { ChatComponent } from './Components/chat/chat.component';
+import { VideoComponent } from './Components/video/video.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { EditprofileComponent } from './Components/UserProfile/editprofile/editp
     ServiceComponent,
     EditprofileComponent,
     UserprofileComponent,
+    ChatComponent,
+    VideoComponent,
   ],
   imports: [
     BrowserModule,

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { User } from 'src/app/Modals/user';
+import { ChatService } from 'src/app/Services/ChatService/chat-service.service';
 import { UserService } from 'src/app/Services/auth/User/user.service';
 import { UserstoreService } from 'src/app/Services/auth/UserStore/userstore.service';
 import { AuthService } from 'src/app/Services/auth/auth.service';
@@ -11,7 +12,7 @@ import { AuthService } from 'src/app/Services/auth/auth.service';
   templateUrl: './userprofile.component.html',
   styleUrls: ['./userprofile.component.css']
 })
-export class UserprofileComponent{
+export class UserprofileComponent implements OnInit {
   public UserID: string="";
   public UserRouteID: any;
   public UserData:any;
@@ -23,8 +24,16 @@ export class UserprofileComponent{
   public CertificateIMG: any;
   formData=new FormData();
 
-  constructor(private route:ActivatedRoute ,private toast:NgToastService,private userservice:UserService,private auth:AuthService,private userStore:UserstoreService) {
+  constructor(private route:ActivatedRoute ,
+    private toast:NgToastService,
+    private userservice:UserService,
+    private auth:AuthService,
+    private userStore:UserstoreService,
+    public signalRService: ChatService
+    ) { }
 
+  ngOnInit(): void {
+    this.signalRService.startConnection();
     this.UserRouteID=(this.route.snapshot.paramMap.get('id'));
     console.log(this.UserRouteID);
     this.userStore.getIDfromStore().subscribe( id => {
@@ -46,8 +55,7 @@ export class UserprofileComponent{
         this.UserPortofolio=val;
         console.log(this.UserPortofolio);
     })
-   }
-
+  }
   addNewCategory(){
     this.formData.append('categoryID',this.selectedCategoryId)
     this.formData.append('hourRate',this.userhourRate)
@@ -62,5 +70,16 @@ export class UserprofileComponent{
       this.toast.error({detail:"Error",summary:"Edit your Category Failed",duration:3000}),
 
     })
+  }
+  msg?:string="";
+  SendUserMessage(): void {
+    console.log("asdasd");
+
+    if (this.msg?.trim() === "" || this.msg == null) return;
+
+    this.signalRService.hubConnection
+    .invoke("SendUserMessage", this.UserRouteID, this.auth.getIDfromToken(), this.msg);
+    this.toast.success({detail:"Success",summary:"Your message was sent successfully",duration:3000}),
+    this.msg=""
   }
 }

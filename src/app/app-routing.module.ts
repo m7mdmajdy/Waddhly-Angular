@@ -10,6 +10,8 @@ import { PostsComponent } from './Components/posts/posts.component';
 import { ServiceComponent } from './Components/service/service.component';
 import { UserprofileComponent } from './Components/UserProfile/userprofile/userprofile.component';
 import { EditprofileComponent } from './Components/UserProfile/editprofile/editprofile.component';
+import { ChatComponent } from './Components/chat/chat.component';
+import { VideoComponent } from './Components/video/video.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -22,6 +24,8 @@ const routes: Routes = [
   { path: 'services/:id', component: ServicesComponent },
   { path: 'posts', component: PostsComponent },
   { path: 'post/:id', component: PostComponent },
+  { path: 'chat', component: ChatComponent },
+  { path: 'session/:id', component: VideoComponent },
   { path: '**', component: NotFoundComponent },
 ];
 

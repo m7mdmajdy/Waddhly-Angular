@@ -64,6 +64,11 @@ export class AuthService {
       return this.userPayload.email;
     }
   }
+  getUsernamefromToken(){
+    if (this.userPayload) {
+      return this.userPayload.sub;
+    }
+  }
 
   getRoleFromToken(){
     if (this.userPayload) {
