@@ -1,0 +1,18 @@
+<app-header></app-header>
+<div class="container">
+  <div class="d-flex justify-content-between">
+    <a routerLink="{{ post.postuserid }}">{{ post.postusername }}</a>
+    <span>{{ subDates(post.postDate) }}</span>
+  </div>
+  <h3>{{ post.postTitle }}</h3>
+  <p>{{ post.postDescription }}</p>
+  <h5>Comments({{ post.comments.length }})</h5>
+  <div class="comments bg-light-color" *ngFor="let item of post.comments">
+    <p>{{ item.item1 }}</p>
+    <p>
+      <a routerLink="{{ item.item2 }}">{{ item.item3 }}</a>
+    </p>
+    <p>{{ subDates(item.item4) }}</p>
+  </div>
+</div>
+<app-footer></app-footer>

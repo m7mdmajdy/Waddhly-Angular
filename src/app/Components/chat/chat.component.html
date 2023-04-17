@@ -1,0 +1,41 @@
+{{loggedUsername}}
+<div class="container-fluid">
+    <div class="row">
+        <!-- <div class="col-6 pl-4">
+            Welcome <b>{{ signalRService.userData?.name }}</b>
+        </div>
+        <div class="col-6 text-right" style="cursor: pointer;">
+            Logout
+        </div> -->
+    </div>
+
+    <!-- 5Tutorial  -->
+    <div class="row">
+        <!-- List of Users -->
+        <div class="col-12 col-sm-3 offset-sm-3 mt-4">
+            <!-- Online Users -->
+            <label>Recent Chats</label>
+            <ul class="list-group" *ngFor="let user of users">
+                <li class="list-group-item" style="cursor: pointer;" (click)="getMessages(user)">{{ user.email }}</li>
+            </ul>
+        </div>
+
+        <!-- Chat Box -->
+        <div class="col-12 col-sm-3 mt-4">
+            <label><b>{{ selectedUser?.email }}</b></label>
+            <div id="chatBox">
+                <div #msgBox id="msgBox">
+                    <div *ngFor="let msg of msgs" class="msg">
+                        {{ msg.senderName }}:  {{msg.content}}
+                    </div>
+                </div>
+                <textarea [(ngModel)]="msg" id="textarea"></textarea>
+                <button id="sendBtn" class="btn btn-primary" [disabled]="selectedUser == null"
+                    (click)="sendMsgInv()">Send</button>
+
+                <button id="sendBtn" class="btn btn-primary" [disabled]="selectedUser == null"
+                (click)="openChatPage()">Start Session</button>
+            </div>
+        </div>
+    </div>
+</div>
