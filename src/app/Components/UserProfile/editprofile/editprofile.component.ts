@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/Services/auth/auth.service';
   templateUrl: './editprofile.component.html',
   styleUrls: ['./editprofile.component.css']
 })
-export class EditprofileComponent implements OnInit{
+export class EditprofileComponent{
   usercertificate:any;
   user:any;
   public UserData:any="";
@@ -43,8 +43,6 @@ export class EditprofileComponent implements OnInit{
         this.UserData = val;
         console.log(this.UserData);
       })
-  }
-  ngOnInit(): void {
       this.userservice.getPorfolio(this.UserID).subscribe( val => {
         this.UserPortofolio=val;
         console.log(this.UserPortofolio);
@@ -53,7 +51,7 @@ export class EditprofileComponent implements OnInit{
         this.Categories=category
         console.log(this.Categories);
     })
-    }
+  }
 
     addNewCertificate(){
       this.formData.append('Title',this.CertificateTitle)

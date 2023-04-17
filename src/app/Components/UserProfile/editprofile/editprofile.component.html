@@ -47,36 +47,40 @@
             </div>
 
 
-            <div class="col-lg-8">
-              <div class="row mb-3">
-                <div class="col-sm-3">
+            <div class=" col-lg-8">
+              <div class=" row mb-3">
+                <div class=" col-sm-3">
                   <h6 class="mb-0">Full Name <small class="text-danger">*</small></h6>
                 </div>
-                <div class="col-sm-9 text-secondary d-flex">
-                  <input type="text" class="form-control me-2" name="firstname"
-                  required pattern="^[A-Za-z]+([A-Za-z]){2,}$"
-                  #fname="ngModel" [(ngModel)]="UserData.fname" value="{{UserData.fname}}"
-                  [ngClass]="{'is-invalid':(fname.touched || fname.dirty )&& fname.invalid}"/>
+                <div class="col-sm-9 text-secondary d-flex ">
+                  <div  class="form-outline w-100 mb-0 pe-3">
+                    <input type="text" class="form-control me-2" name="firstname"
+                    required pattern="^[A-Za-z]+([A-Za-z]){2,}$"
+                    #fname="ngModel" [(ngModel)]="UserData.fname" value="{{UserData.fname}}"
+                    [ngClass]="{'is-invalid':(fname.touched || fname.dirty )&& fname.invalid}"/>
+                      <span class='invalid-feedback'>
+                      <span *ngIf="fname.errors?.['required']">
+                        First Name is required.
+                      </span>
+                      <span *ngIf="fname.errors?.['pattern']">
+                        First Name must be at least 3 characters and only alphabetic and can't contain voids.
+                      </span>
+                    </span>
+                  </div>
+                  <div  class="form-outline w-100 mb-0">
+                    <input type="text" class="form-control" name="lastname"
+                    required pattern="^[A-Za-z]+([A-Za-z]){2,}$"
+                    #lname="ngModel" [(ngModel)]="UserData.lname" value="{{UserData.lname}}"
+                    [ngClass]="{'is-invalid':(lname.touched || lname.dirty )&& lname.invalid}">
                     <span class='invalid-feedback'>
-                    <span *ngIf="fname.errors?.['required']">
-                      First Name is required.
+                      <span *ngIf="lname.errors?.['required']">
+                        Last Name required.
+                      </span>
+                      <span *ngIf="lname.errors?.['pattern']">
+                        Last Name must be at least 3 characters and only alphabetic and can't contain voids.
+                      </span>
                     </span>
-                    <span *ngIf="fname.errors?.['pattern']">
-                      First Name must be at least 3 characters and only alphabetic and can't contain voids.
-                    </span>
-                  </span>
-                  <input type="text" class="form-control" name="lastname"
-                  required pattern="^[A-Za-z]+([A-Za-z]){2,}$"
-                  #lname="ngModel" [(ngModel)]="UserData.lname" value="{{UserData.lname}}"
-                  [ngClass]="{'is-invalid':(lname.touched || lname.dirty )&& lname.invalid}">
-                  <span class='invalid-feedback'>
-                    <span *ngIf="lname.errors?.['required']">
-                      Last Name required.
-                    </span>
-                    <span *ngIf="lname.errors?.['pattern']">
-                      Last Name must be at least 3 characters and only alphabetic and can't contain voids.
-                    </span>
-                  </span>
+                  </div>
                 </div>
               </div>
               <div class="row mb-3">
@@ -187,7 +191,7 @@
               </div>
               <div class="row">
                 <div class="col-sm-3"></div>
-                <div class="col-sm-9 text-secondary">
+                <div class="col-sm-9 text-secondary d-flex justify-content-end">
                   <input type="submit" [disabled]="InformationForm.invalid" class="btn btn-primary px-4" value="Save Changes">
                 </div>
               </div>
@@ -206,11 +210,11 @@
                 <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">My Portofolio</i></h6>
                 <div class="card mb-3" *ngFor="let item of UserPortofolio" >
                   <div class="row no-gutters">
-                    <div class="col-md-4 d-flex">
+                    <div class="col-lg-4 col-sm-4 d-flex">
                       <button type="button" class="btn btn-danger " (click)="deletePorfolio(item.id)">x</button>
-                      <img src="data:image/png;base64,{{item.portimage}}" class="card-img">
+                      <img src="data:image/png;base64,{{item.portimage}}" class="card-img" height="150px">
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-lg-8 col-sm-8">
                       <div class="card-body">
                         <h5 class="card-title">{{item.title}}</h5>
                         <p class="card-text">{{item.description}}</p>
@@ -270,7 +274,7 @@
                   <div class="row no-gutters">
                     <div class="col-md-4 d-flex">
                       <button type="button" class="btn btn-danger" (click)="deleteCertificate(item.item3)">x</button>
-                    <img src="data:image/png;base64,{{item.item4}}" class="card-img">
+                    <img src="data:image/png;base64,{{item.item4}}" class="card-img" width="100px" height="130px">
                     </div>
                     <div class="col-md-8">
                       <div class="card-body">

@@ -11,7 +11,7 @@ import { AuthService } from 'src/app/Services/auth/auth.service';
   templateUrl: './userprofile.component.html',
   styleUrls: ['./userprofile.component.css']
 })
-export class UserprofileComponent implements OnInit {
+export class UserprofileComponent{
   public UserID: string="";
   public UserRouteID: any;
   public UserData:any;
@@ -23,9 +23,8 @@ export class UserprofileComponent implements OnInit {
   public CertificateIMG: any;
   formData=new FormData();
 
-  constructor(private route:ActivatedRoute ,private toast:NgToastService,private userservice:UserService,private auth:AuthService,private userStore:UserstoreService) { }
+  constructor(private route:ActivatedRoute ,private toast:NgToastService,private userservice:UserService,private auth:AuthService,private userStore:UserstoreService) {
 
-  ngOnInit(): void {
     this.UserRouteID=(this.route.snapshot.paramMap.get('id'));
     console.log(this.UserRouteID);
     this.userStore.getIDfromStore().subscribe( id => {
@@ -47,7 +46,8 @@ export class UserprofileComponent implements OnInit {
         this.UserPortofolio=val;
         console.log(this.UserPortofolio);
     })
-  }
+   }
+
   addNewCategory(){
     this.formData.append('categoryID',this.selectedCategoryId)
     this.formData.append('hourRate',this.userhourRate)
