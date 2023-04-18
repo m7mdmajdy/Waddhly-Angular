@@ -6,7 +6,7 @@
   </div>
   <h3>{{ post.postTitle }}</h3>
   <p>{{ post.postDescription }}</p>
-  <img src="data:image/png;base64,{{ post.userImage }}" class="card-img" />
+  <img src="data:image/png;base64,{{ post.userimage }}" class="rounded-circle" width="50" height="50" />
   <h5>Comments({{ post.comments.length }})</h5>
   <div class="comments bg-light-color mb-2" *ngFor="let item of post.comments">
     <p>{{ item.item1 }}</p>

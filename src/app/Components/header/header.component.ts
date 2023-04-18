@@ -15,8 +15,8 @@ export class HeaderComponent implements OnInit {
   public UserID:string="";
   public UserData:any
 
-  constructor (private userStore: UserstoreService, private auth:AuthService,private userservice:UserService){}
-  ngOnInit(): void {
+  constructor (private userStore: UserstoreService, private auth:AuthService,private userservice:UserService){
+
     this.mytoken = this.auth.getToken();
     this.userStore.getIDfromStore().subscribe(val=>{
       this.UserID = val || this.auth.getIDfromToken()
@@ -25,6 +25,9 @@ export class HeaderComponent implements OnInit {
       this.UserData = val;
       console.log(this.UserData);
     })
+
+  }
+  ngOnInit(): void {
   }
 logout(){
   this.auth.logout();

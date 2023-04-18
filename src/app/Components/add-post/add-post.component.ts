@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserstoreService } from 'src/app/Services/auth/UserStore/userstore.service';
 import { AuthService } from 'src/app/Services/auth/auth.service';
 import { environment } from 'src/environments/environment';
@@ -19,7 +20,8 @@ export class AddPostComponent {
   constructor(
     private httpClient: HttpClient,
     private userStore: UserstoreService,
-    private auth: AuthService
+    private auth: AuthService,
+    private router: Router,
   ) {}
   ngOnInit(): void {
     console.log(this.post);
@@ -29,13 +31,16 @@ export class AddPostComponent {
   }
 
   addPost() {
+    debugger;
     this.post = {
       title: this.title,
       description: this.description,
-      now: this.now,
+      date: this.now,
       userId: this.UserID,
     };
 
-    return this.httpClient.post(`${environment.apiUrl}/Post`, this.post);
+    return this.httpClient.post(`${environment.apiUrl}/Post`, this.post).subscribe(data => {
+      this.router.navigate(['/posts']);
+    });
   }
 }
