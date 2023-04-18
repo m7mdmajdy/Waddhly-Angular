@@ -1,0 +1,25 @@
+
+.card
+{
+
+  width:40%;
+  margin: 50px;
+  border-radius: 6%;
+  background-color: rgb(154, 192, 226);
+
+
+}
+
+.accept
+{
+  margin-left:25% ;
+  width: 50%;
+}
+
+.back
+{
+  width:30%;
+  margin-left :35%;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}

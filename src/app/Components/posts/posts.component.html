@@ -1,0 +1,43 @@
+<app-header></app-header>
+<div class="min-height">
+  <div class="container d-flex justify-content-end mt-5">
+    <a routerLink="/addpost" class="btn btn-primary">Add Post</a>
+  </div>
+  <div class="container my-4 d-flex flex-wrap gap-3 justify-content-between">
+    <div class="bg-light-color post p-3" *ngFor="let post of posts">
+      <h3>
+        <a class="main-color hov-text" routerLink="/post/{{ post.postid }}">{{
+          post.postTitle
+        }}</a>
+      </h3>
+      <div class="d-flex justify-content-between align-items-center">
+        <a
+          class="d-flex align-items-center"
+          routerLink="/profile/{{ post.postuserid }}"
+        >
+          <i class="fa-solid fa-user me-2"></i>
+          <span>{{ post.postusername }}</span>
+        </a>
+        <a class="text-color hov-main" routerLink="/post/{{ post.postid }}">
+          <i class="fa-regular fa-comment"></i>
+          {{ post.comments.length }}
+        </a>
+        <p class="m-0">
+          <i class="fa-regular fa-clock me-1"></i>
+          <span [title]="post.postDate | date : 'full'">
+            {{ subDates(post.postDate) }}
+          </span>
+        </p>
+      </div>
+      <!-- <p class="text-success" *ngFor="let comment of post.comments">
+    {{ comment.item1 }}
+    <br />
+    <a routerLink="/user/{{ comment.item2 }}">{{ comment.item3 }}</a>
+    <br />
+    {{ comment.item4 }}
+  </p> -->
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

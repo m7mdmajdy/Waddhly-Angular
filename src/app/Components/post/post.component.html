@@ -1,0 +1,38 @@
+<app-header></app-header>
+<div class="container">
+  <div class="d-flex justify-content-between">
+    <a routerLink="/profile/{{ post.postuserid }}">{{ post.postusername }}</a>
+    <span>{{ subDates(post.postDate) }}</span>
+  </div>
+  <h3>{{ post.postTitle }}</h3>
+  <p>{{ post.postDescription }}</p>
+  <img
+    src="data:image/png;base64,{{ post.userimage }}"
+    class="rounded-circle"
+    width="50"
+    height="50"
+  />
+  <h5>Comments({{ post.comments.length }})</h5>
+  <div class="comments bg-light-color mb-2" *ngFor="let item of post.comments">
+    <p>{{ item.item1 }}</p>
+    <p>
+      <a routerLink="/profile/{{ item.item2 }}">{{ item.item3 }}</a>
+    </p>
+    <p [title]="post.postDate | date : 'full'">{{ subDates(item.item4) }}</p>
+    <img src="data:image/png;base64,{{ item.item5 }}" class="card-img" />
+  </div>
+  <div class="comment my-5">
+    <h3>Add Comment</h3>
+    <!-- #comment="ngModel" -->
+    <textarea
+      [(ngModel)]="comment"
+      class="form-control"
+      name="comment"
+      id="comment"
+    ></textarea>
+    <button (click)="addComment()" type="submit" class="btn btn-success mt-2">
+      Add
+    </button>
+  </div>
+</div>
+<app-footer></app-footer>
