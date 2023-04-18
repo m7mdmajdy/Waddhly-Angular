@@ -23,6 +23,11 @@ import { EditprofileComponent } from './Components/UserProfile/editprofile/editp
 import { ChatComponent } from './Components/chat/chat.component';
 import { VideoComponent } from './Components/video/video.component';
 
+// import {NgConfirmModule} from 'ng-confirm-box';
+import { CommonModule } from '@angular/common';
+import { ProposalComponent } from './Components/add-proposal/proposal.component';
+import { ResetComponent } from './Components/reset/reset.component';
+import { UserProposalsComponent } from './Components/user-proposals/user-proposals.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,14 +46,19 @@ import { VideoComponent } from './Components/video/video.component';
     UserprofileComponent,
     ChatComponent,
     VideoComponent,
+    ProposalComponent,
+    ResetComponent,
+    UserProposalsComponent
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgToastModule
+    NgToastModule,
+    // NgConfirmModule
   ],
   providers: [
     // {provide: HTTP_INTERCEPTORS,
@@ -56,6 +66,6 @@ import { VideoComponent } from './Components/video/video.component';
     //  multi:true
     // }
 ],
-  bootstrap: [AppComponent],
+bootstrap: [AppComponent],
 })
 export class AppModule {}

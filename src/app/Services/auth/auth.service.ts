@@ -70,9 +70,20 @@ export class AuthService {
     }
   }
 
+
+  getFullNamefromToken(){
+    if (this.userPayload) {
+      return this.userPayload.name;
+    }
+  }
   getRoleFromToken(){
     if (this.userPayload) {
       return this.userPayload.role;
     }
+
   }
-}
+  getIDFromToken(){
+    if (this.userPayload) {
+      return this.userPayload.uid;
+    }
+}}

@@ -12,6 +12,12 @@ import { UserprofileComponent } from './Components/UserProfile/userprofile/userp
 import { EditprofileComponent } from './Components/UserProfile/editprofile/editprofile.component';
 import { ChatComponent } from './Components/chat/chat.component';
 import { VideoComponent } from './Components/video/video.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ProposalComponent } from './Components/add-proposal/proposal.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { ResetComponent } from './Components/reset/reset.component';
+import { AllProposalsComponent } from './Components/all-proposals/all-proposals.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -27,10 +33,14 @@ const routes: Routes = [
   { path: 'chat', component: ChatComponent },
   { path: 'session/:id', component: VideoComponent },
   { path: '**', component: NotFoundComponent },
+  { path: 'Proposals/Proposal', component:ProposalComponent },
+  { path: 'user/Proposal', component:AllProposalsComponent },
+  { path: 'reset', component:ResetComponent },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes),
+    HttpClientModule,FormsModule, ReactiveFormsModule,CommonModule],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

@@ -56,6 +56,10 @@
           </div> -->
 
           <!-- Submit button -->
+<div class="form-inline fr mt-4 font-weight-bold nav-link ">
+  <a id="forget" data-bs-toggle="modal" data-bs-target="#exampleModal" >Forget Password ?</a>
+</div>
+
           <button type="submit" [disabled]="LoginForm.invalid" class="btn btn-primary btn-lg btn-block w-100" style="background-color:#395B64 ;">Login</button>
 
           <!-- <div class="divider d-flex align-items-center my-4">
@@ -75,3 +79,40 @@
     </div>
   </div>
 </section>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+       <p class="modal-title" id="exampleModalLabel">
+          <span style="font-size: 25px;font-weight: 700;">
+              Forget Your Password
+          </span>
+          <br>
+          <small>please provide your email we will send the reset link</small>
+      </p>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+<div class="modal-body">
+     <div class="form-group pt-3">
+         <div class="input-field">
+          <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+            <label class="form-label" for="email">Email address</label>
+                  <input class="mt-4 w-100  form-control" type="text" placeholder="Email" [(ngModel)]="resetpassword" (ngModelChange)="checkValidEmail($event)">
+
+         </div>
+
+      </div>
+      <small *ngIf="!resetpassword" class="text-danger">Email is required</small>
+      <small *ngIf="!isvalidEmail && resetpassword" class="text-danger">Email is Invalid</small>
+
+    </div>
+      <div class="modal-footer">
+        <button id="closebtn" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="confirmToSend()">Send</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+

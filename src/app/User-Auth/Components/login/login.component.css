@@ -7,3 +7,10 @@ nav button:focus {
 .text-black{
   color: #2C3333!important;
 }
+.form-inline
+{
+  color:blue;
+  text-align: right;
+font-size: large;
+font-weight: bold;
+}
