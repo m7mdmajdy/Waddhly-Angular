@@ -1,0 +1,9 @@
+nav {
+  background-color: var(--main-color, #395b64);
+}
+nav button:focus {
+  box-shadow: 0 0 0 1px;
+}
+.text-black{
+  color: #2C3333!important;
+}
