@@ -22,9 +22,15 @@ export class VideoComponent implements OnInit {
   }   
   selectedUserName:any ;
   selectedUserPeerId:any ;
-  
+  isAuthenticated:any;
   async ngOnInit(): Promise<void> {
+    this.isAuthenticated = false;
     this.signalRService.startConnection();
+    this.time.setUTCHours(0,0,0,0);
+    this.startFlag=false;
+    this.pauseFlag=false;
+    
+    
     this.getPeerId();
     this.selectedUserName=this.route.snapshot.paramMap.get('id');
     console.log(this.selectedUserName);
@@ -33,8 +39,32 @@ export class VideoComponent implements OnInit {
     console.log("asdasd");
     console.log(this.selectedUserName);
     await this.updatePeer();
+    setTimeout(() => {
+      this.checkProposal();
+    }, 200);
+    
+  }
+
+
+  isValidProposal:any;
+
+  async checkProposal(): Promise<void> {
+    this.isValidProposal = await this.signalRService.hubConnection
+    .invoke("isValidProposal", this.selectedUserName, this.auth.getUsernamefromToken());
+
+    setTimeout(() => {
+      if(this.isValidProposal==false){
+        alert("This is a free session because you are not assigned to a service with this user")
+      }
+      else{
+        alert("This is a paid session")
+      }
+    }, 200);
 
   }
+
+
+
   private updatePeer(){
     setTimeout(() => {
       console.log("dddd");
@@ -86,7 +116,7 @@ export class VideoComponent implements OnInit {
 
     await this.callPeer(this.selectedUserPeerId);
   }
-
+  
   private callPeer(id: string): void {
     navigator.mediaDevices.getUserMedia({
       video: true,
@@ -154,4 +184,49 @@ export class VideoComponent implements OnInit {
     sender.replaceTrack(videoTrack);
   }
 
+interval:any;
+time=new Date();
+startFlag:any;
+  async startTimer(): Promise<void> {
+
+    if(document.getElementById("remote-video")?.innerHTML!=''){
+      this.pauseFlag=false;
+    if(this.startFlag==false){
+      this.startFlag=true;
+      this.interval = setInterval(() =>{
+        this.time.setSeconds(this.time.getSeconds()+1);
+      },1000);
+    }
+
+    await this.signalRService.hubConnection
+    .invoke("StartSession", this.selectedUserName, this.auth.getUsernamefromToken());
+
+    alert("Session started");
+    }
+    else{
+      alert("No Call found");
+      
+    }
+  }
+
+  pauseFlag:any;
+  pauseTimer():void{
+    this.startFlag=false;
+    if(this.pauseFlag==false){
+      this.pauseFlag=true;
+      clearInterval(this.interval);
+    }
+  }
+
+  resetTimer():void{
+    this.time.setSeconds(0);
+  }
+
+  async endSession():Promise<void> {
+    await this.signalRService.hubConnection
+    .invoke("EndSession", this.selectedUserName, this.auth.getUsernamefromToken());
+    alert("Session has Ended, you can close the tab now")
+
+    document.getElementById('remote-video')!.innerHTML="";
+  }
 }
