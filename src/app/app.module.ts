@@ -20,6 +20,7 @@ import { NgToastModule } from 'ng-angular-popup';
 import { TokenInterceptor } from './Interceptors/token.interceptor';
 import { UserprofileComponent } from './Components/UserProfile/userprofile/userprofile.component';
 import { EditprofileComponent } from './Components/UserProfile/editprofile/editprofile.component';
+import { AddPostComponent } from './Components/add-post/add-post.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { EditprofileComponent } from './Components/UserProfile/editprofile/editp
     ServiceComponent,
     EditprofileComponent,
     UserprofileComponent,
+    AddPostComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,24 @@
+<app-header></app-header>
+<div class="container">
+  <form action="">
+    <!-- #title="ngModel" -->
+    <input
+      [(ngModel)]="title"
+      class="form-control"
+      type="text"
+      name="title"
+      id="title"
+    />
+    <!-- #description="ngModel" -->
+    <textarea
+      [(ngModel)]="description"
+      class="form-control"
+      name="description"
+      id="description"
+    ></textarea>
+    <button (click)="addPost()" type="submit" class="btn btn-success mt-2">
+      Add
+    </button>
+  </form>
+</div>
+<app-footer></app-footer>

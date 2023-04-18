@@ -10,6 +10,7 @@ import { PostsComponent } from './Components/posts/posts.component';
 import { ServiceComponent } from './Components/service/service.component';
 import { UserprofileComponent } from './Components/UserProfile/userprofile/userprofile.component';
 import { EditprofileComponent } from './Components/UserProfile/editprofile/editprofile.component';
+import { AddPostComponent } from './Components/add-post/add-post.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -19,9 +20,10 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignUpComponent },
   { path: 'services', component: ServicesComponent },
-  { path: 'services/:id', component: ServicesComponent },
+  { path: 'service/:id', component: ServiceComponent },
   { path: 'posts', component: PostsComponent },
   { path: 'post/:id', component: PostComponent },
+  { path: 'addpost', component: AddPostComponent },
   { path: '**', component: NotFoundComponent },
 ];
 

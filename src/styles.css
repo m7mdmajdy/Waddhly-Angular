@@ -32,3 +32,6 @@
 .min-height {
   min-height: calc(100vh - 96px);
 }
+textarea {
+  resize: none;
+}
