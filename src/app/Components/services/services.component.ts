@@ -10,6 +10,7 @@ import { LoginedUser, service } from 'src/app/Modals/user';
 import {NgConfirmService} from 'ng-confirm-box';
 import Swal from 'sweetalert2';
 import { TemplateBindingParseResult } from '@angular/compiler';
+import { NgToastService } from 'ng-angular-popup';
 // import {Swal} from 'sweetalert2';
 @Component({
   selector: 'app-services',
@@ -73,8 +74,8 @@ export class ServicesComponent implements OnInit {
     private httpClient: HttpClient,
     private router: Router,
     private ser:UserService,
-    private http:HttpClient,
     private authService:AuthService,
+    private toast:NgToastService,
     private confirmservice:NgConfirmService ,
     private userStore:UserstoreService) {
       this.userStore.getIDfromStore().subscribe( id => {
@@ -192,10 +193,7 @@ export class ServicesComponent implements OnInit {
                   title: "Thanks....."
                 });
               }
-              );
-
-
-
+  );
   });
 }
 
@@ -209,9 +207,16 @@ export class ServicesComponent implements OnInit {
       user_id:this.UserID
     }
     console.log(this.service);
-    return this.http.post<any>(`https://localhost:7033/api/Service`,this.service)
-    // {next:val=>{
-      // this.toast.success({detail:"Success",summary:"You add your Category successfully",duration:3000})};
+    return this.httpClient.post<any>(`https://localhost:7033/api/Service`,this.service).subscribe({next:val=>{
+      this.toast.success({detail:"Success",summary:"You add your Category successfully",duration:3000})
+      this.serTitle="",
+      this.serDes="",
+      this.serHour="",
+      this.selectedCategoryId2=""
+    },
+      error:err=>
+      this.toast.error({detail:"Error",summary:"Edit your Category Failed",duration:3000}),
+      });
 
   }
 }
