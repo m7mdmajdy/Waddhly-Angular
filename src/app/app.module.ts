@@ -23,7 +23,7 @@ import { EditprofileComponent } from './Components/UserProfile/editprofile/editp
 import { ChatComponent } from './Components/chat/chat.component';
 import { VideoComponent } from './Components/video/video.component';
 
-// import {NgConfirmModule} from 'ng-confirm-box';
+import {NgConfirmModule} from 'ng-confirm-box';
 import { CommonModule } from '@angular/common';
 import { ProposalComponent } from './Components/add-proposal/proposal.component';
 import { ResetComponent } from './Components/reset/reset.component';
@@ -58,7 +58,7 @@ import { UserProposalsComponent } from './Components/user-proposals/user-proposa
     ReactiveFormsModule,
     HttpClientModule,
     NgToastModule,
-    // NgConfirmModule
+    NgConfirmModule
   ],
   providers: [
     // {provide: HTTP_INTERCEPTORS,

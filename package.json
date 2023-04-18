@@ -26,11 +26,11 @@
     "bootstrap": "^5.2.3",
     "font-awesome": "^4.7.0",
     "ng-angular-popup": "^0.2.0",
-    "peerjs": "^1.4.7",
     "ng-confirm-box": "^0.0.6",
+    "peerjs": "^1.4.7",
     "rxjs": "~7.8.0",
-    "sweetalert2": "^11.7.3",
     "signalr": "^2.4.3",
+    "sweetalert2": "^11.7.3",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"
   },

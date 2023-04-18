@@ -40,7 +40,7 @@ export class ResetComponent implements OnInit {
       console.log(this.emailToken);
     });
   }
-  
+
   passwordMatchValidator(formGroup: FormGroup) {
     const password = formGroup.get('password')?.value;
     const confirmPassword = formGroup.get('confirmPassword')?.value;
@@ -66,7 +66,7 @@ export class ResetComponent implements OnInit {
             summary:'Password Reset Successfully',
             duration: 3000
           });
-          this.router.navigate(['/']); 
+          this.router.navigate(['/']);
         },
         error:(err)=>{
           this.toast.error({

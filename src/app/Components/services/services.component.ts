@@ -7,10 +7,10 @@ import { UserstoreService } from 'src/app/Services/auth/UserStore/userstore.serv
 import { UserService } from 'src/app/Services/userService/user.service';
 import { AuthService } from 'src/app/Services/auth/auth.service';
 import { LoginedUser, service } from 'src/app/Modals/user';
-//import {NgConfirmService} from 'ng-confirm-box';
-//import Swal from 'sweetalert2';
+import {NgConfirmService} from 'ng-confirm-box';
+import Swal from 'sweetalert2';
 import { TemplateBindingParseResult } from '@angular/compiler';
-//import {Swal} from 'sweetalert2';
+// import {Swal} from 'sweetalert2';
 @Component({
   selector: 'app-services',
   templateUrl: './services.component.html',
@@ -68,7 +68,7 @@ export class ServicesComponent implements OnInit {
     private router: Router,
     private ser:UserService,
     private authService:AuthService,
-   // private confirmservice:NgConfirmService ,
+    private confirmservice:NgConfirmService ,
     private userStore:UserstoreService) {
       this.httpClient
       .get<any>(`${environment.apiUrl}/Category`)
@@ -165,32 +165,32 @@ export class ServicesComponent implements OnInit {
     })
   }
 
-  // checkMoney(id:number)
-  // {
-  //   // *************** Get Service By ID *****************
-  //   this.httpClient
-  //   .get<service>('https://localhost:7033/api/Service/'+id)
-  //   .subscribe(
-  //     (ser) => {
-  //     this.selectedService = ser;
-  //     this.ser.service_id=this.selectedService.id;
-  //     console.log(this.selectedService);
-  //     this.httpClient
-  //     .get<LoginedUser>('https://localhost:7033/api/User/'+this.selectedService.service_user_id)
-  //     .subscribe(
-  //       (u) => {
-  //         this.ser.user_id=this.selectedService.service_user_id;
-  //       this.ownerOfService = u;
-  //       console.log(this.ownerOfService);
-  //         this.confirmservice.showConfirm('Are you sure you want to Apply this service   '  ,
-  //           ()=>{this.router.navigate(['/Proposals/Proposal']);},
-  //           ()=>{
-  //             Swal.fire({
-  //               title: "Thanks.....",
-  //               text:"thank you",
-  //               icon:"success"
-  //             })
-  //           });
+  checkMoney(id:number)
+  {
+    // *************** Get Service By ID *****************
+    this.httpClient
+    .get<service>('https://localhost:7033/api/Service/'+id)
+    .subscribe(
+      (ser) => {
+      this.selectedService = ser;
+      this.ser.service_id=this.selectedService.id;
+      console.log(this.selectedService);
+      this.httpClient
+      .get<LoginedUser>('https://localhost:7033/api/User/'+this.selectedService.service_user_id)
+      .subscribe(
+        (u) => {
+          this.ser.user_id=this.selectedService.service_user_id;
+        this.ownerOfService = u;
+        console.log(this.ownerOfService);
+          this.confirmservice.showConfirm('Are you sure you want to Apply this service   '  ,
+            ()=>{this.router.navigate(['/Proposals/Proposal']);},
+            ()=>{
+              Swal.fire({
+                title: "Thanks.....",
+                text:"thank you",
+                icon:"success"
+              })
+            });
 
 
 
@@ -219,10 +219,10 @@ export class ServicesComponent implements OnInit {
 
 
 
-  //     });
-  //   });
+      });
+    });
 
 
 
-  // }
+  }
 }
