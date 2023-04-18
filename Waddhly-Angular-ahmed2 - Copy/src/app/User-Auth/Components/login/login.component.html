@@ -1,0 +1,108 @@
+<nav class="navbar navbar-expand-lg navbar-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand me-auto" routerLink="/home">Waddhly</a>
+    <a class="nav-link text-white" routerLink="/signup">Sign Up</a>
+  </div>
+</nav>
+
+<section class="vh-100 text-black">
+  <div class="container py-5 h-100">
+    <div class="row d-flex align-items-center justify-content-center h-100">
+      <div class="col-md-7 col-lg-6 col-xl-5 mb-5">
+        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+          class="img-fluid" alt="Phone image">
+      </div>
+      <div class="col-md-8 col-lg-6 col-xl-6 offset-xl-1">
+        <form [formGroup]="LoginForm" (ngSubmit)="Login()">
+
+<!-- Email input -->
+          <div class="form-outline mb-4">
+            <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+            <label class="form-label" for="email">Email address</label>
+            <input type="email" id="email" class="form-control form-control-lg"
+            formControlName="email"
+            [ngClass]="{'is-invalid':(LoginForm.get('email')?.touched || LoginForm.get('email')?.dirty )&& LoginForm.get('email')?.invalid}">
+            <span class='invalid-feedback'>
+              <span *ngIf="LoginForm.get('email')?.errors?.['required']">
+                Email is required.
+              </span>
+              <span *ngIf="LoginForm.get('email')?.errors?.['email']">
+                Please enter a valid email address.
+              </span>
+            </span>
+          </div>
+
+ <!-- Password input -->
+          <div class="form-outline mb-4">
+            <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+            <label class="form-label" for="pass">Password</label>
+            <input type="password" id="pass" class="form-control form-control-lg"
+            formControlName="password"
+            [ngClass]="{'is-invalid':(LoginForm.get('password')?.touched || LoginForm.get('password')?.dirty )&& LoginForm.get('password')?.invalid}">
+            <span class='invalid-feedback'>
+              <span *ngIf="LoginForm.get('password')?.errors?.['required']">
+                Password is required.
+              </span>
+            </span>
+          </div>
+<div class="form-inline fr mt-4 font-weight-bold nav-link ">
+  <a id="forget" data-bs-toggle="modal" data-bs-target="#exampleModal" >Forget Password ?</a>
+</div>
+         
+          <button type="submit" [disabled]="LoginForm.invalid" class="btn btn-primary btn-lg btn-block w-100" style="background-color:#395B64 ;">Login</button>
+
+          <!-- <div class="divider d-flex align-items-center my-4">
+            <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
+          </div>
+
+          <a class="btn btn-primary btn-lg btn-block" style="background-color: #3b5998" href="#!"
+            role="button">
+            <i class="fab fa-facebook-f me-2"></i>Continue with Facebook
+          </a>
+          <a class="btn btn-primary btn-lg btn-block" style="background-color: #55acee" href="#!"
+            role="button">
+            <i class="fab fa-twitter me-2"></i>Continue with Twitter
+          </a> -->
+
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+       <p class="modal-title" id="exampleModalLabel">
+          <span style="font-size: 25px;font-weight: 700;">
+              Forget Your Password
+          </span>
+          <br>
+          <small>please provide your email we will send the reset link</small>
+      </p>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+<div class="modal-body">
+     <div class="form-group pt-3">
+         <div class="input-field">
+          <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+            <label class="form-label" for="email">Email address</label>
+                  <input class="mt-4 w-100  form-control" type="text" placeholder="Email" [(ngModel)]="resetpassword" (ngModelChange)="checkValidEmail($event)">
+
+         </div>
+
+      </div>
+      <small *ngIf="!resetpassword" class="text-danger">Email is required</small>
+      <small *ngIf="!isvalidEmail && resetpassword" class="text-danger">Email is Invalid</small>
+
+    </div>
+      <div class="modal-footer">
+        <button id="closebtn" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="confirmToSend()">Send</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
