@@ -30,31 +30,34 @@ export class UserprofileComponent implements OnInit {
     private auth:AuthService,
     private userStore:UserstoreService,
     public signalRService: ChatService
-    ) { }
+    ) {
+
+      this.UserRouteID=(this.route.snapshot.paramMap.get('id'));
+      console.log(this.UserRouteID);
+      this.userStore.getIDfromStore().subscribe( id => {
+          this.UserID = id || this.auth.getIDfromToken()
+          console.log(this.UserID);
+          this.Useraccount=this.UserData.moneyAccount
+      })
+      this.userservice.getUserDataByID(this.UserRouteID).subscribe( val => {
+          this.UserData = val;
+          console.log(this.UserData);
+
+      })
+      this.userservice.getallcategory().subscribe( category => {
+          this.Categories=category
+          console.log(this.Categories);
+      })
+    // this.CertificateIMG=this.userservice.convertBYTEtoIMG(this.UserData.certfcimage)
+      this.userservice.getPorfolio(this.UserRouteID).subscribe( val => {
+          this.UserPortofolio=val;
+          console.log(this.UserPortofolio);
+      })
+
+     }
 
   ngOnInit(): void {
     this.signalRService.startConnection();
-    this.UserRouteID=(this.route.snapshot.paramMap.get('id'));
-    console.log(this.UserRouteID);
-    this.userStore.getIDfromStore().subscribe( id => {
-        this.UserID = id || this.auth.getIDfromToken()
-        console.log(this.UserID);
-        this.Useraccount=this.UserData.moneyAccount
-    })
-    this.userservice.getUserDataByID(this.UserRouteID).subscribe( val => {
-        this.UserData = val;
-        console.log(this.UserData);
-
-    })
-    this.userservice.getallcategory().subscribe( category => {
-        this.Categories=category
-        console.log(this.Categories);
-    })
-  // this.CertificateIMG=this.userservice.convertBYTEtoIMG(this.UserData.certfcimage)
-    this.userservice.getPorfolio(this.UserRouteID).subscribe( val => {
-        this.UserPortofolio=val;
-        console.log(this.UserPortofolio);
-    })
   }
   addNewCategory(){
     this.formData.append('categoryID',this.selectedCategoryId)
