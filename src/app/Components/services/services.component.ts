@@ -22,8 +22,14 @@ export class ServicesComponent implements OnInit {
   ServicesByCatId: any;
   ServicesByCatName: any;
   selectedCategoryId: any;
+  selectedCategoryId2: any;
   selectedCategoryName: any;
   UserID:any;
+  service:any;
+  serTitle:any;
+  serDes:any;
+  serHour:any;
+
   userData:LoginedUser=
   {
     id: '',
@@ -67,9 +73,14 @@ export class ServicesComponent implements OnInit {
     private httpClient: HttpClient,
     private router: Router,
     private ser:UserService,
+    private http:HttpClient,
     private authService:AuthService,
     private confirmservice:NgConfirmService ,
     private userStore:UserstoreService) {
+      this.userStore.getIDfromStore().subscribe( id => {
+        this.UserID = id || this.authService.getIDfromToken()
+        console.log(this.UserID);
+      });
       this.httpClient
       .get<any>(`${environment.apiUrl}/Category`)
       .subscribe((cats) => {
@@ -167,62 +178,61 @@ export class ServicesComponent implements OnInit {
 
   checkMoney(id:number)
   {
-    // *************** Get Service By ID *****************
-    this.httpClient
-    .get<service>('https://localhost:7033/api/Service/'+id)
-    .subscribe(
-      (ser) => {
-      this.selectedService = ser;
-      this.ser.service_id=this.selectedService.id;
-      console.log(this.selectedService);
+      // *************** Get Service By ID *****************
       this.httpClient
-      .get<LoginedUser>('https://localhost:7033/api/User/'+this.selectedService.service_user_id)
+      .get<service>('https://localhost:7033/api/Service/'+id)
       .subscribe(
-        (u) => {
-          this.ser.user_id=this.selectedService.service_user_id;
-        this.ownerOfService = u;
-        console.log(this.ownerOfService);
-          this.confirmservice.showConfirm('Are you sure you want to Apply this service   '  ,
-            ()=>{this.router.navigate(['/Proposals/Proposal']);},
-            ()=>{
-              Swal.fire({
-                title: "Thanks.....",
-                text:"thank you",
-                icon:"success"
-              })
-            });
+        (ser) => {
+        this.selectedService = ser;
+        console.log(this.selectedService);
+            this.confirmservice.showConfirm('Are you sure you want to Apply this service',
+              ()=>{this.router.navigate(['/Proposals/Proposal']);},
+              ()=>{
+                Swal.fire({
+                  title: "Thanks....."
+                });
+              }
+              );
 
 
 
+  });
+}
 
-  ///// comment
-          // Swal.fire({
-          //   title: "Warnning.....",
-          //   text:"please check your money Account",
-          //   icon:"warning"
-          // })
+  addService(){
 
-        // else
-        // {
-        //   Swal.fire({
-        //     title: "Success.....",
-        //     text:"please check your money Account",
-        //     icon:"warning"
-        //   })
-        //   // this.confirmservice.showConfirm('Are you sure you want to buy this service this service will cost you  ' + this.ownerOfService.hourRate * this.selectedService.hours ,
-        //   //   ()=>{this.router.navigate(['/Proposals/Proposal']);},
-        //   //   ()=>{}
-        //   // );
-        // }
-/////  comment
-
-
-
-
-      });
-    });
-
-
+    this.service={
+      title:this.serTitle,
+      description:this.serDes,
+      hours:this.serHour,
+      category_id:this.selectedCategoryId2,
+      user_id:this.UserID
+    }
+    console.log(this.service);
+    return this.http.post<any>(`https://localhost:7033/api/Service`,this.service)
+    // {next:val=>{
+      // this.toast.success({detail:"Success",summary:"You add your Category successfully",duration:3000})};
 
   }
 }
+
+///// comment
+        // Swal.fire({
+        //   title: "Warnning.....",
+        //   text:"please check your money Account",
+        //   icon:"warning"
+        // })
+
+      // else
+      // {
+      //   Swal.fire({
+      //     title: "Success.....",
+      //     text:"please check your money Account",
+      //     icon:"warning"
+      //   })
+      //   // this.confirmservice.showConfirm('Are you sure you want to buy this service this service will cost you  ' + this.ownerOfService.hourRate * this.selectedService.hours ,
+      //   //   ()=>{this.router.navigate(['/Proposals/Proposal']);},
+      //   //   ()=>{}
+      //   // );
+      // }
+/////  comment

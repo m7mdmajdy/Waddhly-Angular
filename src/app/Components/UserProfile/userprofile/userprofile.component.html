@@ -117,19 +117,11 @@
                   <div class="col-sm-9 text-secondary">{{UserData.country}}</div>
                 </div>
               </div>
-<<<<<<< HEAD
-            </div>
-
-            <!-- Category Section -->
-
-            <div class="row gutters-sm">
-=======
             </div> -->
 
             <!-- Category Section -->
 
             <div class="row gutters-sm" *ngIf="UserID==UserRouteID">
->>>>>>> f440dc1d0721ee740b5a58425b9a0a784c00b42b
               <div class="col-sm-6 mb-3">
                 <div class="card ">
                   <div class="card-body" *ngIf="!UserData.categoryName">
@@ -170,22 +162,14 @@
                   </div>
 
 
-<<<<<<< HEAD
                   <div class="card-body" *ngIf="UserData.categoryName">
-=======
-                  <div class="card-body"  *ngIf="UserData.categoryName">
->>>>>>> f440dc1d0721ee740b5a58425b9a0a784c00b42b
                     <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">Catogory</i></h6>
                     <div class="row">
                       <div class="col-sm-9 text-secondary">{{UserData.categoryName}}</div>
                     </div>
                     <hr>
                     <div class="row">
-<<<<<<< HEAD
                       <div class="col-sm-12 d-flex text-secondary my-2">Hour Rate: ${{UserData.hourRate}}.00 /hr</div>
-=======
-                      <div class="col-sm-12 d-flex text-secondary mb-2">Hour Rate: {{UserData.hourRate}}</div>
->>>>>>> f440dc1d0721ee740b5a58425b9a0a784c00b42b
                     </div>
                     <!-- <div class="row">
                       <button class="btn btn-primary w-100"> Edit Category </button>
@@ -193,11 +177,7 @@
                   </div>
                 </div>
               </div>
-<<<<<<< HEAD
-              <div class="col-sm-6 mb-3">
-=======
               <div class="col-sm-6 mb-3" *ngIf="UserID==UserRouteID">
->>>>>>> f440dc1d0721ee740b5a58425b9a0a784c00b42b
                   <div class="card l-bg-blue-dark">
                       <div class="card-statistic-3 p-4">
                           <div class="card-icon card-icon-large mx-4"><i class="fas fa-users"></i></div>
@@ -226,27 +206,16 @@
 
             <div class="row gutters-sm">
               <div class="col-sm-12 mb-3">
-<<<<<<< HEAD
-                <div class="card ">
-=======
                 <div class="card h-100">
->>>>>>> f440dc1d0721ee740b5a58425b9a0a784c00b42b
                   <div class="card-body">
                     <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">Portfolio section</i></h6>
                     <p class="text-secondary m-2" *ngIf="UserPortofolio.length ==0">There is no Jobs </p>
                     <div class="card mb-3" *ngIf="UserPortofolio.length!==0">
                       <div class="row no-gutters" *ngFor="let item of UserPortofolio">
-<<<<<<< HEAD
                         <div class="col-lg-4 col-sm-5">
                           <img src="data:image/png;base64,{{item.portimage}}" class="card-img"  height="130px">
                         </div>
                         <div class="col-lg-8 col-sm-7">
-=======
-                        <div class="col-md-4">
-                          <img src="data:image/png;base64,{{item.portimage}}" class="card-img">
-                        </div>
-                        <div class="col-md-8">
->>>>>>> f440dc1d0721ee740b5a58425b9a0a784c00b42b
                           <div class="card-body">
                             <h5 class="card-title">{{item.title}}</h5>
                             <p class="card-text">{{item.description}}</p>
@@ -265,27 +234,16 @@
 
             <div class="row gutters-sm">
               <div class="col-sm-12 mb-3">
-<<<<<<< HEAD
-                <div class="card ">
-=======
                 <div class="card h-100">
->>>>>>> f440dc1d0721ee740b5a58425b9a0a784c00b42b
                   <div class="card-body">
                     <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">Certification section</i></h6>
                     <p class="text-secondary m-2" *ngIf="UserData.certfcimage.length==0">There is no Certifications </p>
                     <div class="card mb-3"  *ngIf="UserData.certfcimage.length!==0">
                       <div class="row no-gutters" *ngFor="let item of UserData.certfcimage">
-<<<<<<< HEAD
                         <div class="col-lg-4 col-sm-5">
                           <img src="data:image/png;base64,{{item.item4}}" class="card-img" width="100px" height="130px">
                         </div>
                         <div class="col-lg-8 col-sm-7">
-=======
-                        <div class="col-md-4">
-                          <img src="data:image/png;base64,{{item.item4}}" class="card-img">
-                        </div>
-                        <div class="col-md-8">
->>>>>>> f440dc1d0721ee740b5a58425b9a0a784c00b42b
                           <div class="card-body">
                             <h5 class="card-title">{{item.item1}}</h5>
                             <a href="{{item.item2}}" target="_blank">Details</a>

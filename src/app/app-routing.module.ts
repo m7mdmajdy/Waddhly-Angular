@@ -27,15 +27,15 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignUpComponent },
   { path: 'services', component: ServicesComponent },
-  { path: 'services/:id', component: ServicesComponent },
+  { path: 'service/:id', component: ServiceComponent },
   { path: 'posts', component: PostsComponent },
   { path: 'post/:id', component: PostComponent },
   { path: 'chat', component: ChatComponent },
   { path: 'session/:id', component: VideoComponent },
-  { path: '**', component: NotFoundComponent },
   { path: 'Proposals/Proposal', component:ProposalComponent },
   { path: 'user/Proposal', component:AllProposalsComponent },
   { path: 'reset', component:ResetComponent },
+  { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({

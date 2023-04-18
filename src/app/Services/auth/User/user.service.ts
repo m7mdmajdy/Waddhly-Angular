@@ -43,4 +43,7 @@ export class UserService {
   deletePorfolio(id:string,pid:string){
     return this.http.delete(`${this.UserUrl2}/Portfolios?uid=${id}&pid=${pid}`);
   }
+  addservice(service:any){
+    return this.http.post(`${this.UserUrl}/Service`,service);
+  }
 }
