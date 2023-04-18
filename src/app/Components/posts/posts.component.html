@@ -1,5 +1,8 @@
 <app-header></app-header>
 <div class="min-height">
+  <div class="container d-flex justify-content-end mt-5">
+    <a routerLink="/addpost" class="btn btn-primary">Add Post</a>
+  </div>
   <div class="container my-4 d-flex flex-wrap gap-3 justify-content-between">
     <div class="bg-light-color post p-3" *ngFor="let post of posts">
       <h3>

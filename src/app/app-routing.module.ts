@@ -18,6 +18,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ResetComponent } from './Components/reset/reset.component';
 import { AllProposalsComponent } from './Components/all-proposals/all-proposals.component';
+import { AddPostComponent } from './Components/add-post/add-post.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -35,6 +36,7 @@ const routes: Routes = [
   { path: 'Proposals/Proposal', component:ProposalComponent },
   { path: 'user/Proposal', component:AllProposalsComponent },
   { path: 'reset', component:ResetComponent },
+  { path: 'addpost', component: AddPostComponent },
   { path: '**', component: NotFoundComponent },
 ];
 

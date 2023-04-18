@@ -22,6 +22,7 @@ import { UserprofileComponent } from './Components/UserProfile/userprofile/userp
 import { EditprofileComponent } from './Components/UserProfile/editprofile/editprofile.component';
 import { ChatComponent } from './Components/chat/chat.component';
 import { VideoComponent } from './Components/video/video.component';
+import { AddPostComponent } from './Components/add-post/add-post.component';
 
 import {NgConfirmModule} from 'ng-confirm-box';
 import { CommonModule } from '@angular/common';
@@ -48,7 +49,8 @@ import { UserProposalsComponent } from './Components/user-proposals/user-proposa
     VideoComponent,
     ProposalComponent,
     ResetComponent,
-    UserProposalsComponent
+    UserProposalsComponent,
+    AddPostComponent,
   ],
   imports: [
     BrowserModule,

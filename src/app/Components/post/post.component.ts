@@ -1,6 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { UserService } from 'src/app/Services/auth/User/user.service';
+import { UserstoreService } from 'src/app/Services/auth/UserStore/userstore.service';
+import { AuthService } from 'src/app/Services/auth/auth.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -8,10 +11,20 @@ import { environment } from 'src/environments/environment';
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.css'],
 })
-export class PostComponent {
+export class PostComponent implements OnInit {
   post: any;
+  UserID: any;
+  currentUserId: number = 0;
+  now: Date = new Date();
+  comment: any;
   currentPostId: number = 0;
-  constructor(private route: ActivatedRoute, private httpClient: HttpClient) {
+  constructor(
+    private route: ActivatedRoute,
+    private httpClient: HttpClient,
+    private user: UserService,
+    private userStore: UserstoreService,
+    private auth: AuthService
+  ) {
     this.currentPostId = Number(this.route.snapshot.paramMap.get('id'));
     console.log(this.currentPostId);
     this.httpClient
@@ -20,7 +33,12 @@ export class PostComponent {
         this.post = p;
         console.log(p);
       });
+  }
+  ngOnInit(): void {
     console.log(this.post);
+    this.userStore.getIDfromStore().subscribe((id) => {
+      this.UserID = id || this.auth.getIDfromToken();
+    });
   }
   subDates(date: Date) {
     let currentDate: any = new Date();
@@ -43,5 +61,18 @@ export class PostComponent {
     }
     if (timeAgo.includes('1 ')) return timeAgo.replace('s ', ' ');
     else return timeAgo;
+  }
+  addComment() {
+    this.comment = {
+      commentdescription: this.comment,
+      commentdate: this.now,
+      commentUserId: this.UserID,
+    };
+    return this.httpClient
+      .post(
+        `${environment.apiUrl}/Comment?id=${this.currentPostId}`,
+        this.comment
+      )
+      .subscribe((c) => {});
   }
 }

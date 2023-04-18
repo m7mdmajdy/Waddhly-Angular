@@ -122,11 +122,14 @@ export class ServicesComponent implements OnInit {
       //   'services',
       //   this.ServicesByCatId.service_category_name,
       // ]);
-      for (let i = 0; i < this.ServicesByCatId.length; i++) {
-        this.router.navigateByUrl(
-          `services/${this.ServicesByCatId[i].service_category_name}`
-        );
-      }
+      /////////////////////////////////////
+
+      // for (let i = 0; i < this.ServicesByCatId.length; i++) {
+      //   this.router.navigateByUrl(
+      //     `service/${this.ServicesByCatId[i].service_category_id}`
+      //   );
+      // }
+      /////////////////////////////////////
     }
   }
   subString(subString: string): string {

@@ -12,7 +12,7 @@ import { UserService } from 'src/app/Services/userService/user.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent  implements OnInit{
   UserID:any;
@@ -40,9 +40,13 @@ export class LoginComponent  implements OnInit{
       next:(res)=>{
         //debugger;
         this.LoginForm.reset();
-        this.toast.success({detail:"Success",summary:"Login confirmed",duration:5000});
-        this.authService.storeToken(res.token)
-        let TokenPayload=this.authService.decodedToken();
+        this.toast.success({
+          detail: 'Success',
+          summary: 'Login confirmed',
+          duration: 5000,
+        });
+        this.authService.storeToken(res.token);
+        let TokenPayload = this.authService.decodedToken();
         this.userStore.setIDforStore(TokenPayload.id);
         this.userStore.setEmailforStore(TokenPayload.email);
         this.userStore.setRoleforStore(TokenPayload.role);
