@@ -1,5 +1,5 @@
 .post {
-  width: calc(50% - 10px);
+  width: calc(100%);
   display: flex;
   gap: 10px;
   flex-direction: column;

@@ -24,8 +24,8 @@
         </a>
         <p class="m-0">
           <i class="fa-regular fa-clock me-1"></i>
-          <span>
-            {{ post.postDate | date }}
+          <span [title]="post.postDate | date : 'full'">
+            {{ subDates(post.postDate) }}
           </span>
         </p>
       </div>

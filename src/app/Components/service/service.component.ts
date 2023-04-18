@@ -8,94 +8,25 @@ import { environment } from 'src/environments/environment';
   templateUrl: './service.component.html',
   styleUrls: ['./service.component.css'],
 })
-export class ServiceComponent implements OnInit {
-  Categories: any;
-  Services: any;
-  ServicesByCatId: any;
-  // ServicesByCatName: any;
-  selectedCategoryId: any;
-  // selectedCategoryName: any;
+export class ServiceComponent {
+  Service: any;
+  currentServiceId: number;
   constructor(
     private httpClient: HttpClient,
-    private router: Router,
     private activatedRoute: ActivatedRoute
   ) {
+    this.currentServiceId = Number(
+      this.activatedRoute.snapshot.paramMap.get('id')
+    );
+    console.log(this.currentServiceId);
     this.httpClient
-      .get<any>(`${environment.apiUrl}/Category`)
-      .subscribe((cats) => {
-        this.Categories = cats;
-        console.log(this.Categories);
+      .get(`${environment.apiUrl}/Service/${this.currentServiceId}`)
+      .subscribe((s) => {
+        this.Service = s;
+        console.log(s);
       });
-    this.httpClient
-      .get<any>(`${environment.apiUrl}/Service`)
-      .subscribe((ser) => {
-        this.Services = ser;
-        console.log(this.Services);
-      });
-    this.httpClient
-      .get<any>(
-        `${environment.apiUrl}/Service?service_category_id=${this.selectedCategoryId}`
-      )
-      .subscribe((ser) => {
-        this.ServicesByCatId = ser;
-        console.log(this.ServicesByCatId);
-      });
-    // this.httpClient
-    //   .get<any>(
-    //     `${environment.apiUrl}/Service?service_category_name=${this.selectedCategoryName}`
-    //   )
-    //   .subscribe((ser) => {
-    //     this.ServicesByCatName = ser;
-    //     console.log(this.ServicesByCatName);
-    //   });
   }
-  ngOnInit(): void {
-    this.selectedCategoryId = this.activatedRoute.snapshot.paramMap.get('id');
-    if (this.selectedCategoryId == 0) {
-      this.ServicesByCatId = this.Services;
-    } else {
-      this.ServicesByCatId = this.Services.filter(
-        (s: any) => s.service_category_id == this.selectedCategoryId
-      );
-      // this.router.navigate([
-      //   'services',
-      //   this.ServicesByCatId.service_category_name,
-      // ]);
-      /////////////////////////////////////
-      // for (let i = 0; i < this.ServicesByCatId.length; i++) {
-      //   this.router.navigateByUrl(
-      //     `service/${this.ServicesByCatId[i].service_category_id}`
-      //   );
-      // }
-      /////////////////////////////////////
-    }
-  }
-  filterCategory() {
-    if (this.selectedCategoryId == 0) {
-      this.ServicesByCatId = this.Services;
-    } else {
-      this.ServicesByCatId = this.Services.filter(
-        (s: any) => s.service_category_id == this.selectedCategoryId
-      );
-      // this.router.navigate([
-      //   'services',
-      //   this.ServicesByCatId.service_category_name,
-      // ]);
-      /////////////////////////////////////
-      // for (let i = 0; i < this.ServicesByCatId.length; i++) {
-      //   this.router.navigateByUrl(
-      //     `service/${this.ServicesByCatId[i].service_category_id}`
-      //   );
-      // }
-      /////////////////////////////////////
-    }
-  }
-  subString(subString: string): string {
-    if (subString.length > 125) {
-      return subString.substring(0, 125) + '...';
-    }
-    return subString.substring(0, 125);
-  }
+
   subDates(date: Date) {
     let currentDate: any = new Date();
     let currentDateCalc: any = new Date(currentDate);
@@ -122,4 +53,61 @@ export class ServiceComponent implements OnInit {
     if (status == true) return 'opened';
     else return 'closed';
   }
+  //   ngOnInit(): void {
+  //     this.userStore.getIDfromStore().subscribe( id => {
+  //       this.UserID = id || this.authService.getIDfromToken()
+  //       console.log(this.UserID);
+  //     });
+  //     this.ser.get(this.UserID).subscribe({
+  //       next:(u)=>{console.log(u);
+  //        this.userData=u;
+  //        console.log(this.userData);
+  //       },
+  //       error:(err)=>console.log(err)
+  //     })
+  //   }
+
+  //   checkMoney(id:number)
+  //   {
+  //       // *************** Get Service By ID *****************
+  //       this.httpClient
+  //       .get<service>('https://localhost:7033/api/Service/'+id)
+  //       .subscribe(
+  //         (ser) => {
+  //         this.selectedService = ser;
+  //         console.log(this.selectedService);
+  //             this.confirmservice.showConfirm('Are you sure you want to Apply this service',
+  //               ()=>{this.router.navigate(['/Proposals/Proposal']);},
+  //               ()=>{
+  //                 Swal.fire({
+  //                   title: "Thanks....."
+  //                 });
+  //               }
+  //   );
+  //   });
+  // }
+
+  //   addService(){
+
+  //     this.service={
+  //       title:this.serTitle,
+  //       description:this.serDes,
+  //       hours:this.serHour,
+  //       category_id:this.selectedCategoryId2,
+  //       user_id:this.UserID
+  //     }
+  //     console.log(this.service);
+  //     return this.httpClient.post<any>(`https://localhost:7033/api/Service`,this.service).subscribe({next:val=>{
+  //       this.toast.success({detail:"Success",summary:"You add your Category successfully",duration:3000})
+  //       this.serTitle="",
+  //       this.serDes="",
+  //       this.serHour="",
+  //       this.selectedCategoryId2=""
+  //     },
+  //       error:err=>
+  //       this.toast.error({detail:"Error",summary:"Edit your Category Failed",duration:3000}),
+  //       });
+
+  //   }
+  // }
 }

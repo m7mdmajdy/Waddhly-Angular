@@ -1,5 +1,5 @@
 .service {
-  width: calc(50% - 12px);
+  width: calc(100%);
 }
 @media (max-width: 767px) {
   .service {
@@ -18,9 +18,7 @@ a:hover {
 a.user:hover {
   color: var(--text-color);
 }
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
-body
-{
-  font-family: 'Poppins',sans-serif;
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+body {
+  font-family: "Poppins", sans-serif;
 }
-

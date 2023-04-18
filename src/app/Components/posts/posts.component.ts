@@ -32,24 +32,34 @@ export class PostsComponent {
     this.httpClient.get(`${environment.apiUrl}/Comment`).subscribe((posts) => {
       this.posts = posts;
       for (let i = 0; i < this.thePosts.length; i++) {
-        // this.thePosts[i].postId = this.posts[i]?.postId;
-        // this.thePosts[i].postTitle = this.posts[i]?.postTitle;
-        // this.thePosts[i].comments = this.posts[i]?.comments;
         this.thePosts[i] = this.posts[i];
 
         for (let j = 0; j < this.posts[i]?.comments.length; j++) {
-          // this.thePosts[i].comments[j].item1 =
-          //   this.posts[i]?.comments[j].item1;
-          // this.thePosts[i].comments[j].item2 =
-          //   this.posts[i]?.comments[j].item2;
           this.thePosts[i].comments[j] = this.posts[i]?.comments[j];
         }
-        //console.log(this.posts[i]?.comments.length);
-        // console.log(this.posts[i]?.comments);
-        // console.log(this.thePosts.length);
       }
     });
-    // console.log(this.posts);
-    // console.log(this.thePosts);
+  }
+  subDates(date: Date) {
+    let currentDate: any = new Date();
+    let currentDateCalc: any = new Date(currentDate);
+    let serviceDate: any = new Date(date);
+    let result = (currentDateCalc.getTime() - serviceDate.getTime()) / 1000;
+    let timeAgo = '';
+    if (result < 60) {
+      timeAgo = `${Math.round(result)} seconds ago`;
+    } else if (result > 60 && result < 60 * 60) {
+      timeAgo = `${Math.round(result / 60)} minutes ago`;
+    } else if (result > 60 * 60 && result < 60 * 60 * 24) {
+      timeAgo = `${Math.round(result / 60 / 60)} hours ago`;
+    } else if (result > 60 * 60 * 24 && result < 60 * 60 * 24 * 30) {
+      timeAgo = `${Math.round(result / 60 / 60 / 24)} days ago`;
+    } else if (result > 60 * 60 * 24 * 30 && result < 60 * 60 * 24 * 365) {
+      timeAgo = `${Math.round(result / 60 / 60 / 24 / 30)} months ago`;
+    } else {
+      timeAgo = `${Math.round(result / 60 / 60 / 24 / 365)} years ago`;
+    }
+    if (timeAgo.includes('1 ')) return timeAgo.replace('s ', ' ');
+    else return timeAgo;
   }
 }

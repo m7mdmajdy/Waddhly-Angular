@@ -1,11 +1,7 @@
 .service {
-  width: calc(50% - 12px);
+  width: 100%;
 }
-@media (max-width: 767px) {
-  .service {
-    width: 100%;
-  }
-}
+
 .service i {
   font-size: 13px;
 }

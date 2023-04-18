@@ -13,7 +13,7 @@
     <p>
       <a routerLink="/profile/{{ item.item2 }}">{{ item.item3 }}</a>
     </p>
-    <p>{{ subDates(item.item4) }}</p>
+    <p [title]="post.postDate | date : 'full'">{{ subDates(item.item4) }}</p>
     <img src="data:image/png;base64,{{ item.item5 }}" class="card-img" />
   </div>
   <div class="comment my-5">
