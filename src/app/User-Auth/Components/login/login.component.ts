@@ -62,10 +62,10 @@ export class LoginComponent  implements OnInit{
       console.log(this.UserID);
       this.ser.userloginedID=id;
     });
-this.ser.get(this.UserID).subscribe({
-  next:(u)=>console.log(u),
-  error:(err)=>console.log(err)
-})
+// this.ser.get(this.UserID).subscribe({
+//   next:(u)=>console.log(u),
+//   error:(err)=>console.log(err)
+// })
 }
 checkValidEmail(event:string)
 {

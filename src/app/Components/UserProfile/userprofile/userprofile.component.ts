@@ -85,4 +85,22 @@ export class UserprofileComponent implements OnInit {
     this.toast.success({detail:"Success",summary:"Your message was sent successfully",duration:3000}),
     this.msg=""
   }
+
+//   deletecat(){
+
+//     this.formData.append('hourRate',"")
+//     this.formData.append('categoryID',"")
+
+//     this.userservice.editUserDataByID(this.UserID,this.formData).subscribe({next:val=>{
+//       this.toast.success({detail:"Success",summary:"You delete your category successfully",duration:3000}),
+//       this.userservice.getUserDataByID(this.UserID).subscribe( val => {
+//         this.UserData = val;
+//         console.log(this.UserData);
+//         this.formData=new FormData();
+//       })},
+//       error:err=>
+//       this.toast.error({detail:"Error",summary:"Edit your information Failed",duration:3000}),
+
+//     })
+// }
 }

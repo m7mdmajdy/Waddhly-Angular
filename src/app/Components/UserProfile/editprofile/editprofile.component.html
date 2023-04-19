@@ -2,7 +2,7 @@
   <div class="main-body">
     <div class="card">
       <div class="card-body">
-        <form class="g-3" #InformationForm="ngForm" class="mx-1 mx-md-4" (ngSubmit)="editinfo()" >
+        <form class="g-3" #InformationForm="ngForm" class="mx-1 mx-md-4">
           <div class="row">
             <div class="col-lg-4">
               <div class="d-flex flex-column align-items-center text-center">
@@ -11,7 +11,7 @@
                       <div class="pic-holder">
                         <!-- uploaded pic shown here -->
                         <img id="profilePic" class="pic" src="data:image/png;base64,{{UserData.userimage}}">
-                        <input class="uploadProfileInput form-control" name="profile_pic" type="file" style="opacity: 0;"
+                        <input class="uploadProfileInput form-control d-none" name="profile_pic" type="file" style="opacity: 0;"
                         (change)="fileInput($event.target)" id="newProfilePhoto">
                         <!-- <Input class="uploadProfileInput" type="file" name="profile_pic" id="newProfilePhoto" accept="image/*" style="opacity: 0;" /> -->
                         <label for="newProfilePhoto" class="upload-file-block">
@@ -143,11 +143,11 @@
                 </div>
               </div>
               <div class="row mb-3">
-                <div class="col-sm-3">
+                <!-- <div class="col-sm-3">
                   <h6 class="mb-0">Money in my account</h6>
                 </div>
                 <div class="col-sm-9 text-secondary">
-                  <input type="text" class="form-control" name="money" #money="ngModel" [(ngModel)]="UserData.moneyAccount">
+                  <input type="text" class="form-control" name="money" #money="ngModel" [(ngModel)]="UserData.moneyAccount"> -->
                   <!-- <input type="text" class="form-control"
                   required
                   #money="ngModel" [(ngModel)]="UserData.moneyAccount"
@@ -157,7 +157,7 @@
                       MoneyAccount is required.
                     </span>
                   </span> -->
-                </div>
+                <!-- </div> -->
               </div>
               <div class="row mb-3">
                 <div class="col-sm-3">
@@ -165,6 +165,7 @@
                 </div>
                 <div class="col-sm-9 text-secondary">
                   <input type="text" class="form-control" name="title" #title="ngModel" [(ngModel)]="UserData.title">
+                  <!-- <input *ngIf="!UserData.title" type="text" class="form-control" name="title" #title="ngModel" [(ngModel)]="titlee"> -->
                 </div>
               </div>
               <div class="row mb-3" *ngIf="UserData.categoryName">
@@ -192,7 +193,8 @@
               <div class="row">
                 <div class="col-sm-3"></div>
                 <div class="col-sm-9 text-secondary d-flex justify-content-end">
-                  <input type="submit" [disabled]="InformationForm.invalid" class="btn btn-primary px-4" value="Save Changes">
+                  <input *ngIf="UserData.categoryName" (click)="editinfo()" type="submit" [disabled]="InformationForm.invalid" class="btn btn-primary px-4" value="Save Changes">
+                  <input *ngIf="!UserData.categoryName" (click)="editinfo2()"  type="submit"  [disabled]="InformationForm.invalid" class="btn btn-primary px-4" value="Save Changes">
                 </div>
               </div>
             </div>
@@ -218,7 +220,7 @@
                       <div class="card-body">
                         <h5 class="card-title">{{item.title}}</h5>
                         <p class="card-text">{{item.description}}</p>
-                        <p class="card-text"><small class="text-muted">{{item.date}}</small></p>
+                        <p class="card-text"><small class="text-muted">{{item.date| date:'longDate'}}</small></p>
                         <a href="{{item.projectUrl}}" target="_blank" class="">Details</a>
                       </div>
                     </div>

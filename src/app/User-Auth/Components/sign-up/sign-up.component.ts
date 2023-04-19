@@ -61,7 +61,7 @@ export class SignUpComponent {
           this.router.navigate(['/login'])
         }, error:(err)=>{
           // console.log(err)
-          this.toast.error({detail:"Failed",summary:err.error,duration:5000})
+          this.toast.error({detail:"Failed",summary:err.message,duration:5000})
         }
       })
     }

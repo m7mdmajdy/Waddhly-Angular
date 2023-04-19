@@ -114,6 +114,22 @@ export class EditprofileComponent{
     this.formData=new FormData();
     const files=data.files as File[];
     Array.from(files).forEach(file => this.formData.append('File',file))
+
+    this.userservice.editUserDataByID(this.UserID,this.formData).subscribe({next:val=>{
+      this.toast.success({detail:"Success",summary:"You edit your picture successfully",duration:3000}),
+      this.userservice.getUserDataByID(this.UserID).subscribe( val => {
+        this.UserData = val;
+        console.log(this.UserData);
+        this.formData=new FormData();
+      })},
+      error:err=>
+      this.toast.error({detail:"Error",summary:"Edit your picture Failed",duration:3000}),
+
+    })
+    // setTimeout(() => {
+    //   location.reload();
+
+    // }, 1000)
     //this.formData.append('File',files)
   }
 
@@ -130,7 +146,13 @@ export class EditprofileComponent{
   }
 
 editinfo(){
-      this.formData.append('summary',this.UserData.summary)
+  if(this.UserData.summary ==null){
+
+    this.formData.append('summary',"")
+  }
+  else{
+    this.formData.append('summary',this.UserData.summary)
+  }
       this.formData.append('fname',this.UserData.fname)
       this.formData.append('lname',this.UserData.lname)
       this.formData.append('email',this.UserData.email)
@@ -138,14 +160,19 @@ editinfo(){
       this.formData.append('MoneyAccount',this.UserData.moneyAccount)
       this.formData.append('hourRate',this.UserData.hourRate)
       this.formData.append('categoryID',this.UserData.categoryID)
-      this.formData.append('title',this.UserData.title)
-      debugger;
+if(this.UserData.summary ==null){
+
+  this.formData.append('title',"")
+}
+else{
+  this.formData.append('title',this.UserData.title)
+}
       this.formData.append('country',this.UserData.country)
       // this.formData.append('File',this.UserData.userimage)
 
 
       this.userservice.editUserDataByID(this.UserID,this.formData).subscribe({next:val=>{
-        this.toast.success({detail:"Success",summary:"You add a Job successfully",duration:3000}),
+        this.toast.success({detail:"Success",summary:"You edit your information successfully",duration:3000}),
         this.userservice.getUserDataByID(this.UserID).subscribe( val => {
           this.UserData = val;
           console.log(this.UserData);
@@ -155,6 +182,45 @@ editinfo(){
         this.toast.error({detail:"Error",summary:"Edit your information Failed",duration:3000}),
 
       })
+}
+editinfo2(){
+  if(this.UserData.summary ==null){
+
+    this.formData.append('summary',"")
+  }
+  else{
+    this.formData.append('summary',this.UserData.summary)
+  }
+  this.formData.append('fname',this.UserData.fname)
+  this.formData.append('lname',this.UserData.lname)
+  this.formData.append('email',this.UserData.email)
+  this.formData.append('PhoneNumber',this.UserData.phoneNumber)
+  // this.formData.append('MoneyAccount',this.UserData.moneyAccount)
+  // this.formData.append('hourRate',this.UserData.hourRate)
+  // this.formData.append('categoryID',this.UserData.categoryID)
+  if(this.UserData.summary ==null){
+
+    this.formData.append('title',"")
+  }
+  else{
+    this.formData.append('title',this.UserData.title)
+  }
+  this.formData.append('title',this.UserData.title)
+  this.formData.append('country',this.UserData.country)
+  // this.formData.append('File',this.UserData.userimage)
+
+
+  this.userservice.editUserDataByID(this.UserID,this.formData).subscribe({next:val=>{
+    this.toast.success({detail:"Success",summary:"You edit your information successfully",duration:3000}),
+    this.userservice.getUserDataByID(this.UserID).subscribe( val => {
+      this.UserData = val;
+      console.log(this.UserData);
+      this.formData=new FormData();
+    })},
+    error:err=>
+    this.toast.error({detail:"Error",summary:"Edit your information Failed",duration:3000}),
+
+  })
 }
 
   // passwordMatchValidator(formGroup: FormGroup) {
