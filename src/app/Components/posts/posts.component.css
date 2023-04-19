@@ -14,3 +14,15 @@ a {
 .hov-text:hover {
   color: var(--text-color);
 }
+.img-container {
+  position: relative;
+  padding-left: 60px !important;
+}
+img {
+  position: absolute;
+  left: -50px;
+  top: 2.5px;
+  height: 100px;
+  width: 100px;
+  outline: 4px solid #ddd;
+}

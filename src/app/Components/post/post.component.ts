@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/Services/auth/User/user.service';
 import { UserstoreService } from 'src/app/Services/auth/UserStore/userstore.service';
@@ -15,13 +15,12 @@ export class PostComponent implements OnInit {
   post: any;
   UserID: any;
   currentUserId: number = 0;
-  now: Date = new Date();
+  now: Date;
   comment: any;
   currentPostId: number = 0;
   constructor(
     private route: ActivatedRoute,
     private httpClient: HttpClient,
-    private user: UserService,
     private userStore: UserstoreService,
     private auth: AuthService
   ) {
@@ -33,6 +32,7 @@ export class PostComponent implements OnInit {
         this.post = p;
         console.log(p);
       });
+    this.now = new Date();
   }
   ngOnInit(): void {
     console.log(this.post);
@@ -68,11 +68,24 @@ export class PostComponent implements OnInit {
       commentdate: this.now,
       commentUserId: this.UserID,
     };
+
     return this.httpClient
       .post(
         `${environment.apiUrl}/Comment?id=${this.currentPostId}`,
         this.comment
       )
-      .subscribe((c) => {});
+      .subscribe((c) => {
+        this.httpClient
+          .get(`${environment.apiUrl}/Comment/${this.currentPostId}`)
+          .subscribe((p) => {
+            this.post = p;
+            console.log(p);
+          });
+        this.comment = '';
+      });
+  }
+  goDown() {
+    document.getElementById('comment')?.focus();
+    window.scrollTo(0, document.body.scrollHeight);
   }
 }

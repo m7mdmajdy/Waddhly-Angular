@@ -139,7 +139,7 @@
               class="title text-color text-decoration-none"
               routerLink="/service/{{ item.id }}"
             >
-              {{ item.title }}
+              {{ subString(item.title, 130) }}
             </a>
           </h4>
           <span
@@ -156,7 +156,7 @@
           routerLink="/profile/{{ item.user_id }}"
           >{{ item.user_firstname }} {{ item.user_lastname }}</a
         >
-        <p>{{ subString(item.description) }}</p>
+        <p>{{ subString(item.description, 170) }}</p>
         <div class="d-flex justify-content-between align-items-center">
           <div *ngIf="item.status">
             <button class="btn btn-warning" (click)="checkMoney(item.id)">

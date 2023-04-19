@@ -1,22 +1,63 @@
 <app-header></app-header>
 <div class="container min-height">
-  <form action="">
+  <h2 class="mt-3">Add Post</h2>
+  <form class="my-3" #postForm="ngForm">
     <!-- #title="ngModel" -->
+    <label class="form-label" for="title">Title</label>
     <input
       [(ngModel)]="title"
+      #tit="ngModel"
+      pattern="(.|\s)*\S(.|\s)*"
       class="form-control"
       type="text"
       name="title"
+      placeholder="Title"
       id="title"
+      required
+      minlength="10"
+      [ngClass]="{
+        'is-invalid': (tit.touched || tit.dirty) && !tit.valid,
+        'is-valid': (tit.touched || tit.dirty) && !tit.invalid,
+      }"
     />
+    <span class="invalid-feedback">
+      <span *ngIf="tit.errors?.['required']">Please enter the title</span>
+      <span *ngIf="tit.errors?.['pattern']">Please enter characters</span>
+
+      <span *ngIf="tit.errors?.['minlength']">
+        Title must be at least 10 characters
+      </span>
+    </span>
     <!-- #description="ngModel" -->
+    <label class="form-label mt-3" for="description">Description</label>
     <textarea
       [(ngModel)]="description"
+      #des="ngModel"
+      pattern="(.|\s)*\S(.|\s)*"
       class="form-control"
       name="description"
+      placeholder="Description"
       id="description"
+      required
+      minlength="20"
+      [ngClass]="{
+        'is-invalid': (des.touched || des.dirty) && !des.valid,
+        'is-valid': (des.touched || des.dirty) && !des.invalid,
+      }"
     ></textarea>
-    <button (click)="addPost()" type="submit" class="btn btn-success mt-2">
+    <span class="invalid-feedback">
+      <span *ngIf="des.errors?.['required']">Please enter the Description</span>
+      <span *ngIf="des.errors?.['pattern']">Please enter characters</span>
+      <span *ngIf="des.errors?.['minlength']">
+        Description must be at least 20 characters
+      </span>
+    </span>
+    <button
+      [disabled]="postForm.invalid"
+      (click)="addPost()"
+      type="submit"
+      class="btn btn-success mt-2"
+    >
       Add
     </button>
   </form>

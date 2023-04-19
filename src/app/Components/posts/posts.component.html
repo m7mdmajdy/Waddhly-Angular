@@ -4,12 +4,32 @@
     <a routerLink="/addpost" class="btn btn-primary">Add Post</a>
   </div>
   <div class="container my-4 d-flex flex-wrap gap-3 justify-content-between">
-    <div class="bg-light-color post p-3" *ngFor="let post of posts">
-      <h3>
-        <a class="main-color hov-text" routerLink="/post/{{ post.postid }}">{{
-          post.postTitle
-        }}</a>
-      </h3>
+    <div
+      class="bg-light-color post p-3 img-container"
+      *ngFor="let post of posts"
+    >
+      <div class="d-flex">
+        <a routerLink="/profile/{{ post.postuserid }}">
+          <img
+            *ngIf="!post.userimage"
+            src="https://bootdey.com/img/Content/avatar/avatar7.png"
+            alt="Admin"
+            class="rounded-circle"
+          />
+          <img
+            *ngIf="post.userimage"
+            src="data:image/png;base64,{{ post.userimage }}"
+            alt="Admin"
+            class="rounded-circle"
+          />
+        </a>
+        <h3>
+          <a class="main-color hov-text" routerLink="/post/{{ post.postid }}">{{
+            subString(post.postTitle, 55)
+          }}</a>
+        </h3>
+      </div>
+
       <div class="d-flex justify-content-between align-items-center">
         <a
           class="d-flex align-items-center"
@@ -18,7 +38,10 @@
           <i class="fa-solid fa-user me-2"></i>
           <span>{{ post.postusername }}</span>
         </a>
-        <a class="text-color hov-main" routerLink="/post/{{ post.postid }}">
+        <a
+          class="text-color hov-main comments-number"
+          routerLink="/post/{{ post.postid }}"
+        >
           <i class="fa-regular fa-comment"></i>
           {{ post.comments.length }}
         </a>
