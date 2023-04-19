@@ -1,33 +1,117 @@
 <app-header></app-header>
-<div class="container">
-  <div class="d-flex justify-content-between">
-    <a routerLink="/profile/{{ post.postuserid }}">{{ post.postusername }}</a>
-    <span>{{ subDates(post.postDate) }}</span>
+<div class="container min-height">
+  <div class="publisher rounded-5 mt-4 p-4">
+    <div class="d-flex align-items-center">
+      <a routerLink="/profile/{{ post.postuserid }}">
+        <img
+          *ngIf="!post.userimage"
+          src="https://bootdey.com/img/Content/avatar/avatar7.png"
+          alt="Admin"
+          class="rounded-circle"
+          width="60"
+          height="60"
+        />
+        <img
+          *ngIf="post.userimage"
+          src="data:image/png;base64,{{ post.userimage }}"
+          alt="Admin"
+          class="rounded-circle"
+          width="60"
+          height="60"
+        />
+      </a>
+      <div>
+        <a class="d-block" routerLink="/profile/{{ post.postuserid }}">{{
+          post.postusername
+        }}</a>
+        <span [title]="post.postDate | date : 'full'" class="post-date">{{
+          subDates(post.postDate)
+        }}</span>
+      </div>
+    </div>
+    <h3>{{ post.postTitle }}</h3>
+    <p class="fs-5">{{ post.postDescription }}</p>
   </div>
-  <h3>{{ post.postTitle }}</h3>
-  <p>{{ post.postDescription }}</p>
-  <img src="data:image/png;base64,{{ post.userimage }}" class="rounded-circle" width="50" height="50" />
-  <h5>Comments({{ post.comments.length }})</h5>
-  <div class="comments bg-light-color mb-2" *ngFor="let item of post.comments">
-    <p>{{ item.item1 }}</p>
-    <p>
-      <a routerLink="/profile/{{ item.item2 }}">{{ item.item3 }}</a>
-    </p>
-    <p [title]="post.postDate | date : 'full'">{{ subDates(item.item4) }}</p>
-    <img src="data:image/png;base64,{{ item.item5 }}" class="card-img" />
+  <div class="my-3 d-flex comment justify-content-between align-items-center">
+    <h5 *ngIf="post.comments.length <= 1" class="m-0">
+      Comment({{ post.comments.length }})
+    </h5>
+    <h5 *ngIf="post.comments.length > 1" class="m-0">
+      Comments({{ post.comments.length }})
+    </h5>
+    <button class="btn btn-info" (click)="goDown()">Add Comment</button>
+  </div>
+  <div
+    class="comments rounded-3 bg-light-color mb-1 p-4"
+    *ngFor="let item of post.comments"
+  >
+    <div class="d-flex align-items-center">
+      <a routerLink="/profile/{{ post.postuserid }}">
+        <img
+          *ngIf="!item.item5"
+          src="https://bootdey.com/img/Content/avatar/avatar7.png"
+          alt="Admin"
+          class="rounded-circle"
+          width="60"
+          height="60"
+        />
+        <img
+          *ngIf="item.item5"
+          src="data:image/png;base64,{{ item.item5 }}"
+          alt="Admin"
+          class="rounded-circle"
+          width="60"
+          height="60"
+        />
+      </a>
+      <div>
+        <a class="d-block" routerLink="/profile/{{ item.item2 }}">{{
+          item.item3
+        }}</a>
+        <span class="comment-date" [title]="item.item4 | date : 'full'">
+          {{ subDates(item.item4) }}
+        </span>
+      </div>
+    </div>
+    <p class="mt-3 fs-5">{{ item.item1 }}</p>
   </div>
   <div class="comment my-5">
     <h3>Add Comment</h3>
     <!-- #comment="ngModel" -->
-    <textarea
-      [(ngModel)]="comment"
-      class="form-control"
-      name="comment"
-      id="comment"
-    ></textarea>
-    <button (click)="addComment()" type="submit" class="btn btn-success mt-2">
-      Add
-    </button>
+    <form #commentForm="ngForm">
+      <textarea
+        required
+        pattern="(.|\s)*\S(.|\s)*"
+        #com="ngModel"
+        minlength="4"
+        [(ngModel)]="comment"
+        class="form-control"
+        name="comment"
+        id="comment"
+        [ngClass]="{
+          'is-invalid': (com.touched || com.dirty) && !com.valid,
+          'is-valid': (com.touched || com.dirty) && !com.invalid,
+        }"
+      ></textarea>
+      <span class="invalid-feedback">
+        <span *ngIf="com.errors?.['required']"
+          >Please enter the Description</span
+        >
+        <span *ngIf="com.errors?.['pattern']">Please enter characters</span>
+        <span *ngIf="com.errors?.['minlength']">
+          Description must be at least 4 characters
+        </span>
+      </span>
+
+      <button
+        [disabled]="commentForm.invalid"
+        (click)="addComment()"
+        type="submit"
+        class="btn btn-success mt-2"
+      >
+        Add
+      </button>
+    </form>
   </div>
 </div>
 <app-footer></app-footer>

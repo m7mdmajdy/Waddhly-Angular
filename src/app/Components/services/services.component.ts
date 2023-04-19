@@ -7,7 +7,7 @@ import { UserstoreService } from 'src/app/Services/auth/UserStore/userstore.serv
 import { UserService } from 'src/app/Services/userService/user.service';
 import { AuthService } from 'src/app/Services/auth/auth.service';
 import { LoginedUser, service } from 'src/app/Modals/user';
-import {NgConfirmService} from 'ng-confirm-box';
+import { NgConfirmService } from 'ng-confirm-box';
 import Swal from 'sweetalert2';
 import { TemplateBindingParseResult } from '@angular/compiler';
 import { NgToastService } from 'ng-angular-popup';
@@ -25,14 +25,13 @@ export class ServicesComponent implements OnInit {
   selectedCategoryId: any;
   selectedCategoryId2: any;
   selectedCategoryName: any;
-  UserID:any;
-  service:any;
-  serTitle:any;
-  serDes:any;
-  serHour:any;
+  UserID: any;
+  service: any;
+  serTitle: any;
+  serDes: any;
+  serHour: any;
 
-  userData:LoginedUser=
-  {
+  userData: LoginedUser = {
     id: '',
     firstName: '',
     lastName: '',
@@ -41,25 +40,23 @@ export class ServicesComponent implements OnInit {
     moneyAccount: 0,
     country: '',
     hourRate: 0,
-    gender: ''
+    gender: '',
   };
-  selectedService:service=
-  {
+  selectedService: service = {
     id: 0,
     title: '',
     description: '',
-    date: new Date,
+    date: new Date(),
     hours: 0,
     status: false,
     service_category_id: 0,
     service_category_name: '',
-    service_user_id:'',
+    service_user_id: '',
     user_firstname: '',
     user_lastname: '',
-    user_title: ''
-  }
-  ownerOfService:LoginedUser=
-  {
+    user_title: '',
+  };
+  ownerOfService: LoginedUser = {
     id: '',
     firstName: '',
     lastName: '',
@@ -68,21 +65,22 @@ export class ServicesComponent implements OnInit {
     moneyAccount: 0,
     country: '',
     hourRate: 0,
-    gender: ''
+    gender: '',
   };
   constructor(
     private httpClient: HttpClient,
     private router: Router,
-    private ser:UserService,
-    private authService:AuthService,
-    private toast:NgToastService,
-    private confirmservice:NgConfirmService ,
-    private userStore:UserstoreService) {
-      this.userStore.getIDfromStore().subscribe( id => {
-        this.UserID = id || this.authService.getIDfromToken()
-        console.log(this.UserID);
-      });
-      this.httpClient
+    private ser: UserService,
+    private authService: AuthService,
+    private toast: NgToastService,
+    private confirmservice: NgConfirmService,
+    private userStore: UserstoreService
+  ) {
+    this.userStore.getIDfromStore().subscribe((id) => {
+      this.UserID = id || this.authService.getIDfromToken();
+      console.log(this.UserID);
+    });
+    this.httpClient
       .get<any>(`${environment.apiUrl}/Category`)
       .subscribe((cats) => {
         this.Categories = cats;
@@ -132,11 +130,11 @@ export class ServicesComponent implements OnInit {
       /////////////////////////////////////
     }
   }
-  subString(subString: string): string {
-    if (subString.length > 125) {
-      return subString.substring(0, 125) + '...';
+  subString(subString: string, num: number): string {
+    if (subString.length > num) {
+      return subString.substring(0, num) + '...';
     }
-    return subString.substring(0, 125);
+    return subString.substring(0, num);
   }
   subDates(date: Date) {
     let currentDate: any = new Date();
@@ -165,82 +163,92 @@ export class ServicesComponent implements OnInit {
     else return 'closed';
   }
 
-
   ngOnInit(): void {
-    this.userStore.getIDfromStore().subscribe( id => {
-      this.UserID = id || this.authService.getIDfromToken()
+    this.userStore.getIDfromStore().subscribe((id) => {
+      this.UserID = id || this.authService.getIDfromToken();
       console.log(this.UserID);
     });
     this.ser.get(this.UserID).subscribe({
-      next:(u)=>{console.log(u);
-       this.userData=u;
-       console.log(this.userData);
+      next: (u) => {
+        console.log(u);
+        this.userData = u;
+        console.log(this.userData);
       },
-      error:(err)=>console.log(err)
-    })
+      error: (err) => console.log(err),
+    });
   }
 
-  checkMoney(id:number)
-  {
-      // *************** Get Service By ID *****************
-      this.httpClient
-      .get<service>('https://localhost:7033/api/Service/'+id)
-      .subscribe(
-        (ser) => {
+  checkMoney(id: number) {
+    // *************** Get Service By ID *****************
+    this.httpClient
+      .get<service>('https://localhost:7033/api/Service/' + id)
+      .subscribe((ser) => {
         this.selectedService = ser;
         console.log(this.selectedService);
-            this.confirmservice.showConfirm('Are you sure you want to Apply this service',
-              ()=>{this.router.navigate(['/Proposals/Proposal']);},
-              ()=>{
-                Swal.fire({
-                  title: "Thanks....."
-                });
-              }
-  );
-  });
-}
-
-  addService(){
-
-    this.service={
-      title:this.serTitle,
-      description:this.serDes,
-      hours:this.serHour,
-      category_id:this.selectedCategoryId2,
-      user_id:this.UserID
-    }
-    console.log(this.service);
-    return this.httpClient.post<any>(`https://localhost:7033/api/Service`,this.service).subscribe({next:val=>{
-      this.toast.success({detail:"Success",summary:"You add your Category successfully",duration:3000})
-      this.serTitle="",
-      this.serDes="",
-      this.serHour="",
-      this.selectedCategoryId2=""
-    },
-      error:err=>
-      this.toast.error({detail:"Error",summary:"Edit your Category Failed",duration:3000}),
+        this.confirmservice.showConfirm(
+          'Are you sure you want to Apply this service',
+          () => {
+            this.router.navigate(['/Proposals/Proposal']);
+          },
+          () => {
+            Swal.fire({
+              title: 'Thanks.....',
+            });
+          }
+        );
       });
+  }
 
+  addService() {
+    this.service = {
+      title: this.serTitle,
+      description: this.serDes,
+      hours: this.serHour,
+      category_id: this.selectedCategoryId2,
+      user_id: this.UserID,
+    };
+    console.log(this.service);
+    return this.httpClient
+      .post<any>(`https://localhost:7033/api/Service`, this.service)
+      .subscribe({
+        next: (val) => {
+          this.toast.success({
+            detail: 'Success',
+            summary: 'You add your Category successfully',
+            duration: 3000,
+          });
+          (this.serTitle = ''),
+            (this.serDes = ''),
+            (this.serHour = ''),
+            (this.selectedCategoryId2 = '');
+        },
+        error: (err) =>
+          this.toast.error({
+            detail: 'Error',
+            summary: 'Edit your Category Failed',
+            duration: 3000,
+          }),
+      });
   }
 }
 
 ///// comment
-        // Swal.fire({
-        //   title: "Warnning.....",
-        //   text:"please check your money Account",
-        //   icon:"warning"
-        // })
+// Swal.fire({
+//   title: "Warnning.....",
+//   text:"please check your money Account",
+//   icon:"warning"
+// })
 
-      // else
-      // {
-      //   Swal.fire({
-      //     title: "Success.....",
-      //     text:"please check your money Account",
-      //     icon:"warning"
-      //   })
-      //   // this.confirmservice.showConfirm('Are you sure you want to buy this service this service will cost you  ' + this.ownerOfService.hourRate * this.selectedService.hours ,
-      //   //   ()=>{this.router.navigate(['/Proposals/Proposal']);},
-      //   //   ()=>{}
-      //   // );
-      // }
+// else
+// {
+//   Swal.fire({
+//     title: "Success.....",
+//     text:"please check your money Account",
+//     icon:"warning"
+//   })
+//   // this.confirmservice.showConfirm('Are you sure you want to buy this service this service will cost you  ' + this.ownerOfService.hourRate * this.selectedService.hours ,
+//   //   ()=>{this.router.navigate(['/Proposals/Proposal']);},
+//   //   ()=>{}
+//   // );
+// }
 /////  comment

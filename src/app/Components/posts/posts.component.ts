@@ -62,4 +62,10 @@ export class PostsComponent {
     if (timeAgo.includes('1 ')) return timeAgo.replace('s ', ' ');
     else return timeAgo;
   }
+  subString(subString: string, num: number): string {
+    if (subString.length > num) {
+      return subString.substring(0, num) + '...';
+    }
+    return subString.substring(0, num);
+  }
 }
