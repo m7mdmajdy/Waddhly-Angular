@@ -1,0 +1,16 @@
+.post {
+  width: calc(100%);
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  justify-content: space-between;
+}
+a {
+  text-decoration: none;
+}
+.hov-main:hover {
+  color: var(--main-color);
+}
+.hov-text:hover {
+  color: var(--text-color);
+}

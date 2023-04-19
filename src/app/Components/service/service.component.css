@@ -1,0 +1,16 @@
+.service {
+  width: 100%;
+}
+
+.service i {
+  font-size: 13px;
+}
+a.title:hover {
+  color: var(--main-color);
+}
+a:hover {
+  color: unset;
+}
+a.user:hover {
+  color: var(--text-color);
+}
