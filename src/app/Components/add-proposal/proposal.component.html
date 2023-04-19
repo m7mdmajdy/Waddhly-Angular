@@ -67,7 +67,7 @@
         </div>
 
         <div class="mb-3">
-          <label for="cost" class="form-label">Cost</label>
+          <label for="cost" class="form-label">Cost ($)</label>
           <input
             type="number"
             class="form-control"
@@ -131,7 +131,7 @@
             </span>
           </span>
         </div> -->
-        <button type="submit" mat-raised-button class="btn btn-success submit"
+        <button [disabled]="propFrom.invalid" type="submit" mat-raised-button class="btn btn-success submit"
         >Save</button>
         <button class="btn btn-warning cancel" (click)="CancelAdding()">Cancel</button>
       </form>

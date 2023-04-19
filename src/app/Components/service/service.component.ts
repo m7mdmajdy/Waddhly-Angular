@@ -13,6 +13,7 @@ export class ServiceComponent {
   currentServiceId: number;
   constructor(
     private httpClient: HttpClient,
+    private router: Router,
     private activatedRoute: ActivatedRoute
   ) {
     this.currentServiceId = Number(
@@ -53,6 +54,14 @@ export class ServiceComponent {
     if (status == true) return 'opened';
     else return 'closed';
   }
+
+  serviceId:any;
+  checkMoney()
+  {
+      // *************** Get Service By ID *****************
+      this.serviceId=(this.activatedRoute.snapshot.paramMap.get('id'));
+      this.router.navigate(['/proposal',this.serviceId]);
+}
   //   ngOnInit(): void {
   //     this.userStore.getIDfromStore().subscribe( id => {
   //       this.UserID = id || this.authService.getIDfromToken()

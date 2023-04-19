@@ -29,6 +29,8 @@ import { CommonModule } from '@angular/common';
 import { ProposalComponent } from './Components/add-proposal/proposal.component';
 import { ResetComponent } from './Components/reset/reset.component';
 import { UserProposalsComponent } from './Components/user-proposals/user-proposals.component';
+import { UserOldPropsComponent } from './Components/user-old-props/user-old-props.component';
+import { NgxPayPalModule } from 'ngx-paypal';
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,6 +53,7 @@ import { UserProposalsComponent } from './Components/user-proposals/user-proposa
     ResetComponent,
     UserProposalsComponent,
     AddPostComponent,
+    UserOldPropsComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,7 +63,9 @@ import { UserProposalsComponent } from './Components/user-proposals/user-proposa
     ReactiveFormsModule,
     HttpClientModule,
     NgToastModule,
-    NgConfirmModule
+    NgConfirmModule,
+    NgxPayPalModule,
+
   ],
   providers: [
     // {provide: HTTP_INTERCEPTORS,

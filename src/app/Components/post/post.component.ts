@@ -21,6 +21,7 @@ export class PostComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private httpClient: HttpClient,
+    private user: UserService,
     private userStore: UserstoreService,
     private auth: AuthService
   ) {
@@ -68,7 +69,6 @@ export class PostComponent implements OnInit {
       commentdate: this.now,
       commentUserId: this.UserID,
     };
-
     return this.httpClient
       .post(
         `${environment.apiUrl}/Comment?id=${this.currentPostId}`,

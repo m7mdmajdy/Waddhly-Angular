@@ -1,0 +1,57 @@
+<app-header></app-header>
+<div class="container">
+    <div class="row">
+        <ng-container *ngFor="let item of retrievedProposals">
+            <div class="card" style="width: 18rem; margin: 5px;">
+                <div class="card-body">
+                    <h3 class="card-title">{{item.prop_userName}}</h3>
+                    <h5 class="card-text">{{item.serviceTitle}}</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">{{item.description}}</li>
+                    <li class="list-group-item">{{item.cost }}&dollar;</li>
+                    <li class="list-group-item">{{item.noOfHours}}</li>
+                </ul>
+                <div class="card-body">
+                    <button (click)="initConfig(item.cost, item.id)" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">Accept
+                        offer</button>
+                    <a class="btn btn-secondary back card-link" (click)="Onback()"> Back </a>
+
+                </div>
+
+
+                <div class="modal fade" id="loginModal" data-bs-keyboard="false" tabindex="-1"
+                    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content" style="border-radius: 0; border: none;">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Proposal Payment</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <h4 class="my-4">Pay Now to Accept the offer</h4>
+                                <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+                </div>
+            </div>

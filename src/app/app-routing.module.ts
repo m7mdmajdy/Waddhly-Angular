@@ -19,6 +19,7 @@ import { CommonModule } from '@angular/common';
 import { ResetComponent } from './Components/reset/reset.component';
 import { AllProposalsComponent } from './Components/all-proposals/all-proposals.component';
 import { AddPostComponent } from './Components/add-post/add-post.component';
+import { UserOldPropsComponent } from './Components/user-old-props/user-old-props.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -35,6 +36,8 @@ const routes: Routes = [
   { path: 'session/:id', component: VideoComponent },
   { path: 'Proposals/Proposal', component:ProposalComponent },
   { path: 'user/Proposal', component:AllProposalsComponent },
+  { path: 'proposal/:id', component:ProposalComponent },
+  { path: 'proposals', component:UserOldPropsComponent },
   { path: 'reset', component:ResetComponent },
   { path: 'addpost', component: AddPostComponent },
   { path: '**', component: NotFoundComponent },
