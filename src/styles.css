@@ -1,0 +1,52 @@
+:root {
+  --main-color: #395b64;
+  --second-color: #2c3333;
+  --alter-color: #6ca6a8;
+  --text-color: #2c3333;
+  --light-color: #e7f6f2;
+}
+.main-color {
+  color: var(--main-color, #395b64);
+}
+.alter-color {
+  color: var(--alter-color, #6ca6a8);
+}
+.text-color {
+  color: var(--text-color, #2c3333);
+}
+.light-color {
+  color: var(--light-color, #e7f6f2);
+}
+.bg-main-color {
+  background-color: var(--main-color, #395b64);
+}
+.bg-alter-color {
+  background-color: var(--alter-color, #6ca6a8);
+}
+.bg-text-color {
+  background-color: var(--text-color, #2c3333);
+}
+.bg-light-color {
+  background-color: var(--light-color, #e7f6f2);
+}
+.min-height {
+  min-height: calc(100vh - 96px);
+}
+textarea {
+  resize: none;
+}
+html {
+  scroll-behavior: smooth;
+}
+::-webkit-scrollbar {
+  width: 15px;
+}
+::-webkit-scrollbar-track {
+  background-color: #e7f6f2;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #6ca6a8;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #5a99aa;
+}

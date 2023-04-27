@@ -1,0 +1,381 @@
+<app-header></app-header>
+<div class="container">
+  <div class="main-body">
+    <div class="row gutters-sm">
+      <div class="row mb-3">
+        <div class="col-sm-12 d-flex justify-content-end">
+          <a
+            class="btn btn-info"
+            *ngIf="UserID == UserRouteID"
+            routerLink="/editprofile"
+            >Edit Profile</a
+          >
+        </div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex flex-column align-items-center text-center">
+              <!-- upload img -->
+              <img
+                *ngIf="!UserData.userimage"
+                src="https://bootdey.com/img/Content/avatar/avatar7.png"
+                alt="Admin"
+                class="rounded-circle"
+                width="150"
+              />
+              <img
+                *ngIf="UserData.userimage"
+                src="data:image/png;base64,{{ UserData.userimage }}"
+                alt="Admin"
+                class="rounded-circle"
+                width="150"
+                height="150"
+              />
+              <div class="mt-3">
+                <h4>{{ UserData.name }}</h4>
+                <p class="text-secondary mb-1">{{ UserData.username }}</p>
+                <p class="text-secondary mb-1">{{ UserData.title }}</p>
+                <!-- <button *ngIf="UserID!==UserRouteID" class="btn btn-primary">Chat</button> -->
+              </div>
+            </div>
+            <!-- <hr class="my-4">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                    <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe me-2 icon-inline"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>Website</h6>
+                    <span class="text-secondary">https://hhhh.com</span>
+                  </li>
+                </ul> -->
+          </div>
+        </div>
+        <div class="card mt-3 p-3">
+          <h4>Description</h4>
+          <p class="text-secondary mb-1" *ngIf="!UserData.summary">
+            There is no summary
+          </p>
+          <p class="text-secondary mb-1" *ngIf="UserData.summary">
+            {{ UserData.summary }}
+          </p>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <section class="main" id="main">
+          <div class="container">
+            <div class="row">
+              <div class="col leftSection">
+                <button
+                  *ngIf="UserID != UserRouteID"
+                  class="btn btn-primary"
+                  data-bs-toggle="modal"
+                  data-bs-target="#loginModal"
+                >
+                  Send Message
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div
+          class="modal fade"
+          id="loginModal"
+          data-bs-keyboard="false"
+          tabindex="-1"
+          aria-labelledby="staticBackdropLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="border-radius: 0; border: none">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                  Send Message
+                </h1>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <div class="mb-3">
+                  <label for="login-email" class="col-form-label">
+                    Type Your Message
+                  </label>
+                  <textarea
+                    [(ngModel)]="msg"
+                    class="form-control"
+                    id="login-email"
+                    name="email"
+                    required
+                  ></textarea>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button (click)="SendUserMessage()" class="btn btn-primary">
+                    Send
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- <button *ngIf="UserID!=UserRouteID" (click)="SendUserMessage()" class="btn btn-primary">
+              Send Message
+            </button>
+            <div class="card mb-3">
+              <div class="card-body">
+                <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">Personal Information</i></h6>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Phone</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">{{UserData.phoneNumber}}</div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Email</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">{{UserData.email}}</div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Country</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">{{UserData.country}}</div>
+                </div>
+              </div>
+            </div> -->
+
+        <!-- Category Section -->
+
+        <div class="row gutters-sm" *ngIf="UserID == UserRouteID">
+          <div class="col-sm-12 mb-3">
+            <div class="card">
+              <div class="card-body" *ngIf="!UserData.categoryName">
+                <h6 class="d-flex align-items-center mb-3">
+                  <i class="material-icons text-info mr-2">Mentor Section</i>
+                </h6>
+                <div class="row">
+                  <div class="col-sm-12 ms-2 text-secondary">
+                    Do you need to share your Knowledge?
+                    <!-- <button class="btn btn-primary btn-circle" data-bs-toggle="collapse" data-bs-target="#mentor"> OK </button> -->
+                    <div id="mentor" aria-labelledby="mentorsection">
+                      <form class="g-3" #addcategory="ngForm">
+                        <div class="row mb-3">
+                          <div class="col-sm-4">
+                            <h6 class="mb-0">Category</h6>
+                          </div>
+                          <div class="col-sm-8 text-secondary">
+                            <select
+                              name="cat"
+                              id="prdCat"
+                              class="form-select w-100"
+                              #cat="ngModel"
+                              [(ngModel)]="selectedCategoryId"
+                              required
+                            >
+                              <option disabled selected>
+                                Select your Category
+                              </option>
+                              <option
+                                *ngFor="let item of Categories"
+                                [value]="item.id"
+                              >
+                                {{ item.name }}
+                              </option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="row mb-3">
+                          <div class="col-sm-4">
+                            <h6 class="mb-0">Hour Rate</h6>
+                          </div>
+                          <div class="col-sm-8 text-secondary">
+                            <input
+                              type="text"
+                              class="form-control"
+                              name="hour"
+                              #hour="ngModel"
+                              [(ngModel)]="userhourRate"
+                              required
+                            />
+                          </div>
+                        </div>
+                        <button
+                          type="submit"
+                          class="btn btn-primary"
+                          [disabled]="addcategory.invalid"
+                          (click)="addNewCategory()"
+                        >
+                          Add Category
+                        </button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card-body" *ngIf="UserData.categoryName">
+                <!-- <div class="col-sm-12 d-flex justify-content-end">
+                      <button type="button" class="btn btn-danger d-flex text" (click)="deletecat()">x</button>
+                    </div> -->
+                <h6 class="d-flex align-items-center mb-3">
+                  <i class="material-icons text-info mr-2">Catogory</i>
+                </h6>
+                <div class="row">
+                  <div class="col-sm-9 text-secondary">
+                    {{ UserData.categoryName }}
+                  </div>
+                </div>
+                <hr />
+                <div class="row">
+                  <div class="col-sm-12 d-flex text-secondary my-2">
+                    Hour Rate: ${{ UserData.hourRate }}.00 /hr
+                  </div>
+                </div>
+                <!-- <div class="row">
+                      <button class="btn btn-primary w-100"> Edit Category </button>
+                    </div> -->
+              </div>
+            </div>
+          </div>
+          <!-- <div class="col-sm-6 mb-3" *ngIf="UserID == UserRouteID">
+            <div class="card l-bg-blue-dark">
+              <div class="card-statistic-3 p-4">
+                <div class="card-icon card-icon-large mx-4">
+                  <i class="fas fa-users"></i>
+                </div>
+                <div class="mb-4">
+                  <h5 class="card-title mb-0">My Account</h5>
+                </div>
+                <div class="row align-items-center mb-4 d-flex">
+                  <div class="col-8">
+                    <h2 class="d-flex align-items-center mb-0">
+                      {{ UserData.moneyAccount }}
+                    </h2>
+                  </div>
+                </div>
+                <div class="progress mt-1" data-height="8" style="height: 8px">
+                  <div
+                    class="progress-bar l-bg-green"
+                    role="progressbar"
+                    data-width="25%"
+                    aria-valuenow="25"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                    style="width: 10%"
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div> -->
+        </div>
+
+        <!-- porfolio secton -->
+
+        <div class="row gutters-sm">
+          <div class="col-sm-12 mb-3">
+            <div class="card h-100">
+              <div class="card-body">
+                <h6 class="d-flex align-items-center mb-3">
+                  <i class="material-icons text-info mr-2">Portfolio section</i>
+                </h6>
+                <p
+                  class="text-secondary m-2"
+                  *ngIf="UserPortofolio.length == 0"
+                >
+                  There is no Jobs
+                </p>
+                <div class="card mb-3" *ngIf="UserPortofolio.length !== 0">
+                  <div
+                    class="row no-gutters"
+                    *ngFor="let item of UserPortofolio"
+                  >
+                    <div class="col-lg-4 col-sm-5">
+                      <img
+                        src="data:image/png;base64,{{ item.portimage }}"
+                        class="card-img"
+                        height="130px"
+                      />
+                    </div>
+                    <div class="col-lg-8 col-sm-7">
+                      <div class="card-body">
+                        <h5 class="card-title">{{ item.title }}</h5>
+                        <p class="card-text">{{ item.description }}</p>
+                        <p class="card-text">
+                          <small class="text-muted">{{
+                            item.date | date : "longDate"
+                          }}</small>
+                        </p>
+                        <a href="{{ item.projectUrl }}" target="_blank"
+                          >Details</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Certificate section -->
+
+        <div class="row gutters-sm">
+          <div class="col-sm-12 mb-3">
+            <div class="card h-100">
+              <div class="card-body">
+                <h6 class="d-flex align-items-center mb-3">
+                  <i class="material-icons text-info mr-2"
+                    >Certification section</i
+                  >
+                </h6>
+                <p
+                  class="text-secondary m-2"
+                  *ngIf="UserData.certfcimage.length == 0"
+                >
+                  There is no Certifications
+                </p>
+                <div
+                  class="card mb-3"
+                  *ngIf="UserData.certfcimage.length !== 0"
+                >
+                  <div
+                    class="row no-gutters"
+                    *ngFor="let item of UserData.certfcimage"
+                  >
+                    <div class="col-lg-4 col-sm-5">
+                      <img
+                        src="data:image/png;base64,{{ item.item4 }}"
+                        class="card-img"
+                        width="100px"
+                        height="130px"
+                      />
+                    </div>
+                    <div class="col-lg-8 col-sm-7">
+                      <div class="card-body">
+                        <h5 class="card-title">{{ item.item1 }}</h5>
+                        <a href="{{ item.item2 }}" target="_blank">Details</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

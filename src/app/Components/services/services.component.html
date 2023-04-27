@@ -1,0 +1,186 @@
+<app-header></app-header>
+<div class="bg-light-color services text-color min-height pt-4 pb-5">
+  <div class="container">
+    <div class="row mb-3">
+      <div class="col-sm-12 d-flex justify-content-end">
+        <a
+          class="btn btn-info"
+          *ngIf="UserID"
+          data-bs-toggle="modal"
+          data-bs-target="#loginModal"
+          >Add Service</a
+        >
+      </div>
+      <div
+        class="modal fade"
+        id="loginModal"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="staticBackdropLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content" style="border-radius: 0; border: none">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                Add Service
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <form #ADDSER="ngForm">
+                <div class="mb-3">
+                  <label for="title" class="col-form-label"> Title </label>
+                  <input
+                    [(ngModel)]="serTitle"
+                    class="form-control"
+                    id="title"
+                    name="title"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="des" class="col-form-label"> description </label>
+                  <textarea
+                    [(ngModel)]="serDes"
+                    class="form-control"
+                    id="des"
+                    name="dse"
+                    required
+                  >
+                  </textarea>
+                </div>
+                <div class="mb-3">
+                  <label for="hour" class="col-form-label">
+                    Estimated Hour
+                  </label>
+                  <input
+                    [(ngModel)]="serHour"
+                    class="form-control"
+                    id="hour"
+                    name="hour"
+                    type="number"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <h6 class="mb-0">Category</h6>
+                </div>
+                <div class="text-secondary">
+                  <select
+                    name="cat"
+                    id="prdCat"
+                    class="form-select w-100"
+                    #cat="ngModel"
+                    [(ngModel)]="selectedCategoryId2"
+                    required
+                  >
+                    <option disabled selected>Select your Category</option>
+                    <option *ngFor="let item of Categories" [value]="item.id">
+                      {{ item.name }}
+                    </option>
+                  </select>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button
+                    *ngIf="UserID"
+                    type="submit"
+                    (click)="addService()"
+                    class="btn btn-primary"
+                    [disabled]="ADDSER.invalid"
+                  >
+                    ADD
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <label class="form-label" for="serCat">Select a Category</label>
+    <select
+      name="cat"
+      id="prdCat"
+      class="form-control w-50"
+      [(ngModel)]="selectedCategoryId"
+      (change)="filterCategory()"
+    >
+      <option value="0" selected>All</option>
+      <option *ngFor="let item of Categories" [value]="item.id">
+        {{ item.name }}
+      </option>
+    </select>
+    <div *ngIf="ServicesByCatId?.length == 0" class="main-color fs-1">
+      there no services in this category right now
+    </div>
+    <div
+      class="d-flex align-items-start flex-wrap flex-lg-row gap-4 justify-content-between mt-5"
+    >
+      <a
+        class="service bg-white p-3 text-decoration-none text-color"
+        *ngFor="let item of ServicesByCatId"
+      >
+        <div class="d-flex justify-content-between align-items-start">
+          <h4>
+            <a
+              class="title text-color text-decoration-none"
+              routerLink="/service/{{ item.id }}"
+            >
+              {{ subString(item.title, 130) }}
+            </a>
+          </h4>
+          <span
+            [class]="
+              item.status
+                ? 'bg-success text-white px-2 rounded-3'
+                : 'bg-danger text-white px-2 rounded-3'
+            "
+            >{{ checkStatus(item.status) }}</span
+          >
+        </div>
+        <a
+          class="user text-decoration-none"
+          routerLink="/profile/{{ item.user_id }}"
+          >{{ item.user_firstname }} {{ item.user_lastname }}</a
+        >
+        <p>{{ subString(item.description, 170) }}</p>
+        <div class="d-flex justify-content-between align-items-end">
+          <div *ngIf="item.status">
+            <button
+              *ngIf="UserID"
+              class="btn btn-warning"
+              (click)="checkMoney(item.id)"
+            >
+              Apply
+            </button>
+            <a *ngIf="!UserID" routerLink="/login" class="btn btn-warning"
+              >Login to Apply</a
+            >
+          </div>
+          <div
+            class="d-flex align-items-baseline bg-light-color rounded-3 px-2"
+            [title]="item.date | date : 'full'"
+          >
+            <i class="fa-regular fa-clock"></i>
+            <span class="d-inline-block ms-2">{{ subDates(item.date) }}</span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+<ng-confirm></ng-confirm>
+<app-footer></app-footer>

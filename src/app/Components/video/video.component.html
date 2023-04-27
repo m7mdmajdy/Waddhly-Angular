@@ -1,0 +1,54 @@
+<app-header></app-header>
+<div class="container min-height">
+  <h5 class="mt-3">
+    <span> Connect with </span>
+    <a class="text-decoration-none" routerLink="/profile/{{ UserID }}">{{
+      selectedUserName
+    }}</a>
+  </h5>
+
+  <!-- Video & screen share container -->
+  <!-- <span>PeerId: {{peerId}}</span> <br>
+    <span>UserPeerId: {{selectedUserPeerId}}</span> -->
+  <div class="d-flex justify-content-between">
+    <div
+      class="w-75"
+      style="height: 400px; border: 2px solid"
+      id="remote-video"
+    ></div>
+    <div
+      class="flex-grow-1 d-flex justify-content-around align-items-center flex-column"
+    >
+      <div class="d-flex justify-content-around">
+        <!-- <input type="text" placeholder="Peer Id" [(ngModel)]="peerIdShare" /> -->
+        <button
+          class="fw-bold btn btn-success me-3"
+          (click)="connectWithPeer()"
+        >
+          Call Now
+        </button>
+        <button class="fw-bold btn btn-warning" (click)="screenShare()">
+          Screen Share
+        </button>
+      </div>
+      <div class="d-flex justify-content-evenly align-items-baseline">
+        <span class="fs-3 fw-bold d-inline-block me-2"> Start Timer: </span>
+        <span class="fs-5">
+          {{ time.toISOString().substr(11, 8) }}
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="Content w-75 mt-2" role="main">
+    <div class="d-flex justify-content-between">
+      <button class="btn btn-primary" (click)="startTimer()">Start Session</button>
+      <!-- <button class="btn btn-primary" (click)="pauseTimer()">Pause</button>
+      <button class="btn btn-primary" (click)="resetTimer()">Reset</button> -->
+      <button class="btn btn-danger" (click)="endSession()">End Session</button>
+    </div>
+  </div>
+
+  <br />
+</div>
+<app-footer></app-footer>
